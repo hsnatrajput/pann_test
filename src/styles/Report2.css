@@ -1,0 +1,48 @@
+.ratings-container {
+   
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff8f0;
+    padding: 20px;
+    border-radius: 12px;
+    flex-wrap: wrap; 
+    margin-left: 90px;
+    width: 80%;
+}
+
+.ratings-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.ratings-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ratings-item {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.ratings-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #2f2f2f;
+}
+
+.ratings-value {
+    font-size: 24px;
+    color: #707070;
+    font-weight: 500;
+}
+
+.ratings-chart {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0; 
+}

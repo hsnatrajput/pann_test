@@ -1,0 +1,46 @@
+  .ratings-chart {
+    width: 120px;
+    height: 120px;
+
+  }
+  
+  .ratings-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fdf7f1;
+    padding: 16px;
+    border-radius: 10px;
+  }
+  
+  .ratings-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .rating-item {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+    margin-bottom: 8px;
+  }
+  
+  .rating-label {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .rating-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .ratings-chart {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px; /* Increase this value to push chart more to the right */
+    flex-shrink: 0;
+  }
+  

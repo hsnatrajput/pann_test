@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import VerifyForm from "./components/VerifyForm";
+import Reports from "./components/Reports"; 
 
-function App() {
+const App = () => {
+  const [reportData, setReportData] = useState(null);
+  const [hasPaid, setHasPaid] = useState(false); 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<VerifyForm setReportData={setReportData} />} />
+        <Route 
+          path="/report1" 
+          element={<Reports reportData={reportData} hasPaid={hasPaid} setHasPaid={setHasPaid} />}
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

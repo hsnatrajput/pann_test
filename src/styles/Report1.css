@@ -1,0 +1,174 @@
+.pann-box {
+  background-color: #FEF7EF; 
+  width: 80%;
+  height: 180px; 
+  border-radius: 20px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 20px auto 0 auto; 
+  padding: 20px;
+}
+
+.pann-logo {
+  width: 120px; 
+  height: auto;
+  display: block;
+  margin: 5px auto; 
+}
+
+.business-report {
+  /* font-size: 10px; */
+  /* font-weight: 200; */
+  color: #868DA6;
+  font-family: 'Inter', sans-serif;
+  margin: 5px 0;
+}
+
+.table td {
+  border: none !important;  
+  padding: 12px 16px;  
+  color: #868DA6;    
+}
+
+.bg-light td {
+  background-color: #f8f9fc !important;  
+}
+
+.text-primary {
+  color: #4a7eb8 !important; 
+}
+
+.text-muted {
+  font-size: 14px;  
+}
+
+h6 {
+  font-size: 16px;
+  color: #6c757d; 
+}
+
+.custom-hr {
+  width: 70rem
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-left: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #11B669;
+  background-color: #11B66933;
+  border-radius: 12px;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff8f0; 
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  margin: 0 auto; 
+}
+
+.rating-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rating-section h6 {
+  font-weight: bold;
+}
+
+.rating-grade {
+  font-size: 40px;
+  font-weight: bold;
+  color: #444;
+  margin: 0;
+}
+
+.rating-subtext {
+  color: gray;
+  margin-top: -10px;
+}
+
+.rating-visual {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rating-labels p {
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+.circular-rating img {
+  width: 120px; 
+  height: auto;
+}
+
+
+@media (max-width: 1440px) {
+  .pann-box {
+      width: 90%; 
+      height: 100px; 
+  }
+  .pann-text {
+      font-size: 48px; 
+  }
+  .business-report {
+      /* font-size: 20px; */
+  }
+}
+
+@media (max-width: 1024px) {
+  .pann-box {
+      width: 80%; 
+      height: 110px;
+  }
+  .pann-text {
+      font-size: 40px;
+  }
+  .business-report {
+      /* font-size: 18px; */
+  }
+}
+
+@media (max-width: 768px) {
+  .pann-box {
+      width: 90%; 
+      height: 120px;
+      padding: 15px;
+  }
+  .pann-text {
+      font-size: 32px;
+  }
+  .business-report {
+      /* font-size: 16px; */
+  }
+}
+
+@media (max-width: 480px) {
+  .pann-box {
+      width: 95%;
+      height: 100px;
+      padding: 10px;
+  }
+  .pann-text {
+      font-size: 28px;
+  }
+  .business-report {
+      /* font-size: 14px; */
+  }
+}
+
+
+
+

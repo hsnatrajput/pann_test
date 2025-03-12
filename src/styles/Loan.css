@@ -1,0 +1,9 @@
+.loan{
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff8f0; 
+    padding: 15px;
+    border-radius: 12px;
+    width: 90%;
+    margin: 0 auto; 
+}

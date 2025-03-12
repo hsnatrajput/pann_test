@@ -1,0 +1,19 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff8f0; /* Light peach background */
+  padding: 12px 20px;
+  border-radius: 12px;
+}
+
+.company-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e47628; /* Orange */
+}
+
+.report-info {
+  font-size: 14px;
+  color: #e47628; /* Orange */
+}
