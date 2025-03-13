@@ -10,6 +10,7 @@ const PricingModal = ({ isOpen, onClose }) => {
         <button className="close-btn" onClick={onClose}>
           ✖
         </button>
+
         <h2 className="modal-title">Pricing Plans</h2>
         <p className="modal-subtitle">Choose Your Best Plan</p>
 

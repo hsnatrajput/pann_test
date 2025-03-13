@@ -93,10 +93,16 @@ const Reports = ({ reportData }) => {
           <Report1 reportData={reportData} />
         </div>
         {!hasPaid && (
-          <div className="blur-overlay-report1">
-            <p className="upgrade-text" onClick={() => setIsModalOpen(true)}>Upgrade your plan to unlock full report</p>
+          <div className="blur-overlay-report1" onClick={() => setIsModalOpen(true)}>
+            <div className="upgrade-box">
+              <span className="upgrade-icon">🔒</span>
+              <p className="upgrade-text">Upgrade your plan to unlock full report</p>
+            </div>
           </div>
         )}
+
+
+
       </div>
 
       <div style={{ 
