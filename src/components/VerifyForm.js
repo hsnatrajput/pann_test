@@ -11,6 +11,8 @@ const VerifyForm = ({ setReportData }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   
+  const API_URL = process.env.REACT_APP_API_URL || "https://pann-app-base-edl9t.ondigitalocean.app";
+
   const handleVerify = async () => {
     if (!legalName || !address) {
       alert("Please enter both Legal Entity Name and Address!");
@@ -20,14 +22,19 @@ const VerifyForm = ({ setReportData }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://stingray-app-zycze.ondigitalocean.app/proxy/get_business_data",
+        `${API_URL}/get_business_data`,  // Direct API call
         {
           business_name: legalName,
           business_address: address
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          }
         }
       );
       
-
       console.log("API Response:", response.data);
 
       const riskScore = response.data.scores?.find(s => s.type === "risk") || {};
@@ -43,28 +50,28 @@ const VerifyForm = ({ setReportData }) => {
         legalEntityName: legalName,
         legalEntityAddress: address,
         email: response.data.email,
-        tin: response.data.tin ,
-        officers: officerNames ,
-        phoneNumber: response.data.phone_number ,
-        website: response.data.website ,
-        riskRating: riskScore.rating ,
+        tin: response.data.tin,
+        officers: officerNames,
+        phoneNumber: response.data.phone_number,
+        website: response.data.website,
+        riskRating: riskScore.rating,
         riskLevel: riskScore.rating === "A" ? "Low Risk" : 
                   riskScore.rating === "B" ? "Medium Risk" : 
                   riskScore.rating === "C" ? "High Risk" : "N/A",
-        kybRating: kybScore.rating ,
+        kybRating: kybScore.rating,
         kybLevel: kybScore.rating === "A" ? "Fully Verified" : 
                  kybScore.rating === "B" ? "Partially Verified" : 
                  kybScore.rating === "C" ? "Limited Verification" : "N/A",
         address: response.data.address,
-        business: response.data.business ,
+        business: response.data.business,
         businessOfficers: officers,
-        watchlistHits: response.data.watchlist_hits ,
-        registrations: response.data.business?.registrations ,
-        incorporationDate: response.data.business?.incorporation_date ,
-        incorporationState: response.data.business?.incorporation_state ,
+        watchlistHits: response.data.watchlist_hits,
+        registrations: response.data.business?.registrations,
+        incorporationDate: response.data.business?.incorporation_date,
+        incorporationState: response.data.business?.incorporation_state,
         businessAge: response.data.business?.months_in_business ? 
                     `${Math.floor(response.data.business.months_in_business / 12)} years` : "N/A",
-        structure: response.data.business?.structure 
+        structure: response.data.business?.structure
       };
 
       console.log("Transformed Data:", transformedData);
