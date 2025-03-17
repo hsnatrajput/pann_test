@@ -19,10 +19,14 @@ const VerifyForm = ({ setReportData }) => {
   
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/proxy/get_business_data", {
-        business_name: legalName,
-        business_address: address
-      });
+      const response = await axios.post(
+        "https://stingray-app-zycze.ondigitalocean.app/proxy/get_business_data",
+        {
+          business_name: legalName,
+          business_address: address
+        }
+      );
+      
 
       console.log("API Response:", response.data);
 
