@@ -15,6 +15,13 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const reportRefs = {
+    report1: useRef(null),
+    report2: useRef(null),
+    report3: useRef(null),
+    report4: useRef(null),
+    report5: useRef(null)
+  };
   const reportContainerRef = useRef(null);
 
   useEffect(() => {
@@ -23,7 +30,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     }
   }, [reportData, navigate]);
 
-  const correctPassword = "123456"; // Set your actual password here
+  const correctPassword = "123456"; 
 
   const handlePasswordSubmit = () => {
     if (password === correctPassword) {
@@ -47,20 +54,57 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
       if (downloadButton) downloadButton.style.display = "none";
       if (backButton) backButton.style.display = "none";
 
-      const input = reportContainerRef.current; 
+      // Get report elements
+      const reportElements = [
+        reportRefs.report1.current,
+        reportRefs.report2.current,
+        reportRefs.report3.current,
+        reportRefs.report4.current,
+        reportRefs.report5.current
+      ];
 
-      const canvas = await html2canvas(input, {
-        scale: 3,
-        useCORS: true,
-      });
+      let pdf = null;
+      
+      // Process each report element
+      for (let i = 0; i < reportElements.length; i++) {
+        const element = reportElements[i];
+        if (!element) continue;
 
-      const imgData = canvas.toDataURL("image/png");
-      const imgWidth = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        // Convert the report to canvas
+        const canvas = await html2canvas(element, {
+          scale: 2,
+          useCORS: true,
+          scrollY: -window.scrollY,
+          windowWidth: document.documentElement.offsetWidth,
+          windowHeight: document.documentElement.offsetHeight
+        });
 
-      const pdf = new jsPDF("p", "mm", [imgWidth, imgHeight]);
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-      pdf.save("Business_Verification_Report.pdf");
+        const imgData = canvas.toDataURL("image/png");
+        
+        // Calculate PDF dimensions based on canvas size
+        // Convert from pixels to mm (assuming 96 DPI)
+        const pdfWidth = (canvas.width / 96) * 25.4;
+        const pdfHeight = (canvas.height / 96) * 25.4;
+        
+        // If first page, create PDF with dimensions of first report
+        if (i === 0) {
+          pdf = new jsPDF({
+            orientation: pdfWidth > pdfHeight ? "landscape" : "portrait",
+            unit: "mm",
+            format: [pdfWidth, pdfHeight]
+          });
+          pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        } else {
+          // For subsequent pages, add a new page with dimensions of current report
+          pdf.addPage([pdfWidth, pdfHeight], pdfWidth > pdfHeight ? "landscape" : "portrait");
+          pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        }
+      }
+
+      // Save the PDF
+      if (pdf) {
+        pdf.save("Business_Verification_Report.pdf");
+      }
     } catch (error) {
       console.error("Error generating PDF:", error);
       alert("Error generating PDF. Please try again.");
@@ -95,15 +139,11 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         </button>
       </div>
 
-      {/* Report Container */}
       <div ref={reportContainerRef}>
-        <div className="report1-container">
-          <div>
-            <Report1 reportData={reportData} />
-          </div>
+        <div className="report1-container" ref={reportRefs.report1}>
+          <Report1 reportData={reportData} />
         </div>
 
-        {/* Blurred Section for Non-Paid Users */}
         <div
           style={{
             filter: hasPaid ? "none" : "blur(10px)",
@@ -111,13 +151,12 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
             position: "relative",
           }}
         >
-          <div><Report2 reportData={reportData} /></div>
-          <div><Report3 reportData={reportData} /></div>
-          <div><Report4 reportData={reportData} /></div>
-          <div><Report5 reportData={reportData} /></div>
+          <div ref={reportRefs.report2}><Report2 reportData={reportData} /></div>
+          <div ref={reportRefs.report3}><Report3 reportData={reportData} /></div>
+          <div ref={reportRefs.report4}><Report4 reportData={reportData} /></div>
+          <div ref={reportRefs.report5}><Report5 reportData={reportData} /></div>
         </div>
 
-        {/* Blur Overlay & Unlock Prompt */}
         {!hasPaid && (
           <div className="blur-overlay" onClick={() => setIsPasswordModalOpen(true)}>
             <div className="upgrade-box">
@@ -128,7 +167,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         )}
       </div>
 
-      {/* Password Modal */}
       {isPasswordModalOpen && (
         <div className="password-modal">
           <div className="password-box">
