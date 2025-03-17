@@ -64,14 +64,40 @@ const VerifyForm = ({ setReportData }) => {
                  kybScore.rating === "C" ? "Limited Verification" : "N/A",
         address: response.data.address,
         business: response.data.business,
-        businessOfficers: officers,
+        businessOfficers: officers.map(officer => ({
+          name: officer.name,
+          roles: officer.titles?.join(", ") || "N/A",
+          sos_filings: officer.states?.length || officer.titles?.length || 0
+        })),
         watchlistHits: response.data.watchlist_hits,
         registrations: response.data.business?.registrations,
         incorporationDate: response.data.business?.incorporation_date,
         incorporationState: response.data.business?.incorporation_state,
         businessAge: response.data.business?.months_in_business ? 
                     `${Math.floor(response.data.business.months_in_business / 12)} years` : "N/A",
-        structure: response.data.business?.structure
+        structure: response.data.business?.structure,
+        entityType: response.data.business?.structure,
+        naicsCode: response.data.business?.predicted_naics?.length > 0 ? response.data.business.predicted_naics[0] : "N/A",
+        status: response.data.business?.registrations?.[0]?.status,
+        filingStatus: response.data.business?.registrations ? [
+          { name: "Active Filings", value: response.data.business.registrations.filter(r => r.status === "active").length, color: "#E47628" },
+          { name: "Inactive Filings", value: response.data.business.registrations.filter(r => r.status !== "active").length, color: "#2F4532" },
+          { name: "Unknown", value: 0, color: "#F6CBA9" }
+        ] : null,
+        registeredAgent: response.data.business?.registrations?.[0]?.registered_agent?.name,
+        registeredAgentAddress: response.data.business?.registrations?.[0]?.registered_agent?.address ? 
+          `${response.data.business.registrations[0].registered_agent.address.street}, ${response.data.business.registrations[0].registered_agent.address.city}, ${response.data.business.registrations[0].registered_agent.address.state} ${response.data.business.registrations[0].registered_agent.address.zip}` : "N/A",
+        filingID: response.data.business?.registrations?.[0]?.file_number,
+        dateFiled: response.data.business?.registrations?.[0]?.issue_date,
+        addresses: response.data.business?.addresses?.map(addr => `${addr.street}, ${addr.city}, ${addr.state} ${addr.zip}`) || [],
+        phoneNumbers: response.data.business?.phone_numbers || [],
+        socialMedia: response.data.business?.social_profiles?.map(profile => `${profile.site}: ${profile.url}`) || [],
+        inquiryVariations: response.data.business?.registrations?.map(reg => ({
+          ein: response.data.tin || "N/A",
+          entityName: reg.name,
+          entityAddress: `${reg.address.street}, ${reg.address.city}, ${reg.address.state} ${reg.address.zip}`,
+          officers: reg.officers?.map(o => o.name).join(", ") || "N/A"
+        })) || [],
       };
 
       console.log("Transformed Data:", transformedData);

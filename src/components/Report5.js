@@ -68,7 +68,7 @@ const Report5 = ({ reportData }) => {
                   <td className="fw-bold text-muted">{variation.ein || "N/A"}</td>
                   <td>{variation.entityName || "N/A"}</td>
                   <td>{variation.entityAddress || "N/A"}</td>
-                  <td>{variation.officers ? variation.officers.join(", ") : "N/A"}</td>
+                  <td>{variation.officers || "N/A"}</td> {/* Fixed line */}
                 </tr>
               ))
             ) : (
