@@ -42,6 +42,22 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     }
   };
 
+  const compressCanvasImage = (canvas, quality = 0.9) => {
+    // Create a new canvas with slightly reduced dimensions
+    const scaleFactor = 0.85; // Only reduces dimensions by 15%
+    const newCanvas = document.createElement('canvas');
+    newCanvas.width = canvas.width * scaleFactor;
+    newCanvas.height = canvas.height * scaleFactor;
+    
+    // Draw original canvas content onto the new smaller canvas
+    const ctx = newCanvas.getContext('2d');
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, newCanvas.width, newCanvas.height);
+    
+    // Return compressed JPEG image data with higher quality
+    return newCanvas.toDataURL('image/jpeg', quality);
+  };
+
   const generatePDF = async () => {
     if (!reportData || !hasPaid) return;
 
@@ -70,18 +86,22 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         const element = reportElements[i];
         if (!element) continue;
 
-        // Convert the report to canvas
+        // Convert the report to canvas with higher scale for better quality
         const canvas = await html2canvas(element, {
-          scale: 2,
+          scale: 2, // Higher scale for better initial quality
           useCORS: true,
+          logging: false,
           scrollY: -window.scrollY,
           windowWidth: document.documentElement.offsetWidth,
-          windowHeight: document.documentElement.offsetHeight
+          windowHeight: document.documentElement.offsetHeight,
+          imageTimeout: 0, // No timeout for images
+          removeContainer: false
         });
 
-        const imgData = canvas.toDataURL("image/png");
+        // Compress the canvas image with higher quality
+        const imgData = compressCanvasImage(canvas, 0.92);
         
-        // Calculate PDF dimensions based on canvas size
+        // Calculate PDF dimensions based on original canvas size
         // Convert from pixels to mm (assuming 96 DPI)
         const pdfWidth = (canvas.width / 96) * 25.4;
         const pdfHeight = (canvas.height / 96) * 25.4;
@@ -91,17 +111,19 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
           pdf = new jsPDF({
             orientation: pdfWidth > pdfHeight ? "landscape" : "portrait",
             unit: "mm",
-            format: [pdfWidth, pdfHeight]
+            format: [pdfWidth, pdfHeight],
+            compress: true,
+            putOnlyUsedFonts: true
           });
-          pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+          pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, 'SLOW');
         } else {
           // For subsequent pages, add a new page with dimensions of current report
           pdf.addPage([pdfWidth, pdfHeight], pdfWidth > pdfHeight ? "landscape" : "portrait");
-          pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+          pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, 'SLOW');
         }
       }
 
-      // Save the PDF
+      // Save the PDF with optimized settings
       if (pdf) {
         pdf.save("Business_Verification_Report.pdf");
       }
