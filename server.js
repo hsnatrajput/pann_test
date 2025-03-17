@@ -8,16 +8,20 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: [
+    "http://localhost:3000",
+    "https://stingray-app-zycze.ondigitalocean.app"
+  ],
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type", "Accept"]
 }));
+
 
 app.use(express.json());
 
 app.post("/proxy/get_business_data", async (req, res) => {
   try {
-    const apiUrl = `${process.env.REACT_APP_API_URL}/get_business_data`; 
+    const apiUrl = `${process.env.API_URL}/get_business_data`;
 
     const response = await axios.post(apiUrl, req.body, {
       headers: {
