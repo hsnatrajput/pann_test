@@ -8,7 +8,6 @@
   }
 }
 
-
 body {
   background-color: #f9f6f2; 
   margin: 0;
@@ -80,4 +79,50 @@ input {
 
 .verify-btn:hover {
   background-color: #e04820;
+}
+
+/* Modal styles for error message */
+.error-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears on top */
+}
+
+.error-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FEF7EF; /* Orange background */
+  color: #FA822C; /* Dark text color */
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 50%;
+}
+
+.error-text {
+  flex-grow: 1;
+}
+
+.error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FA822C; /* Red circle */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  color: #fff; /* White icon */
+  font-size: 16px;
+  cursor: pointer; /* Make it clickable */
 }

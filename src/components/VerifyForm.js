@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaTimes } from "react-icons/fa";
 import { FaBriefcase } from "react-icons/fa";
 import { GoLocation } from "react-icons/go";
 import axios from "axios";
@@ -9,6 +10,7 @@ const VerifyForm = ({ setReportData }) => {
   const [legalName, setLegalName] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(""); // State to manage error message
   const navigate = useNavigate();
   
   const API_URL = process.env.REACT_APP_API_URL || "https://pann-app-base-edl9t.ondigitalocean.app";
@@ -22,12 +24,14 @@ const VerifyForm = ({ setReportData }) => {
 
   const handleVerify = async () => {
     if (!legalName || !address) {
-      alert("Please enter both Legal Entity Name and Address!");
+      setError("Please enter both Legal Entity Name and Address!");
       return;
     }
   
     setLoading(true);
+    setError(""); // Clear any previous error
     try {
+      const startTime = Date.now(); // Start time for response logging
       const response = await axios.post(
         `${API_URL}/get_business_data`,
         {
@@ -38,14 +42,17 @@ const VerifyForm = ({ setReportData }) => {
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
-          }
+          },
+          timeout: 30000 // 30-second timeout
         }
       );
       
+      const endTime = Date.now();
+      console.log(`API Response Time: ${endTime - startTime}ms`);
       console.log("API Response:", response.data);
 
       if (response.data.state === "FAILED") {
-        alert("We couldn't find this business.");
+        setError("No Match , Business not found ");
         setLoading(false);
         return;
       }
@@ -148,25 +155,27 @@ const VerifyForm = ({ setReportData }) => {
       navigate("/report1");
     } catch (error) {
       console.error("Detailed Error:", error);
+      console.log("Error Code:", error.code);
       console.log("Error Stack:", error.stack);
       if (error.response) {
         console.log("Response Data:", error.response.data);
         console.log("Response Status:", error.response.status);
-        if (error.response) {
-          console.log("Response Data:", error.response.data);
-          console.log("Response Status:", error.response.status);
-          if (error.response.status === 408 || error.response.data?.state === "FAILED") {
-            alert("We couldn't find this business.");
-          } else {
-            alert(`Server error: ${error.response.data.message || 'Unknown error'} (Status: ${error.response.status})`);
-          }
+        // Check for timeout (408) or FAILED state
+        if (error.response.status === 408 || (error.response.data && error.response.data.state === "FAILED")) {
+          setError("No Match , Business not found");
+        } else {
+          setError(`Server error: ${error.response.data.message || 'Unknown error'} (Status: ${error.response.status})`);
         }
+      } else if (error.code === "ECONNABORTED") {
+        // Handle local timeout due to Axios timeout setting
+        console.log("Timeout Error: Request took longer than 30 seconds");
+        setError("No Match , Business not found");
       } else if (error.request) {
         console.log("Request Error:", error.request);
-        alert("No response from server. Please check your connection and try again.");
+        setError("No response from server. Please check your connection and try again.");
       } else {
         console.log("Error Message:", error.message);
-        alert(`Failed to generate report: ${error.message}`);
+        setError(`Failed to generate report: ${error.message}`);
       }
     } finally {
       setLoading(false);
@@ -210,6 +219,18 @@ const VerifyForm = ({ setReportData }) => {
           {loading ? "Verifying..." : "Verify Now"}
         </button>
       </div>
+
+      {/* Modal for error message */}
+      {error && (
+        <div className="error-modal-overlay">
+          <div className="error-modal">
+            <span className="error-text">{error}</span>
+            <span className="error-icon" onClick={() => setError("")}>
+              <FaTimes />
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
