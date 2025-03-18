@@ -22,7 +22,7 @@ function Report4({ reportData }) {
           <tbody>
             <tr>
               <td>Business Officer</td>
-              <td>This summary presents all associated Business Officers gathered by Baselayer for the identified business.</td>
+              <td>This summary presents all associated Business Officers gathered by Pann for the identified business.</td>
             </tr>
             <tr className="bg-light">
               <td>Address</td>
@@ -47,7 +47,7 @@ function Report4({ reportData }) {
           <tbody>
             <tr>
               <td>WATCHLISTS</td>
-              <td>This summary presents Watchlist hits gathered by Baselayer on the identified business or its officers.</td>
+              <td>This summary presents Watchlist hits gathered by Pann on the identified business or its officers.</td>
             </tr>
             <tr>
               <td className="fw-bold text-muted">{watchlistNames.length > 0 ? watchlistNames.join(', ') : 'No Watchlist Hits'}</td>
@@ -63,7 +63,7 @@ function Report4({ reportData }) {
           <tbody>
             <tr>
               <td>WEBSITE ANALYSIS</td>
-              <td>This summary presents all associated Business Officers gathered by Baselayer for the identified business.</td>
+              <td>This summary presents all associated Business Officers gathered by Pann for the identified business.</td>
             </tr>
             <tr>
               <td className="fw-bold text-muted">Business Age</td>

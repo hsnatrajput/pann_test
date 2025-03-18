@@ -86,7 +86,7 @@ const Report3 = ({ reportData }) => {
             <td>Address</td>
             <td>
               This summary presents all associated addresses gathered by <br />
-              Baselayer for the identified business.
+              Pann for the identified business.
             </td>
           </tr>
         </tbody>

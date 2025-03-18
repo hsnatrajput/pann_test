@@ -13,6 +13,13 @@ const VerifyForm = ({ setReportData }) => {
   
   const API_URL = process.env.REACT_APP_API_URL || "https://pann-app-base-edl9t.ondigitalocean.app";
 
+  const replaceBaselayerWithPann = (value) => {
+    if (typeof value === "string") {
+      return value.replace(/baselayer/gi, "Pann");
+    }
+    return value;
+  };
+
   const handleVerify = async () => {
     if (!legalName || !address) {
       alert("Please enter both Legal Entity Name and Address!");
@@ -48,71 +55,85 @@ const VerifyForm = ({ setReportData }) => {
       const officerNames = officers.map(officer => officer.name || "Unknown").join(", ");
 
       const transformedData = {
-        businessName: response.data.name || legalName,
-        businessID: response.data.business?.id || "N/A",
-        searchDate: new Date().toLocaleDateString(),
-        legalEntityName: legalName,
-        legalEntityAddress: address,
-        email: response.data.email || "N/A",
-        tin: response.data.tin || "N/A",
-        officers: officerNames,
-        phoneNumber: response.data.phone_number || "N/A",
-        website: response.data.website || "N/A",
-        riskRating: riskScore.rating || "N/A",
-        riskLevel: riskScore.rating === "A" ? "Low Risk" : 
-                  riskScore.rating === "B" ? "Medium Risk" : 
-                  riskScore.rating === "C" ? "High Risk" : "N/A",
-        kybRating: kybScore.rating || "N/A",
-        kybLevel: kybScore.rating === "A" ? "Fully Verified" : 
-                 kybScore.rating === "B" ? "Partially Verified" : 
-                 kybScore.rating === "C" ? "Limited Verification" : "N/A",
-        address: response.data.address || "N/A",
-        business: response.data.business || {},
+        businessName: replaceBaselayerWithPann(response.data.name || legalName),
+        businessID: replaceBaselayerWithPann(response.data.business?.id || "N/A"),
+        searchDate: replaceBaselayerWithPann(new Date().toLocaleDateString()),
+        legalEntityName: replaceBaselayerWithPann(legalName),
+        legalEntityAddress: replaceBaselayerWithPann(address),
+        email: replaceBaselayerWithPann(response.data.email || "N/A"),
+        tin: replaceBaselayerWithPann(response.data.tin || "N/A"),
+        officers: replaceBaselayerWithPann(officerNames),
+        phoneNumber: replaceBaselayerWithPann(response.data.phone_number || "N/A"),
+        website: replaceBaselayerWithPann(response.data.website || "N/A"),
+        riskRating: replaceBaselayerWithPann(riskScore.rating || "N/A"),
+        riskLevel: replaceBaselayerWithPann(
+          riskScore.rating === "A" ? "Low Risk" : 
+          riskScore.rating === "B" ? "Medium Risk" : 
+          riskScore.rating === "C" ? "High Risk" : "N/A"
+        ),
+        kybRating: replaceBaselayerWithPann(kybScore.rating || "N/A"),
+        kybLevel: replaceBaselayerWithPann(
+          kybScore.rating === "A" ? "Fully Verified" : 
+          kybScore.rating === "B" ? "Partially Verified" : 
+          kybScore.rating === "C" ? "Limited Verification" : "N/A"
+        ),
+        address: replaceBaselayerWithPann(response.data.address || "N/A"),
+        business: response.data.business || {}, // Object, no replacement needed
         businessOfficers: officers.map(officer => ({
-          name: officer.name || "Unknown",
-          roles: officer.titles?.join(", ") || "N/A",
-          sos_filings: officer.states?.length || officer.titles?.length || 0
+          name: replaceBaselayerWithPann(officer.name || "Unknown"),
+          roles: replaceBaselayerWithPann(officer.titles?.join(", ") || "N/A"),
+          sos_filings: officer.states?.length || officer.titles?.length || 0 // Number, no replacement
         })),
-        watchlistHits: response.data.watchlist_hits || [],
-        registrations: response.data.business?.registrations || [],
-        incorporationDate: response.data.business?.incorporation_date || "N/A",
-        incorporationState: response.data.business?.incorporation_state || "N/A",
-        businessAge: response.data.business?.months_in_business 
-          ? `${Math.floor(response.data.business.months_in_business / 12)} years` 
-          : "N/A",
-        structure: response.data.business?.structure || "N/A",
-        entityType: response.data.business?.structure || "N/A",
-        naicsCode: response.data.business?.predicted_naics?.length > 0 
-          ? response.data.business.predicted_naics[0] 
-          : "N/A",
-        status: response.data.business?.registrations?.[0]?.status || "N/A",
+        watchlistHits: response.data.watchlist_hits || [], // Array of objects, no direct string replacement
+        registrations: response.data.business?.registrations || [], // Array of objects, no direct string replacement
+        incorporationDate: replaceBaselayerWithPann(response.data.business?.incorporation_date || "N/A"),
+        incorporationState: replaceBaselayerWithPann(response.data.business?.incorporation_state || "N/A"),
+        businessAge: replaceBaselayerWithPann(
+          response.data.business?.months_in_business 
+            ? `${Math.floor(response.data.business.months_in_business / 12)} years` 
+            : "N/A"
+        ),
+        structure: replaceBaselayerWithPann(response.data.business?.structure || "N/A"),
+        entityType: replaceBaselayerWithPann(response.data.business?.structure || "N/A"),
+        naicsCode: replaceBaselayerWithPann(
+          response.data.business?.predicted_naics?.length > 0 
+            ? response.data.business.predicted_naics[0] 
+            : "N/A"
+        ),
+        status: replaceBaselayerWithPann(response.data.business?.registrations?.[0]?.status || "N/A"),
         filingStatus: response.data.business?.registrations 
           ? [
-              { name: "Active Filings", value: response.data.business.registrations.filter(r => r.status === "active").length, color: "#E47628" },
-              { name: "Inactive Filings", value: response.data.business.registrations.filter(r => r.status !== "active").length, color: "#2F4532" },
-              { name: "Unknown", value: 0, color: "#F6CBA9" }
+              { name: replaceBaselayerWithPann("Active Filings"), value: response.data.business.registrations.filter(r => r.status === "active").length, color: "#E47628" },
+              { name: replaceBaselayerWithPann("Inactive Filings"), value: response.data.business.registrations.filter(r => r.status !== "active").length, color: "#2F4532" },
+              { name: replaceBaselayerWithPann("Unknown"), value: 0, color: "#F6CBA9" }
             ] 
           : null,
-        registeredAgent: response.data.business?.registrations?.[0]?.registered_agent?.name || "N/A",
-        registeredAgentAddress: response.data.business?.registrations?.[0]?.registered_agent?.address 
-          ? `${response.data.business.registrations[0].registered_agent.address.street || ''}, ${response.data.business.registrations[0].registered_agent.address.city || ''}, ${response.data.business.registrations[0].registered_agent.address.state || ''} ${response.data.business.registrations[0].registered_agent.address.zip || ''}`.replace(/,\s*,/g, ',').replace(/,\s*$/, '').trim()
-          : "N/A",
-        filingID: response.data.business?.registrations?.[0]?.file_number || "N/A",
-        dateFiled: response.data.business?.registrations?.[0]?.issue_date || "N/A",
+        registeredAgent: replaceBaselayerWithPann(response.data.business?.registrations?.[0]?.registered_agent?.name || "N/A"),
+        registeredAgentAddress: replaceBaselayerWithPann(
+          response.data.business?.registrations?.[0]?.registered_agent?.address 
+            ? `${response.data.business.registrations[0].registered_agent.address.street || ''}, ${response.data.business.registrations[0].registered_agent.address.city || ''}, ${response.data.business.registrations[0].registered_agent.address.state || ''} ${response.data.business.registrations[0].registered_agent.address.zip || ''}`.replace(/,\s*,/g, ',').replace(/,\s*$/, '').trim()
+            : "N/A"
+        ),
+        filingID: replaceBaselayerWithPann(response.data.business?.registrations?.[0]?.file_number || "N/A"),
+        dateFiled: replaceBaselayerWithPann(response.data.business?.registrations?.[0]?.issue_date || "N/A"),
         addresses: response.data.business?.addresses?.map(addr => 
-          `${addr.street || ''}, ${addr.city || ''}, ${addr.state || ''} ${addr.zip || ''}`.replace(/,\s*,/g, ',').replace(/,\s*$/, '').trim()
+          replaceBaselayerWithPann(
+            `${addr.street || ''}, ${addr.city || ''}, ${addr.state || ''} ${addr.zip || ''}`.replace(/,\s*,/g, ',').replace(/,\s*$/, '').trim()
+          )
         ) || [],
-        phoneNumbers: response.data.business?.phone_numbers || [],
+        phoneNumbers: response.data.business?.phone_numbers?.map(num => replaceBaselayerWithPann(num)) || [],
         socialMedia: response.data.business?.social_profiles?.map(profile => 
-          `${profile.site || 'Unknown'}: ${profile.url || 'N/A'}`
+          replaceBaselayerWithPann(`${profile.site || 'Unknown'}: ${profile.url || 'N/A'}`)
         ) || [],
         inquiryVariations: response.data.business?.registrations?.map(reg => ({
-          ein: response.data.tin || "N/A",
-          entityName: reg.name || "N/A",
-          entityAddress: reg.address 
-            ? `${reg.address.street || ''}, ${reg.address.city || ''}, ${reg.address.state || ''} ${reg.address.zip || ''}`.replace(/,\s*,/g, ',').replace(/,\s*$/, '').trim() 
-            : "N/A",
-          officers: reg.officers?.map(o => o.name || "Unknown").join(", ") || "N/A"
+          ein: replaceBaselayerWithPann(response.data.tin || "N/A"),
+          entityName: replaceBaselayerWithPann(reg.name || "N/A"),
+          entityAddress: replaceBaselayerWithPann(
+            reg.address 
+              ? `${reg.address.street || ''}, ${reg.address.city || ''}, ${reg.address.state || ''} ${reg.address.zip || ''}`.replace(/,\s*,/g, ',').replace(/,\s*$/, '').trim() 
+              : "N/A"
+          ),
+          officers: replaceBaselayerWithPann(reg.officers?.map(o => o.name || "Unknown").join(", ") || "N/A")
         })) || [],
       };
 

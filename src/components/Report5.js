@@ -26,7 +26,7 @@ const Report5 = ({ reportData }) => {
           <tbody>
             <tr>
               <td>BUSINESS DETAILS</td>
-              <td>These are the specific details that were entered into the Baselayer platform to initiate the search for this Business.</td>
+              <td>These are the specific details that were entered into the Pann platform to initiate the search for this Business.</td>
             </tr>
             <tr className="bg-light">
               <td className="fw-bold text-muted">Associated Addresses</td>
@@ -54,7 +54,7 @@ const Report5 = ({ reportData }) => {
             <tr>
               <td>INQUIRY VARIATIONS</td>
               <td></td>
-              <td>Baselayer ratings can range from A to F for Risk, KYB, and Fraud. Poor scores indicate a greater need for manual review.</td>
+              <td>Pann ratings can range from A to F for Risk, KYB, and Fraud. Poor scores indicate a greater need for manual review.</td>
             </tr>
             <tr className="bg-light">
               <td>EIN</td>

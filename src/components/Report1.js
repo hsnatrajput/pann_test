@@ -38,7 +38,7 @@ const Report1 = ({ reportData }) => {
           <tbody>
             <tr>
               <td>APPLICATION DETAILS</td>
-              <td>Details entered into the Baselayer platform to verify this business.</td>
+              <td>Details entered into the Pann platform to verify this business.</td>
             </tr>
             <tr className="bg-light">
               <td className="fw-bold text-muted">Legal Entity Name</td>

@@ -47,7 +47,7 @@ const Report2 = ({ reportData }) => {
           <tbody>
             <tr>
               <td>BUSINESS DETAILS</td>
-              <td>These are the specific details that were entered into the Baselayer platform to initiate the search for this Business.</td>
+              <td>These are the specific details that were entered into the Pann platform to initiate the search for this Business.</td>
             </tr>
             {businessDetails.map((item, index) => (
               <tr key={index} className={index % 2 === 1 ? "bg-light" : ""}>
