@@ -1,10 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/Footer.css"
+import "../styles/Footer.css";
 
 const Footer = ({ pageNumber }) => {
   return (
-    <div className="d-flex justify-content-between align-items-center mt-4">
+    <div className="d-flex justify-content-between align-items-center mt-3 mt-md-4">
       <img src="/images/Pann_logo.png" alt="Pann Logo" className="footer-logo" />
       <p className="text-muted">{pageNumber}/5</p>
     </div>

@@ -19,22 +19,22 @@ const Report1 = ({ reportData }) => {
   }
 
   return (
-    <div className="container p-4 border shadow-sm bg-white">
-      <div className="p-4 rounded">
+    <div className="container p-3 p-md-4 border shadow-sm bg-white">
+      <div className="p-3 p-md-4 rounded">
         <div className="text-center pann-box">
           <img src="/images/Pann_logo.png" alt="Pann Logo" className="pann-logo" />
           <p className="business-report">Business Report</p>
         </div>
 
         <div className="p-3 text-white rounded" style={{ backgroundColor: "#FA822C" }}>
-          <h4>{reportData.businessName }</h4>
+          <h4>{reportData.businessName}</h4>
           <p className="mb-0">Business ID: {reportData.businessID || "N/A"}</p>
           <p className="mb-0">Searched: {reportData.searchDate || "N/A"}</p>
         </div>
       </div>
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr>
               <td>APPLICATION DETAILS</td>
@@ -42,15 +42,15 @@ const Report1 = ({ reportData }) => {
             </tr>
             <tr className="bg-light">
               <td className="fw-bold text-muted">Legal Entity Name</td>
-              <td>{reportData.legalEntityName }</td>
+              <td>{reportData.legalEntityName}</td>
             </tr>
             <tr>
               <td className="fw-bold text-muted">Legal Entity Address</td>
-              <td>{reportData.legalEntityAddress }</td>
+              <td>{reportData.legalEntityAddress}</td>
             </tr>
             <tr className="bg-light">
               <td className="fw-bold text-muted">Email</td>
-              <td>{reportData.email }</td>
+              <td>{reportData.email}</td>
             </tr>
             <tr>
               <td className="fw-bold text-muted">TIN</td>
@@ -74,26 +74,25 @@ const Report1 = ({ reportData }) => {
 
       <hr />
 
-      <div className="mt-4 ">
-      <div className="rating-container">
-        <div className="rating-text">
-          <div className="rating-section">
-            <h6 className="fw-bold">Risk Rating</h6>
-            <h2 className="rating-grade">{reportData.riskRating || "N/A"}</h2>
-            <p className="rating-subtext">{reportData.riskLevel || "N/A"}</p>
+      <div className="mt-3 mt-md-4">
+        <div className="rating-container">
+          <div className="rating-text">
+            <div className="rating-section">
+              <h6 className="fw-bold">Risk Rating</h6>
+              <h2 className="rating-grade">{reportData.riskRating || "N/A"}</h2>
+              <p className="rating-subtext">{reportData.riskLevel || "N/A"}</p>
+            </div>
+            <div className="rating-section">
+              <h6 className="fw-bold">KYB Rating</h6>
+              <h2 className="rating-grade">{reportData.kybRating || "N/A"}</h2>
+              <p className="rating-subtext">{reportData.kybLevel || "N/A"}</p>
+            </div>
           </div>
-          <div className="rating-section">
-            <h6 className="fw-bold">KYB Rating</h6>
-            <h2 className="rating-grade">{reportData.kybRating || "N/A"}</h2>
-            <p className="rating-subtext">{reportData.kybLevel || "N/A"}</p>
-          </div>
+          <CircularChart riskRating={reportData.riskRating} />
         </div>
-        <CircularChart riskRating={reportData.riskRating} />
-      </div>
       </div>
 
       <Footer pageNumber={1} />
-
     </div>
   );
 };

@@ -19,11 +19,11 @@ const Report3 = ({ reportData }) => {
   }
 
   return (
-    <div className="container p-4 border shadow-sm bg-white">
+    <div className="container p-3 p-md-4 border shadow-sm bg-white">
       <Header />
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr className="bg-light">
               <td className="fw-bold text-muted">
@@ -55,8 +55,8 @@ const Report3 = ({ reportData }) => {
 
       <hr />
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr className="bg-light">
               <td className="fw-bold text-muted">District of Columbia</td>
@@ -80,7 +80,7 @@ const Report3 = ({ reportData }) => {
 
       <hr />
 
-      <table className="table">
+      <table className="table table-responsive">
         <tbody>
           <tr>
             <td>Address</td>
@@ -92,8 +92,8 @@ const Report3 = ({ reportData }) => {
         </tbody>
       </table>
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <thead>
             <tr>
               <th>Address</th>

@@ -1,24 +1,23 @@
-import React from 'react';
-import Loan from './LoanComponent/Loan';
-import Header from './Header';
-import Footer from './Footer';
+import React from "react";
+import Loan from "./LoanComponent/Loan";
+import Header from "./Header";
+import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Report1.css";
 
 function Report4({ reportData }) {
   if (!reportData) return <p>Loading...</p>;
 
-  const businessOfficers = reportData.businessOfficers 
-  
+  const businessOfficers = reportData.businessOfficers || [];
   const watchlistHits = reportData.watchlistHits || [];
   const watchlistNames = watchlistHits.map(hit => hit.name || hit.code).filter(Boolean);
-  
+
   return (
-    <div className="container p-4 border shadow-sm bg-white">
+    <div className="container p-3 p-md-4 border shadow-sm bg-white">
       <Header />
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr>
               <td>Business Officer</td>
@@ -32,7 +31,7 @@ function Report4({ reportData }) {
             {businessOfficers.map((officer, index) => (
               <tr key={index}>
                 <td className="fw-bold text-muted">{officer.name}</td>
-                <td>{officer.roles }</td>
+                <td>{officer.roles}</td>
                 <td><span className="badge badge-green">{officer.sos_filings}</span></td>
               </tr>
             ))}
@@ -42,8 +41,8 @@ function Report4({ reportData }) {
 
       <hr />
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr>
               <td>WATCHLISTS</td>
@@ -58,8 +57,8 @@ function Report4({ reportData }) {
 
       <hr />
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr>
               <td>WEBSITE ANALYSIS</td>
@@ -79,8 +78,8 @@ function Report4({ reportData }) {
 
       <hr />
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr>
               <td>WEBSITE ANALYSIS</td>
@@ -107,7 +106,7 @@ function Report4({ reportData }) {
         </table>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-3 mt-md-4">
         <Loan />
       </div>
 

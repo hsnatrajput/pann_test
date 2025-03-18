@@ -19,10 +19,10 @@ const Report5 = ({ reportData }) => {
   }
 
   return (
-    <div className="container p-4 border shadow-sm bg-white">
+    <div className="container p-3 p-md-4 border shadow-sm bg-white">
       <Header />
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr>
               <td>BUSINESS DETAILS</td>
@@ -48,8 +48,8 @@ const Report5 = ({ reportData }) => {
         </table>
       </div>
       <hr />
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr>
               <td>INQUIRY VARIATIONS</td>
@@ -68,7 +68,7 @@ const Report5 = ({ reportData }) => {
                   <td className="fw-bold text-muted">{variation.ein || "N/A"}</td>
                   <td>{variation.entityName || "N/A"}</td>
                   <td>{variation.entityAddress || "N/A"}</td>
-                  <td>{variation.officers || "N/A"}</td> {/* Fixed line */}
+                  <td>{variation.officers || "N/A"}</td>
                 </tr>
               ))
             ) : (

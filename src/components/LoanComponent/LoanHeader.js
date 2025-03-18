@@ -3,11 +3,15 @@ import { Navbar, Nav, Button, Container } from "react-bootstrap";
 
 const LoanHeader = () => {
   return (
-    <Navbar expand="lg"  >
-      <Container >
-    
+    <Navbar expand="lg" bg="light" className="py-2">
+      <Container>
         <Navbar.Brand href="#">
-          <img src="/images/Pann_logo.png" alt="Pann Logo" className="header-logo" style={{ height: "40px" }} />
+          <img
+            src="/images/Pann_logo.png"
+            alt="Pann Logo"
+            className="header-logo"
+            style={{ height: "40px" }}
+          />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -21,7 +25,11 @@ const LoanHeader = () => {
             <Nav.Link href="#">CONTACT US</Nav.Link>
           </Nav>
 
-          <Button variant="warning" className="text-white" style={{ backgroundColor: "#FA822C"}}>
+          <Button
+            variant="warning"
+            className="text-white"
+            style={{ backgroundColor: "#FA822C" }}
+          >
             Log In / Sign Up
           </Button>
         </Navbar.Collapse>
@@ -31,6 +39,3 @@ const LoanHeader = () => {
 };
 
 export default LoanHeader;
-
-
-

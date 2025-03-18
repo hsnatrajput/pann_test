@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff8f0; /* Light peach background */
+  background-color: #fff8f0;
   padding: 12px 20px;
   border-radius: 12px;
 }
@@ -10,10 +10,38 @@
 .company-name {
   font-size: 16px;
   font-weight: bold;
-  color: #e47628; /* Orange */
+  color: #e47628;
 }
 
 .report-info {
   font-size: 14px;
-  color: #e47628; /* Orange */
+  color: #e47628;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 10px 15px;
+  }
+
+  .company-name {
+    font-size: 14px;
+  }
+
+  .report-info {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 8px 10px;
+  }
+
+  .company-name {
+    font-size: 12px;
+  }
+
+  .report-info {
+    font-size: 10px;
+  }
 }

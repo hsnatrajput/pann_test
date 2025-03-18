@@ -39,11 +39,11 @@ const Report2 = ({ reportData }) => {
   ];
 
   return (
-    <div className="container p-4 border shadow-sm bg-white">
+    <div className="container p-3 p-md-4 border shadow-sm bg-white">
       <Header />
 
-      <div className="mt-4">
-        <table className="table">
+      <div className="mt-3 mt-md-4">
+        <table className="table table-responsive">
           <tbody>
             <tr>
               <td>BUSINESS DETAILS</td>
@@ -63,7 +63,7 @@ const Report2 = ({ reportData }) => {
 
       <hr />
 
-      <div className="ratings-container">
+      <div className="ratings-container mt-3 mt-md-4">
         <Ratings ratingsData={ratingsData} />
       </div>
 

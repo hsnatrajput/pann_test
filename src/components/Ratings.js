@@ -14,7 +14,6 @@ const Ratings = ({ ratingsData }) => {
 
   return (
     <div className="ratings-wrapper">
-      
       <div className="ratings-text">
         {data.map((item, index) => (
           <div key={index} className="rating-item">
@@ -24,8 +23,8 @@ const Ratings = ({ ratingsData }) => {
         ))}
       </div>
 
-      <div className="ratings-chart" >
-        <PieChart width={120} height={120}>
+      <div className="ratings-chart">
+        <PieChart width={120} height={120} className="ratings-pie-chart">
           <Pie
             data={data}
             cx="50%"
