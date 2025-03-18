@@ -30,7 +30,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     }
   }, [reportData, navigate]);
 
-  const correctPassword = "123456"; 
+  const correctPassword = "pann00@@"; 
 
   const handlePasswordSubmit = () => {
     if (password === correctPassword) {
@@ -39,6 +39,12 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
       setErrorMessage("");
     } else {
       setErrorMessage("Incorrect password. Please try again.");
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handlePasswordSubmit();
     }
   };
 
@@ -197,6 +203,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
               className="form-control mt-2"
               placeholder="Enter password"
             />
