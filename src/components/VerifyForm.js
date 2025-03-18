@@ -44,6 +44,12 @@ const VerifyForm = ({ setReportData }) => {
       
       console.log("API Response:", response.data);
 
+      if (response.data.state === "FAILED") {
+        alert("We couldn't find this business.");
+        setLoading(false);
+        return;
+      }
+
       // Validate response
       if (!response.data || typeof response.data !== "object") {
         throw new Error("Invalid API response: Expected an object");
@@ -146,7 +152,15 @@ const VerifyForm = ({ setReportData }) => {
       if (error.response) {
         console.log("Response Data:", error.response.data);
         console.log("Response Status:", error.response.status);
-        alert(`Server error: ${error.response.data.message || 'Unknown error'} (Status: ${error.response.status})`);
+        if (error.response) {
+          console.log("Response Data:", error.response.data);
+          console.log("Response Status:", error.response.status);
+          if (error.response.status === 408 || error.response.data?.state === "FAILED") {
+            alert("We couldn't find this business.");
+          } else {
+            alert(`Server error: ${error.response.data.message || 'Unknown error'} (Status: ${error.response.status})`);
+          }
+        }
       } else if (error.request) {
         console.log("Request Error:", error.request);
         alert("No response from server. Please check your connection and try again.");
