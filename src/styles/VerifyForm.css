@@ -1,15 +1,15 @@
 .print-section {
-  display: none; 
+  display: none;
 }
 
 @media print {
   .print-section {
-    display: block !important; 
+    display: block !important;
   }
 }
 
 body {
-  background-color: #f9f6f2; 
+  background-color: #f9f6f2;
   margin: 0;
   font-family: Arial, sans-serif;
 }
@@ -27,18 +27,19 @@ body {
 .logo {
   position: absolute;
   top: 20px;
-  left: 30px;
-  width: 120px; 
+  left: 20px;
+  width: 100px; /* Reduced for mobile */
   height: auto;
 }
 
 .verify-container {
   text-align: center;
-  margin-top: 120px; 
-  background-color: #f9f6f2; 
+  margin-top: 100px; /* Reduced margin for mobile */
+  background-color: #f9f6f2;
   padding: 20px;
   border-radius: 10px;
-  width: 50%;
+  width: 80%; /* Responsive width */
+  max-width: 600px; /* Max width for larger screens */
 }
 
 .input-container {
@@ -50,7 +51,7 @@ body {
   display: flex;
   align-items: center;
   background: white;
-  padding: 10px;
+  padding: 12px; /* Slightly increased for better touch */
   border-radius: 8px;
   border: 1px solid #ddd;
 }
@@ -71,10 +72,12 @@ input {
   background-color: #ff5a2c;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px; /* Increased padding for touch */
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
+  width: 100%; /* Full width on mobile */
+  max-width: 300px; /* Limit width on larger screens */
 }
 
 .verify-btn:hover {
@@ -106,8 +109,8 @@ input {
   font-size: 16px;
   font-weight: 500;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 50%;
+  width: 80%; /* Responsive width */
+  max-width: 400px; /* Max width for larger screens */
 }
 
 .error-text {
@@ -125,4 +128,107 @@ input {
   color: #fff; /* White icon */
   font-size: 16px;
   cursor: pointer; /* Make it clickable */
+  min-width: 24px; /* Ensure touch target size */
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .logo {
+    top: 15px;
+    left: 15px;
+    width: 80px; /* Smaller logo on mobile */
+  }
+
+  .verify-container {
+    margin-top: 80px; /* Reduced margin */
+    width: 90%; /* Take more width on mobile */
+    padding: 15px; /* Reduced padding */
+  }
+
+  .verify-container h1 {
+    font-size: 24px; /* Smaller heading on mobile */
+  }
+
+  .verify-container p {
+    font-size: 14px; /* Smaller text on mobile */
+  }
+
+  .input-container {
+    margin-bottom: 15px; /* Reduced margin */
+  }
+
+  .input-box {
+    padding: 10px;
+  }
+
+  input {
+    font-size: 14px; /* Slightly smaller font for mobile */
+  }
+
+  .verify-btn {
+    padding: 10px 20px; /* Adjusted padding */
+    font-size: 14px; /* Smaller font */
+    max-width: 100%; /* Full width on mobile */
+  }
+
+  .error-modal {
+    padding: 12px 15px; /* Reduced padding for mobile */
+    width: 90%; /* Take more width on mobile */
+    max-width: 320px; /* Smaller max width */
+    font-size: 14px; /* Smaller font */
+  }
+
+  .error-icon {
+    width: 20px; /* Slightly smaller icon */
+    height: 20px;
+    font-size: 14px;
+    min-width: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 60px; /* Even smaller logo on very small screens */
+  }
+
+  .verify-container {
+    margin-top: 60px;
+    width: 95%;
+    padding: 10px;
+  }
+
+  .verify-container h1 {
+    font-size: 20px;
+  }
+
+  .verify-container p {
+    font-size: 12px;
+  }
+
+  .input-box {
+    padding: 8px;
+  }
+
+  input {
+    font-size: 12px;
+  }
+
+  .verify-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .error-modal {
+    padding: 10px 12px;
+    width: 95%;
+    max-width: 280px;
+    font-size: 12px;
+  }
+
+  .error-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    min-width: 18px;
+  }
 }

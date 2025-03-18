@@ -22,7 +22,7 @@ const VerifyForm = ({ setReportData }) => {
     return value;
   };
 
-  const handleVerify = async () => {
+  const handleVerify = async (retries = 2) => {
     if (!legalName || !address) {
       setError("Please enter both Legal Entity Name and Address!");
       return;
@@ -43,7 +43,7 @@ const VerifyForm = ({ setReportData }) => {
             "Content-Type": "application/json",
             "Accept": "application/json"
           },
-          timeout: 30000 // 30-second timeout
+          timeout: 60000 // Increased to 60 seconds for slower responses
         }
       );
       
@@ -52,7 +52,7 @@ const VerifyForm = ({ setReportData }) => {
       console.log("API Response:", response.data);
 
       if (response.data.state === "FAILED") {
-        setError("No Match , Business not found ");
+        setError("No Match, Business not found");
         setLoading(false);
         return;
       }
@@ -154,22 +154,24 @@ const VerifyForm = ({ setReportData }) => {
       setReportData(transformedData);
       navigate("/report1");
     } catch (error) {
+      if (error.code === "ECONNABORTED" && retries > 0) {
+        console.log(`Retry ${3 - retries} due to timeout...`);
+        return handleVerify(retries - 1);
+      }
       console.error("Detailed Error:", error);
       console.log("Error Code:", error.code);
       console.log("Error Stack:", error.stack);
       if (error.response) {
         console.log("Response Data:", error.response.data);
         console.log("Response Status:", error.response.status);
-        // Check for timeout (408) or FAILED state
         if (error.response.status === 408 || (error.response.data && error.response.data.state === "FAILED")) {
-          setError("No Match , Business not found");
+          setError("No Match, Business not found");
         } else {
           setError(`Server error: ${error.response.data.message || 'Unknown error'} (Status: ${error.response.status})`);
         }
       } else if (error.code === "ECONNABORTED") {
-        // Handle local timeout due to Axios timeout setting
-        console.log("Timeout Error: Request took longer than 30 seconds");
-        setError("No Match , Business not found");
+        console.log("Timeout Error: Request took longer than 60 seconds");
+        setError("No Match, Business not found");
       } else if (error.request) {
         console.log("Request Error:", error.request);
         setError("No response from server. Please check your connection and try again.");
