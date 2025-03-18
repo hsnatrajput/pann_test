@@ -22,7 +22,7 @@ const VerifyForm = ({ setReportData }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${API_URL}/get_business_data`,
+        `${API_URL}/get_business_data`,  // Direct API call
         {
           business_name: legalName,
           business_address: address
@@ -94,10 +94,8 @@ const VerifyForm = ({ setReportData }) => {
         socialMedia: response.data.business?.social_profiles?.map(profile => `${profile.site}: ${profile.url}`) || [],
         inquiryVariations: response.data.business?.registrations?.map(reg => ({
           ein: response.data.tin || "N/A",
-          entityName: reg.name || "N/A",
-          entityAddress: reg.address 
-            ? `${reg.address.street || ''}, ${reg.address.city || ''}, ${reg.address.state || ''} ${reg.address.zip || ''}`.replace(/,\s*,/g, ',').replace(/,\s*$/, '').trim() 
-            : "N/A",
+          entityName: reg.name,
+          entityAddress: `${reg.address.street}, ${reg.address.city}, ${reg.address.state} ${reg.address.zip}`,
           officers: reg.officers?.map(o => o.name).join(", ") || "N/A"
         })) || [],
       };
@@ -112,7 +110,7 @@ const VerifyForm = ({ setReportData }) => {
       } else if (error.request) {
         alert("No response from server. Please check your connection and try again.");
       } else {
-        alert("Failed to generate report. Please try again. Error: " + error.message);
+        alert("Failed to generate report. Please try again.");
       }
     } finally {
       setLoading(false);
