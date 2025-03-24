@@ -191,7 +191,7 @@ const VerifyForm = ({ setReportData }) => {
       <div className="nav-container">
         <div className="logo-container">
           <a href="/">
-            <img src="/images/pann_logo.png" alt="Pann Logo" className="nav-logo" />
+            <img src="/images/PAAN_Logo.png" alt="Pann Logo" className="nav-logo" />
           </a>
         </div>
         <div className="nav-menu">
