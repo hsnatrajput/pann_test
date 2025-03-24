@@ -6,6 +6,7 @@ import { GoLocation } from "react-icons/go";
 import axios from "axios";
 import "../styles/VerifyForm.css";
 
+
 const VerifyForm = ({ setReportData }) => {
   const [legalName, setLegalName] = useState("");
   const [address, setAddress] = useState("");
