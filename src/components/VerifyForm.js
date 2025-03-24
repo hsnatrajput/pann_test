@@ -186,40 +186,89 @@ const VerifyForm = ({ setReportData }) => {
 
   return (
     <div className="page-container">
-      <img src="/images/Pann_logo.png" alt="Pann Logo" className="logo" />
-      <div className="verify-container">
-        <h1>Welcome to <span className="brand-name">Pann</span></h1>
-        <p style={{ color: "#868DA6" }}>We help verify business identity through AI</p>
-
-        <div className="input-container">
-          <div className="input-box">
-            <FaBriefcase className="icon" size={24} />
-            <input
-              type="text"
-              placeholder="Enter Legal Entity Name"
-              value={legalName}
-              onChange={(e) => setLegalName(e.target.value)}
-            />
-          </div>
-          <label>Legal Entity Name</label>
+      {/* Navigation Menu */}
+      <div className="nav-container">
+        <div className="logo-container">
+          <a href="/">
+            <img src="/images/pann_logo.png" alt="Pann Logo" className="nav-logo" />
+          </a>
         </div>
-
-        <div className="input-container">
-          <div className="input-box">
-            <GoLocation className="icon" size={24} />
-            <input
-              type="text"
-              placeholder="Enter Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-          <label>Legal Entity Address</label>
+        <div className="nav-menu">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <li><a href="/why">Why</a></li>
+            <li><a href="/about">About Us</a></li>
+          </ul>
         </div>
+        {/* Removed the nav-buttons section */}
+      </div>
 
-        <button className="verify-btn" onClick={handleVerify} disabled={loading}>
-          {loading ? "Verifying..." : "Verify Now"}
-        </button>
+      {/* Main Content */}
+      <div className="hero-section">
+        <div className="hero-content">
+          <h1>Validate your Business Partner in Seconds<br />& Eliminate Fraud and Risk</h1>
+          
+          <div className="verify-container">
+            <div className="form-item">
+              <label>Legal Entity Name*</label>
+              <div className="input-box">
+                <div className="input-icon">
+                  <FaBriefcase className="icon" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Enter your first name"
+                  value={legalName}
+                  onChange={(e) => setLegalName(e.target.value)}
+                />
+              </div>
+            </div>
+            
+            <div className="form-item">
+              <label>Legal Entity Address*</label>
+              <div className="input-box">
+                <div className="input-icon">
+                  <GoLocation className="icon" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Enter your last name"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+            </div>
+            
+            <button className="verify-btn" onClick={handleVerify} disabled={loading}>
+              {loading ? "Verifying..." : "Verify Now"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Partner section */}
+      <div className="partners-section">
+        <h2>Partnered with Leading Institutions</h2>
+        <div className="partner-logos">
+          <div className="partner-logo">
+            <img src="/images/JP_Morgan.png" alt="JPMorgan Logo" className="partner-logo-img" />
+          </div>
+          <div className="partner-logo">
+            <img src="/images/Techstars.png" alt="Techstars Logo" className="partner-logo-img" />
+          </div>
+          <div className="partner-logo">
+            <img src="/images/t_mobile.png" alt="T-Mobile Logo" className="partner-logo-img" />
+          </div>
+          <div className="partner-logo">
+            <img src="/images/Baselayer.png" alt="Baselayer Logo" className="partner-logo-img" />
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="footer">
+        <p>© Pann Capital Platform, Corporation 2025. All Rights Reserved</p>
       </div>
 
       {/* Modal for error message */}
