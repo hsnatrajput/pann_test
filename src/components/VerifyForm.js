@@ -197,9 +197,9 @@ const VerifyForm = ({ setReportData }) => {
         <div className="nav-menu">
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/faqs">FAQs</a></li>
-            <li><a href="/why">Why</a></li>
-            <li><a href="/about">About Us</a></li>
+            <li><a href="/">FAQs</a></li>
+            <li><a href="/">Why</a></li>
+            <li><a href="/">About Us</a></li>
           </ul>
         </div>
         {/* Removed the nav-buttons section */}
