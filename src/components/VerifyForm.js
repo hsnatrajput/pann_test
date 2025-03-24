@@ -11,7 +11,7 @@ const VerifyForm = ({ setReportData }) => {
   const [legalName, setLegalName] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(""); // State to manage error message
+  const [error, setError] = useState(""); 
   const navigate = useNavigate();
   
   const API_URL = process.env.REACT_APP_API_URL || "https://pann-app-base-edl9t.ondigitalocean.app";
