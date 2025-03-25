@@ -219,7 +219,7 @@ const VerifyForm = ({ setReportData }) => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Enter your first name"
+                  placeholder="Enter your Entity Name"
                   value={legalName}
                   onChange={(e) => setLegalName(e.target.value)}
                 />
@@ -234,7 +234,7 @@ const VerifyForm = ({ setReportData }) => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Enter your last name"
+                  placeholder="Enter your Entity Address"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
