@@ -23,7 +23,7 @@ const VerifyForm = ({ setReportData }) => {
     return value;
   };
 
-  const handleVerify = async (retries = 2) => {
+  const handleVerify = async () => {
     if (!legalName || !address) {
       setError("Please enter both Legal Entity Name and Address!");
       return;
@@ -43,8 +43,8 @@ const VerifyForm = ({ setReportData }) => {
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
-          },
-          timeout: 60000 // Increased to 60 seconds for slower responses
+          }
+          // Removed timeout setting to allow requests to take as long as needed
         }
       );
       
@@ -155,10 +155,6 @@ const VerifyForm = ({ setReportData }) => {
       setReportData(transformedData);
       navigate("/report1");
     } catch (error) {
-      if (error.code === "ECONNABORTED" && retries > 0) {
-        console.log(`Retry ${3 - retries} due to timeout...`);
-        return handleVerify(retries - 1);
-      }
       console.error("Detailed Error:", error);
       console.log("Error Code:", error.code);
       console.log("Error Stack:", error.stack);
@@ -170,9 +166,6 @@ const VerifyForm = ({ setReportData }) => {
         } else {
           setError(`Server error: ${error.response.data.message || 'Unknown error'} (Status: ${error.response.status})`);
         }
-      } else if (error.code === "ECONNABORTED") {
-        console.log("Timeout Error: Request took longer than 60 seconds");
-        setError("No Match, Business not found");
       } else if (error.request) {
         console.log("Request Error:", error.request);
         setError("No response from server. Please check your connection and try again.");
