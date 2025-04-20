@@ -6,11 +6,11 @@ import { GoLocation } from "react-icons/go";
 import axios from "axios";
 import "../styles/VerifyForm.css";
 
-
 const VerifyForm = ({ setReportData }) => {
   const [legalName, setLegalName] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isVerified, setIsVerified] = useState(false); // New state for verification confirmation
   const [error, setError] = useState(""); 
   const navigate = useNavigate();
   
@@ -30,9 +30,9 @@ const VerifyForm = ({ setReportData }) => {
     }
   
     setLoading(true);
-    setError(""); // Clear any previous error
+    setError("");
     try {
-      const startTime = Date.now(); // Start time for response logging
+      const startTime = Date.now();
       const response = await axios.post(
         `${API_URL}/get_business_data`,
         {
@@ -44,7 +44,6 @@ const VerifyForm = ({ setReportData }) => {
             "Content-Type": "application/json",
             "Accept": "application/json"
           }
-          // Removed timeout setting to allow requests to take as long as needed
         }
       );
       
@@ -58,7 +57,6 @@ const VerifyForm = ({ setReportData }) => {
         return;
       }
 
-      // Validate response
       if (!response.data || typeof response.data !== "object") {
         throw new Error("Invalid API response: Expected an object");
       }
@@ -92,14 +90,14 @@ const VerifyForm = ({ setReportData }) => {
           kybScore.rating === "C" ? "Limited Verification" : "N/A"
         ),
         address: replaceBaselayerWithPann(response.data.address || "N/A"),
-        business: response.data.business || {}, // Object, no replacement needed
+        business: response.data.business || {},
         businessOfficers: officers.map(officer => ({
           name: replaceBaselayerWithPann(officer.name || "Unknown"),
           roles: replaceBaselayerWithPann(officer.titles?.join(", ") || "N/A"),
-          sos_filings: officer.states?.length || officer.titles?.length || 0 // Number, no replacement
+          sos_filings: officer.states?.length || officer.titles?.length || 0
         })),
-        watchlistHits: response.data.watchlist_hits || [], // Array of objects, no direct string replacement
-        registrations: response.data.business?.registrations || [], // Array of objects, no direct string replacement
+        watchlistHits: response.data.watchlist_hits || [],
+        registrations: response.data.business?.registrations || [],
         incorporationDate: replaceBaselayerWithPann(response.data.business?.incorporation_date || "N/A"),
         incorporationState: replaceBaselayerWithPann(response.data.business?.incorporation_state || "N/A"),
         businessAge: replaceBaselayerWithPann(
@@ -153,7 +151,14 @@ const VerifyForm = ({ setReportData }) => {
 
       console.log("Transformed Data:", transformedData);
       setReportData(transformedData);
-      navigate("/report1");
+      
+      // Show "Verified!" message for 2 seconds before navigating
+      setLoading(false);
+      setIsVerified(true);
+      setTimeout(() => {
+        setIsVerified(false);
+        navigate("/report1");
+      }, 2000);
     } catch (error) {
       console.error("Detailed Error:", error);
       console.log("Error Code:", error.code);
@@ -173,7 +178,6 @@ const VerifyForm = ({ setReportData }) => {
         console.log("Error Message:", error.message);
         setError(`Failed to generate report: ${error.message}`);
       }
-    } finally {
       setLoading(false);
     }
   };
@@ -184,85 +188,122 @@ const VerifyForm = ({ setReportData }) => {
       <div className="nav-container">
         <div className="logo-container">
           <a href="/">
-            <img src="/images/PAAN_Logo.png" alt="Pann Logo" className="nav-logo" />
+            <img src="/images/Pann_Logo_New.png" alt="Pann Logo" className="nav-logo" />
           </a>
         </div>
-        <div className="nav-menu">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/">FAQs</a></li>
-            <li><a href="/">Why</a></li>
-            <li><a href="/">About Us</a></li>
-          </ul>
+        <div className="nav-buttons">
+          <button className="schedule-btn">Schedule a Meeting</button>
+          <span className="pricing-btn">Pricing</span>
+          <span className="login-btn">Login</span>
         </div>
-        {/* Removed the nav-buttons section */}
       </div>
 
       {/* Main Content */}
-      <div className="hero-section">
+      <div className={`hero-section ${loading || isVerified ? 'loading' : ''}`}>
         <div className="hero-content">
-          <h1>Validate your Business Partner in Seconds<br />& Eliminate Fraud and Risk</h1>
-          
-          <div className="verify-container">
-            <div className="form-item">
-              <label>Legal Entity Name*</label>
-              <div className="input-box">
-                <div className="input-icon">
-                  <FaBriefcase className="icon" />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Enter your Entity Name"
-                  value={legalName}
-                  onChange={(e) => setLegalName(e.target.value)}
-                />
+          <h1>
+            <span>VALIDATE</span> BUSINESSES IN SECONDS<br />& <span>ELIMINATE </span> FRAUD
+          </h1>
+                  
+          {/* Conditionally render the verify container, loading animation, or verified message */}
+          {loading ? (
+            <div className="loading-container">
+              <div className="loading-circle">
+                <img src="/images/Ellipse1.png" alt="Loading" className="loading-image" />
               </div>
+              <p className="loading-text">Verifying</p>
             </div>
-            
-            <div className="form-item">
-              <label>Legal Entity Address*</label>
-              <div className="input-box">
-                <div className="input-icon">
-                  <GoLocation className="icon" />
+          ) : isVerified ? (
+            <div className="verified-container">
+              <img src="/images/verified.png" alt="Verified" className="verified-image" />
+              <p className="verified-text">Verified!</p>
+            </div>
+          ) : (
+            <div className="verify-container">
+              <div className="form-item">
+                <label>LEGAL ENTITY NAME*</label>
+                <div className="input-group">
+                  <div className="input-icon">
+                    <FaBriefcase className="icon" />
+                  </div>
+                  <div className="input-box">
+                    <input
+                      type="text"
+                      placeholder="Legal Entity, Inc."
+                      value={legalName}
+                      onChange={(e) => setLegalName(e.target.value)}
+                    />
+                  </div>
                 </div>
-                <input
-                  type="text"
-                  placeholder="Enter your Entity Address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
               </div>
-            </div>
-            
-            <button className="verify-btn" onClick={handleVerify} disabled={loading}>
-              {loading ? "Verifying..." : "Verify Now"}
-            </button>
-          </div>
-        </div>
-      </div>
 
-      {/* Partner section */}
-      <div className="partners-section">
-        <h2>Partnered with Leading Institutions</h2>
-        <div className="partner-logos">
-          <div className="partner-logo">
-            <img src="/images/JP_Morgan.png" alt="JPMorgan Logo" className="partner-logo-img" />
-          </div>
-          <div className="partner-logo">
-            <img src="/images/Techstars.png" alt="Techstars Logo" className="partner-logo-img" />
-          </div>
-          <div className="partner-logo">
-            <img src="/images/t_mobile.png" alt="T-Mobile Logo" className="partner-logo-img" />
-          </div>
-          <div className="partner-logo">
-            <img src="/images/Baselayer.png" alt="Baselayer Logo" className="partner-logo-img" />
+              <div className="form-item">
+                <label>LEGAL ENTITY ADDRESS*</label>
+                <div className="input-group">
+                  <div className="input-icon">
+                    <GoLocation className="icon" />
+                  </div>
+                  <div className="input-box">
+                    <input
+                      type="text"
+                      placeholder="1 Main Way, Palo Alto, California, USA"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <button className="verify-btn" onClick={handleVerify} disabled={loading}>
+                VERIFY NOW
+              </button>
+            </div>
+          )}
+
+          <p className="subtitle">
+            WE VALIDATE BUSINESS IDENTITY THROUGH 50 DIFFERENT LAYERS OF<br />
+            PRIVATE CREDIT AND BUSINESS DATA MAKING SURE YOU'RE DOING<br />
+            BUSINESS WITH THE RIGHT PEOPLE
+          </p>
+          <div className="partners-section">
+            <h2>BACKED BY LEADING INSTITUTIONS</h2>
+            <div className="partner-logos">
+              <img src="/images/JP_Morgan_Partner.png" alt="J.P. Morgan Logo" />
+              <img src="/images/Techstars_Partner.png" alt="Techstars Logo" />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Footer */}
       <div className="footer">
-        <p>© Pann Capital Platform, Corporation 2025. All Rights Reserved</p>
+        <div className="footer-links">
+          <div className="footer-column">
+            <h3>PANN</h3>
+            <p>We validate business identity through 50 different layers of private credit and business data making sure you're doing business with the right people.</p>
+          </div>
+          <div className="footer-column">
+            <h3>ABOUT US</h3>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Newsletter</a>
+            <a href="#">Pricing</a>
+          </div>
+          <div className="footer-column">
+            <h3>SUPPORT</h3>
+            <a href="#">Contact</a>
+            <a href="#">Support Portal</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+          <div className="footer-column">
+            <h3>SOCIAL</h3>
+            <a href="#" className="linkedin-link">
+              <img src="/images/linkedin.png" alt="LinkedIn" className="social-icon" />
+            </a>
+          </div>
+        </div>
+        <p className="footer-copyright">© Pann Capital Platform, Corp. 2025. All Rights Reserved</p>
       </div>
 
       {/* Modal for error message */}
