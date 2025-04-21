@@ -202,7 +202,7 @@ const VerifyForm = ({ setReportData }) => {
       <div className={`hero-section ${loading || isVerified ? 'loading' : ''}`}>
         <div className="hero-content">
           <h1>
-            <span>VALIDATE</span> BUSINESSES IN SECONDS<br />& <span>ELIMINATE </span> FRAUD
+            <span>Validate</span> business in seconds<br />& <span>Eliminate </span> Fraud
           </h1>
                   
           {/* Conditionally render the verify container, loading animation, or verified message */}
@@ -221,7 +221,7 @@ const VerifyForm = ({ setReportData }) => {
           ) : (
             <div className="verify-container">
               <div className="form-item">
-                <label>LEGAL ENTITY NAME*</label>
+                <label>Legal Entity Name*</label>
                 <div className="input-group">
                   <div className="input-icon">
                     <FaBriefcase className="icon" />
@@ -238,7 +238,7 @@ const VerifyForm = ({ setReportData }) => {
               </div>
 
               <div className="form-item">
-                <label>LEGAL ENTITY ADDRESS*</label>
+                <label>Legal Entity Address*</label>
                 <div className="input-group">
                   <div className="input-icon">
                     <GoLocation className="icon" />
@@ -255,18 +255,18 @@ const VerifyForm = ({ setReportData }) => {
               </div>
 
               <button className="verify-btn" onClick={handleVerify} disabled={loading}>
-                VERIFY NOW
+                Verify Now
               </button>
             </div>
           )}
 
           <p className="subtitle">
-            WE VALIDATE BUSINESS IDENTITY THROUGH 50 DIFFERENT LAYERS OF<br />
-            PRIVATE CREDIT AND BUSINESS DATA MAKING SURE YOU'RE DOING<br />
-            BUSINESS WITH THE RIGHT PEOPLE
+            We validate business identity through 50 different layers of<br />
+            private credit and business data making sure You're doing<br />
+            business with the right people
           </p>
           <div className="partners-section">
-            <h2>BACKED BY LEADING INSTITUTIONS</h2>
+            <h2>Backed By Leading Institutions</h2>
             <div className="partner-logos">
               <img src="/images/JP_Morgan_Partner.png" alt="J.P. Morgan Logo" />
               <img src="/images/Techstars_Partner.png" alt="Techstars Logo" />
@@ -276,29 +276,30 @@ const VerifyForm = ({ setReportData }) => {
       </div>
 
       {/* Footer */}
+      {/* Footer */}
       <div className="footer">
         <div className="footer-links">
-          <div className="footer-column">
-            <h3>PANN</h3>
+          <div className="footer-column pann-column">
+            <h3 className="pann-heading">Pann</h3>
             <p>We validate business identity through 50 different layers of private credit and business data making sure you're doing business with the right people.</p>
           </div>
-          <div className="footer-column">
-            <h3>ABOUT US</h3>
+          <div className="footer-column aligned-column">
+            <h3>About us</h3>
+            <a href="#">Mission</a>
             <a href="#">Team</a>
-            <a href="#">Careers</a>
             <a href="#">Newsletter</a>
             <a href="#">Pricing</a>
           </div>
-          <div className="footer-column">
-            <h3>SUPPORT</h3>
+          <div className="footer-column aligned-column">
+            <h3>Support</h3>
             <a href="#">Contact</a>
-            <a href="#">Support Portal</a>
+            <a href="#">Refund Policy</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Cookie Policy</a>
-            <a href="#">FAQ's</a>
+            <a href="#">FAQs</a>
           </div>
-          <div className="footer-column">
-            <h3>SOCIAL</h3>
+          <div className="footer-column aligned-column">
+            <h3>Social</h3>
             <a href="#" className="linkedin-link">
               <img src="/images/linkedin.png" alt="LinkedIn" className="social-icon" />
             </a>
@@ -306,7 +307,6 @@ const VerifyForm = ({ setReportData }) => {
         </div>
         <p className="footer-copyright">© Pann Capital Platform, Corp. 2025. All Rights Reserved</p>
       </div>
-
       {/* Modal for error message */}
       {error && (
         <div className="error-modal-overlay">
