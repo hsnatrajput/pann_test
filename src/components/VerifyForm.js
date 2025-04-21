@@ -194,7 +194,7 @@ const VerifyForm = ({ setReportData }) => {
         <div className="nav-buttons">
           <button className="schedule-btn">Schedule a Meeting</button>
           <span className="pricing-btn">Pricing</span>
-          <span className="login-btn">Login</span>
+          <span className="login-btn">Sign in</span>
         </div>
       </div>
 
@@ -231,7 +231,7 @@ const VerifyForm = ({ setReportData }) => {
                   <div className="input-box">
                     <input
                       type="text"
-                      placeholder="Legal Entity, Inc."
+                      placeholder="Meta Platforms, Inc."
                       value={legalName}
                       onChange={(e) => setLegalName(e.target.value)}
                     />
@@ -248,7 +248,7 @@ const VerifyForm = ({ setReportData }) => {
                   <div className="input-box">
                     <input
                       type="text"
-                      placeholder="1 Main Way, Palo Alto, California, USA"
+                      placeholder="1 Meta Way, Menlo Park, California, United States"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                     />

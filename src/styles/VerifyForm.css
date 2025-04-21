@@ -121,7 +121,7 @@ code {
 .hero-content span {
   color: #F15822;
   font-size: 36px;
-  font-weight: bold;
+  font-weight: bolder;
   margin-bottom: 20px;
   line-height: 1.2;
   font-family: 'Nunito Sans', sans-serif;
@@ -186,10 +186,11 @@ code {
 .form-item label {
   display: block;
   margin-bottom: 6px;
-  font-weight: 600;
+  font-weight: bold;
   color: #333;
-  font-size: 12px;
+  font-size: 16px;
   margin-left: 3.5rem;
+  font-family: 'Nunito Sans', sans-serif;;
 }
 
 .form-item .input-group {
@@ -561,7 +562,7 @@ input::placeholder {
   }
 
   .verify-container {
-    max-width: 90%;
+    /* max-width: 90%; */
     padding: 20px;
     margin-top: 30px;
   }
@@ -655,7 +656,8 @@ input::placeholder {
   }
 
   .verify-container {
-    max-width: 95%;
+    /* max-width: 95%; */
+    width: 70%;
     padding: 18px;
     margin-top: 25px;
   }
