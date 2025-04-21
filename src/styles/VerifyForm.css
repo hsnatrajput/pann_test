@@ -648,6 +648,12 @@ input::placeholder {
   }
 }
 
+/* @media (min-width: 1024px){
+  .footer-column p{
+    font-size: 10px;
+  }
+} */
+
 /* Tablets and Small Laptops (max-width: 1024px) */
 @media (max-width: 1024px) {
   .nav-container {
@@ -745,6 +751,9 @@ input::placeholder {
   .footer-column {
     min-width: 180px;
   }
+  .footer-column p {
+    font-size: 10px;
+  }
 }
 
 /* Tablets (max-width: 768px) */
@@ -796,7 +805,7 @@ input::placeholder {
 
   .verify-container {
     /* max-width: 95%; */
-    width: 70%;
+    width: 60%;
     padding: 18px;
     margin-top: 25px;
   }
