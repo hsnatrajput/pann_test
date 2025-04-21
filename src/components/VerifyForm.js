@@ -203,7 +203,7 @@ const VerifyForm = ({ setReportData }) => {
         <div className="hero-content">
           <div className="wide-heading-container">
             <h1>
-              <span>Validate</span> businesses in seconds<br />& <span>Eliminate</span> Fraud
+              <span>Validate</span> businesses in seconds <br /> & <span> Eliminate</span> Fraud
             </h1>
           </div>
                   

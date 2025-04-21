@@ -129,10 +129,10 @@ code {
   font-family: 'Nunito Sans';
 }
 
-.hero-content h1 br
+/* .hero-content h1 br
  {
   display: none;
-}
+} */
 
 .subtitle {
   color: #585858;
