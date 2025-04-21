@@ -220,6 +220,13 @@ code {
   color: white;
   font-size: 16px;
 }
+.icon-image{
+  color: white; /* For font icons */
+  font-size: 16px; /* For font icons */
+  width: 70%; /* For images */
+  height: 70%; /* For images */
+  object-fit: contain; 
+}
 
 input {
   padding: 12px 15px;
