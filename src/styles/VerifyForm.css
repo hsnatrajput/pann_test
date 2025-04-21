@@ -680,9 +680,9 @@ input::placeholder {
   }
 
   .wide-heading-container h1 {
-    font-size: 40px;
+    /* font-size: 40px;
     width: 90%;
-    max-width: 650px;
+    max-width: 650px; */
   }
 
   .verify-container {
