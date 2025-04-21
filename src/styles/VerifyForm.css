@@ -1,3 +1,6 @@
+/* Existing imports and core styles remain unchanged */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap');
+
 .print-section {
   display: none;
 }
@@ -10,8 +13,12 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   background-color: #f9f6f2;
+}
+
+code {
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .page-container {
@@ -51,7 +58,9 @@ body {
   gap: 10px;
 }
 
-.schedule-btn, .pricing-btn, .login-btn {
+.schedule-btn,
+.pricing-btn,
+.login-btn {
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
@@ -65,12 +74,15 @@ body {
   border-radius: 12px;
 }
 
-.pricing-btn, .login-btn {
+.pricing-btn,
+.login-btn {
   color: #333;
 }
-.login-btn{
+
+.login-btn {
   font-weight: bold;
 }
+
 /* Hero section styles */
 .hero-section {
   flex: 1;
@@ -91,6 +103,7 @@ body {
   max-width: 1200px;
   padding: 0 20px;
   margin-top: 30px;
+  position: relative;
 }
 
 .hero-content h1 {
@@ -98,24 +111,59 @@ body {
   font-size: 36px;
   font-weight: 900;
   margin-bottom: 20px;
-  /* text-transform: uppercase; */
   line-height: 1.2;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Nunito Sans', sans-serif;
 }
-.hero-content span{
+
+.hero-content span {
   color: #F15822;
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 20px;
-  /* text-transform: uppercase; */
   line-height: 1.2;
+  font-family: 'Nunito Sans', sans-serif;
 }
+
+.hero-content h1 br,
+.subtitle br {
+  display: none;
+}
+
 .subtitle {
-  color:#585858;
-  font-size: 16px;
+  color: #585858;
+  font-size: 22px;
   font-weight: 700;
   line-height: 1.5;
-  /* text-transform: uppercase; */
   margin-top: 30px;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wide-heading-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.wide-heading-container h1 {
+  color: #333;
+  font-size: 45px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  width: 45rem;
+}
+
+.wide-heading-container h1 span {
+  color: #F15822;
+  font-size: 45px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
 .verify-container {
@@ -126,7 +174,7 @@ body {
   max-width: 500px;
   margin: 0 auto;
   border: 1px solid #F15822;
-  box-shadow: 0 8px 24px#FEF8E0;
+  box-shadow: 0 8px 24px #FEF8E0;
   margin-top: 40px;
 }
 
@@ -141,7 +189,6 @@ body {
   font-weight: 600;
   color: #333;
   font-size: 12px;
-  /* text-transform: uppercase; */
   margin-left: 3.5rem;
 }
 
@@ -164,7 +211,6 @@ body {
   justify-content: center;
   background-color: #F15822;
   padding: 8px;
-  /* border-radius: 4px; */
   width: 42px;
   height: 42px;
 }
@@ -181,7 +227,6 @@ input {
   width: 100%;
   font-size: 14px;
   height: 90%;
-  /* border-radius: 8px; */
 }
 
 input::placeholder {
@@ -199,7 +244,6 @@ input::placeholder {
   cursor: pointer;
   width: 50%;
   margin-top: 20px;
-  /* text-transform: uppercase; */
 }
 
 .verify-btn:hover {
@@ -220,10 +264,8 @@ input::placeholder {
 
 .partners-section h2 {
   color: #000000;
-  /* line-height: 116px; */
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  /* text-transform: uppercase; */
   letter-spacing: 1px;
 }
 
@@ -252,7 +294,6 @@ input::placeholder {
 .footer-links {
   display: flex;
   justify-content: center;
-  /* gap: 40px; */
   margin-bottom: 20px;
 }
 
@@ -261,20 +302,21 @@ input::placeholder {
   min-width: 200px;
 }
 
-/* Specific styling for the Pann column */
 .pann-column {
   display: flex;
   flex-direction: column;
 }
-.pann-column h3{
-  font-size: 25px;
+
+.pann-column h3 {
+  font-size: 30px;
 }
+
 .pann-heading {
-  font-size: 24px; /* Increased size for the Pann heading */
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
   color: #000000;
-  margin-top: -10px; /* Move the heading slightly upwards */
+  margin-top: -10px;
 }
 
 .footer-column p {
@@ -284,12 +326,12 @@ input::placeholder {
   width: 65%;
 }
 
-/* Align other columns with the Pann description */
 .aligned-column {
-  padding-top: 10px; /* Adjust this value to align with the top of the Pann description */
+  padding-top: 10px;
 }
-.aligned-column h3{
-  font-size: 12px;
+
+.aligned-column h3 {
+  font-size: 14px;
 }
 
 .footer-column h3 {
@@ -403,14 +445,11 @@ input::placeholder {
 }
 
 .loading-text {
-  /* color: #F15822; */
   font-size: 15px;
   font-weight: 400;
-  /* text-transform: uppercase; */
   margin-top: 10px;
 }
 
-/* Verified message styles */
 .verified-container {
   display: flex;
   flex-direction: column;
@@ -433,78 +472,206 @@ input::placeholder {
 }
 
 .verified-text {
-  /* color: #F15822; */
   font-size: 20px;
   font-weight: 900;
-  /* text-transform: uppercase; */
 }
 
-/* Existing styles remain unchanged, only media queries are updated */
+/* Enhanced Media Queries for Responsiveness */
 
-/* Tablets (max-width: 768px) */
-@media (max-width: 768px) {
-  .nav-container {
-    flex-direction: row; /* Keep horizontal layout for better usability */
-    padding: 12px 20px;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .nav-logo {
-    width: 40px; /* Slightly smaller logo */
-  }
-
-  .nav-buttons {
-    gap: 12px; /* More comfortable spacing */
-  }
-
-  .schedule-btn, .pricing-btn, .login-btn {
-    padding: 8px 14px; /* Slightly larger for touch */
-    font-size: 13px;
-    border-radius: 8px;
-  }
-
-  .hero-section {
-    padding: 60px 15px 20px; /* Adjusted padding */
-  }
-
-  .hero-content {
-    padding: 0 10px;
-  }
-
-  .hero-content h1, .hero-content span {
-    font-size: 26px; /* Slightly smaller but readable */
-    margin-bottom: 12px;
+/* Large Desktops (min-width: 1200px) - Base styles are for laptops, no changes needed */
+@media (min-width: 1200px) {
+  /* Ensure hero content and other elements remain as designed for laptops */
+  .hero-content h1,
+  .hero-content span {
+    font-size: 36px;
+    width: 700px;
   }
 
   .subtitle {
-    font-size: 14px;
-    margin-top: 20px;
-    line-height: 1.4;
+    font-size: 22px;
+    width: 700px;
+  }
+
+  .wide-heading-container h1 {
+    font-size: 45px;
+    width: 45rem;
   }
 
   .verify-container {
+    max-width: 500px;
+    padding: 24px;
+  }
+
+  .nav-container {
+    padding: 15px 30px;
+  }
+
+  .footer-links {
+    gap: 40px;
+  }
+}
+
+/* Tablets and Small Laptops (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .nav-container {
+    padding: 12px 20px;
+  }
+
+  .nav-logo {
+    width: 45px;
+  }
+
+  .nav-buttons {
+    gap: 10px;
+  }
+
+  .schedule-btn,
+  .pricing-btn,
+  .login-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .hero-section {
+    padding: 70px 15px 20px;
+  }
+
+  .hero-content {
+    padding: 0 15px;
+  }
+
+  .hero-content h1,
+  .hero-content span {
+    font-size: 32px;
+    width: 90%; /* Scale with screen */
+    max-width: 650px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    width: 90%;
+    max-width: 650px;
+    margin-top: 25px;
+  }
+
+  .wide-heading-container h1 {
+    font-size: 40px;
+    width: 90%;
+    max-width: 650px;
+  }
+
+  .verify-container {
+    max-width: 90%;
     padding: 20px;
-    max-width: 90%; /* Use more screen width */
     margin-top: 30px;
   }
 
   .form-item label {
     font-size: 11px;
-    margin-left: 2.5rem; /* Align with input */
+    margin-left: 3rem;
+  }
+
+  .input-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .icon {
+    font-size: 15px;
+  }
+
+  .verify-btn {
+    width: 60%;
+    padding: 12px;
+  }
+
+  .partners-section {
+    margin-top: 50px;
+  }
+
+  .partners-section h2 {
+    font-size: 24px;
+  }
+
+  .partner-logos img {
+    max-height: 60px;
+    max-width: 180px;
+  }
+
+  .footer-links {
+    gap: 30px;
+  }
+
+  .footer-column {
+    min-width: 180px;
+  }
+}
+
+/* Tablets (max-width: 768px) */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 10px 15px;
+  }
+
+  .nav-logo {
+    width: 40px;
+  }
+
+  .nav-buttons {
+    gap: 8px;
+  }
+
+  .schedule-btn,
+  .pricing-btn,
+  .login-btn {
+    padding: 7px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .hero-section {
+    padding: 60px 10px 20px;
+  }
+
+  .hero-content h1,
+  .hero-content span {
+    font-size: 28px;
+    width: 95%;
+    max-width: 600px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    width: 95%;
+    max-width: 600px;
+    margin-top: 20px;
+    line-height: 1.4;
+  }
+
+  .wide-heading-container h1 {
+    font-size: 36px;
+    width: 95%;
+    max-width: 600px;
+  }
+
+  .verify-container {
+    max-width: 95%;
+    padding: 18px;
+    margin-top: 25px;
+  }
+
+  .form-item label {
+    font-size: 10px;
+    margin-left: 2.5rem;
   }
 
   .input-group {
     gap: 10px;
   }
 
-  .input-box {
-    padding: 0;
-  }
-
   .input-icon {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     padding: 6px;
   }
 
@@ -513,18 +680,20 @@ input::placeholder {
   }
 
   .verify-btn {
-    padding: 12px;
-    font-size: 14px;
-    margin-top: 15px;
+    width: 70%;
+    padding: 10px;
+    font-size: 13px;
   }
 
-  .loading-container, .verified-container {
-    padding: 20px;
-    max-width: 90%;
-    margin-top: 30px;
+  .loading-container,
+  .verified-container {
+    max-width: 95%;
+    padding: 18px;
+    margin-top: 25px;
   }
 
-  .loading-circle, .verified-image {
+  .loading-circle,
+  .verified-image {
     width: 50px;
     height: 50px;
   }
@@ -542,47 +711,54 @@ input::placeholder {
   }
 
   .partners-section h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: 22px;
+    margin-bottom: 15px;
   }
 
   .partner-logos {
-    gap: 20px;
-    justify-content: space-around; /* Better distribution */
+    gap: 15px;
+    justify-content: space-around;
   }
 
   .partner-logos img {
-    max-height: 50px; /* Balanced size */
-    max-width: 140px;
+    max-height: 50px;
+    max-width: 150px;
+  }
+
+  .footer {
+    padding: 30px 15px;
   }
 
   .footer-links {
-    flex-direction: column; /* Stack columns for clarity */
-    gap: 30px;
+    flex-direction: column;
+    gap: 25px;
     align-items: center;
   }
 
   .footer-column {
-    text-align: center; /* Center for better mobile look */
+    text-align: center;
     min-width: 100%;
   }
 
   .footer-column h3 {
-    font-size: 15px;
+    font-size: 14px;
   }
 
-  .footer-column p, .footer-column a {
+  .footer-column p,
+  .footer-column a {
     font-size: 13px;
   }
 
-  .footer-copyright {
-    font-size: 11px;
+  .footer-column p {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
   }
 
   .error-modal {
-    padding: 15px 20px;
-    font-size: 14px;
     max-width: 85%;
+    padding: 12px 18px;
+    font-size: 14px;
   }
 
   .error-icon {
@@ -592,10 +768,10 @@ input::placeholder {
   }
 }
 
-/* Larger phones (max-width: 480px) */
+/* Large Phones (max-width: 480px) */
 @media (max-width: 480px) {
   .nav-container {
-    padding: 10px 15px;
+    padding: 8px 12px;
   }
 
   .nav-logo {
@@ -603,27 +779,47 @@ input::placeholder {
   }
 
   .nav-buttons {
-    gap: 8px;
+    gap: 6px;
   }
 
-  .schedule-btn, .pricing-btn, .login-btn {
-    padding: 7px 12px;
-    font-size: 12px;
+  .schedule-btn,
+  .pricing-btn,
+  .login-btn {
+    padding: 6px 10px;
+    font-size: 11px;
   }
 
-  .hero-content h1, .hero-content span {
-    font-size: 22px;
-    margin-bottom: 10px;
+  .hero-section {
+    padding: 50px 10px 15px;
+  }
+
+  .hero-content h1,
+  .hero-content span {
+    font-size: 24px;
+    width: 98%;
+    max-width: 400px;
   }
 
   .subtitle {
-    font-size: 12px;
+    font-size: 16px;
+    width: 98%;
+    max-width: 400px;
     margin-top: 15px;
   }
 
+  .wide-heading-container h1 {
+    font-size: 30px;
+    width: 98%;
+    max-width: 400px;
+  }
+
   .verify-container {
+    max-width: 98%;
     padding: 15px;
-    max-width: 95%;
+  }
+
+  .form-item {
+    margin-bottom: 15px;
   }
 
   .form-item label {
@@ -632,8 +828,8 @@ input::placeholder {
   }
 
   .input-icon {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     padding: 5px;
   }
 
@@ -642,16 +838,19 @@ input::placeholder {
   }
 
   .verify-btn {
+    width: 80%;
     padding: 10px;
-    font-size: 13px;
+    font-size: 12px;
   }
 
-  .loading-container, .verified-container {
+  .loading-container,
+  .verified-container {
+    max-width: 98%;
     padding: 15px;
-    max-width: 95%;
   }
 
-  .loading-circle, .verified-image {
+  .loading-circle,
+  .verified-image {
     width: 45px;
     height: 45px;
   }
@@ -664,13 +863,17 @@ input::placeholder {
     font-size: 15px;
   }
 
+  .partners-section {
+    margin-top: 30px;
+  }
+
   .partners-section h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
+    font-size: 20px;
+    margin-bottom: 12px;
   }
 
   .partner-logos {
-    gap: 15px;
+    gap: 12px;
   }
 
   .partner-logos img {
@@ -679,25 +882,32 @@ input::placeholder {
   }
 
   .footer {
-    padding: 25px 15px;
-  }
-
-  .footer-column {
-    min-width: 100%;
+    padding: 20px 10px;
   }
 
   .footer-column h3 {
-    font-size: 14px;
+    font-size: 13px;
   }
 
-  .footer-column p, .footer-column a {
+  .footer-column p,
+  .footer-column a {
     font-size: 12px;
   }
 
+  .footer-column p {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-copyright {
+    font-size: 11px;
+  }
+
   .error-modal {
-    padding: 12px 15px;
-    font-size: 13px;
     max-width: 90%;
+    padding: 10px 15px;
+    font-size: 13px;
   }
 
   .error-icon {
@@ -707,8 +917,8 @@ input::placeholder {
   }
 }
 
-/* Smaller phones (max-width: 320px) */
-@media (max-width: 320px) {
+/* Small Phones (max-width: 360px) */
+@media (max-width: 360px) {
   .nav-container {
     padding: 8px 10px;
   }
@@ -718,27 +928,43 @@ input::placeholder {
   }
 
   .nav-buttons {
-    gap: 6px;
+    gap: 5px;
   }
 
-  .schedule-btn, .pricing-btn, .login-btn {
-    padding: 6px 10px;
-    font-size: 11px;
+  .schedule-btn,
+  .pricing-btn,
+  .login-btn {
+    padding: 5px 8px;
+    font-size: 10px;
   }
 
-  .hero-content h1, .hero-content span {
-    font-size: 18px;
-    margin-bottom: 8px;
+  .hero-section {
+    padding: 40px 8px 10px;
+  }
+
+  .hero-content h1,
+  .hero-content span {
+    font-size: 20px;
+    width: 100%;
+    max-width: 300px;
   }
 
   .subtitle {
-    font-size: 11px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 300px;
     margin-top: 12px;
   }
 
+  .wide-heading-container h1 {
+    font-size: 26px;
+    width: 100%;
+    max-width: 300px;
+  }
+
   .verify-container {
+    max-width: 100%;
     padding: 12px;
-    max-width: 98%;
   }
 
   .form-item {
@@ -751,8 +977,8 @@ input::placeholder {
   }
 
   .input-icon {
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
     padding: 4px;
   }
 
@@ -761,16 +987,19 @@ input::placeholder {
   }
 
   .verify-btn {
+    width: 85%;
     padding: 8px;
-    font-size: 12px;
+    font-size: 11px;
   }
 
-  .loading-container, .verified-container {
+  .loading-container,
+  .verified-container {
+    max-width: 100%;
     padding: 12px;
-    max-width: 98%;
   }
 
-  .loading-circle, .verified-image {
+  .loading-circle,
+  .verified-image {
     width: 40px;
     height: 40px;
   }
@@ -783,9 +1012,13 @@ input::placeholder {
     font-size: 14px;
   }
 
+  .partners-section {
+    margin-top: 25px;
+  }
+
   .partners-section h2 {
-    font-size: 16px;
-    margin-bottom: 12px;
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 
   .partner-logos img {
@@ -794,15 +1027,22 @@ input::placeholder {
   }
 
   .footer {
-    padding: 20px 10px;
+    padding: 15px 8px;
   }
 
   .footer-column h3 {
-    font-size: 13px;
+    font-size: 12px;
   }
 
-  .footer-column p, .footer-column a {
+  .footer-column p,
+  .footer-column a {
     font-size: 11px;
+  }
+
+  .footer-column p {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .footer-copyright {
@@ -810,9 +1050,9 @@ input::placeholder {
   }
 
   .error-modal {
-    padding: 10px 12px;
-    font-size: 12px;
     max-width: 95%;
+    padding: 8px 12px;
+    font-size: 12px;
   }
 
   .error-icon {

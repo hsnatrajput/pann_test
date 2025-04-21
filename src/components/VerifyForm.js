@@ -201,9 +201,11 @@ const VerifyForm = ({ setReportData }) => {
       {/* Main Content */}
       <div className={`hero-section ${loading || isVerified ? 'loading' : ''}`}>
         <div className="hero-content">
-          <h1>
-            <span>Validate</span> business in seconds<br />& <span>Eliminate </span> Fraud
-          </h1>
+          <div className="wide-heading-container">
+            <h1>
+              <span>Validate</span> businesses in seconds<br />& <span>Eliminate</span> Fraud
+            </h1>
+          </div>
                   
           {/* Conditionally render the verify container, loading animation, or verified message */}
           {loading ? (
@@ -261,9 +263,7 @@ const VerifyForm = ({ setReportData }) => {
           )}
 
           <p className="subtitle">
-            We validate business identity through 50 different layers of<br />
-            private credit and business data making sure You're doing<br />
-            business with the right people
+            We validate business identity through 50 different layers of private credit and business data making sure you're doing business with the right people
           </p>
           <div className="partners-section">
             <h2>Backed By Leading Institutions</h2>
