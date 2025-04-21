@@ -270,8 +270,9 @@ const VerifyForm = ({ setReportData }) => {
           <div className="partners-section">
             <h2>Backed By Leading Institutions</h2>
             <div className="partner-logos">
-              <img src="/images/JP_Morgan_Partner.png" alt="J.P. Morgan Logo" />
-              <img src="/images/Techstars_Partner.png" alt="Techstars Logo" />
+              <img src="/images/JP_Morgan_Partner.png" alt="J.P. Morgan Logo" className="JP-partner" />
+              <img src="/images/Techstars_Partner.png" alt="Techstars Logo" className="techstar-partner"/>
+              {/* style={{maxWidth:'250px' , maxHeight:'95px' , marginTop:'-12px'}} */}
             </div>
           </div>
         </div>
