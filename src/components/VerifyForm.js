@@ -242,9 +242,9 @@ const VerifyForm = ({ setReportData }) => {
               <div className="form-item">
                 <label>Legal Entity Address*</label>
                 <div className="input-group">
-                  <div className="input-icon">
-                    <GoLocation className="icon" />
-                  </div>
+                <div className="input-icon">
+                  <img src="/images/location-icon.png" alt="Legal Entity" className="icon-image" />
+                </div>
                   <div className="input-box">
                     <input
                       type="text"
