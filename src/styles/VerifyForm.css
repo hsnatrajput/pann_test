@@ -404,9 +404,9 @@ input::placeholder {
 
 .loading-text {
   /* color: #F15822; */
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin-top: 10px;
 }
 
@@ -436,7 +436,7 @@ input::placeholder {
   /* color: #F15822; */
   font-size: 20px;
   font-weight: 900;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 /* Existing styles remain unchanged, only media queries are updated */
