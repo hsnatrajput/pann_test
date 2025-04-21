@@ -263,7 +263,9 @@ const VerifyForm = ({ setReportData }) => {
           )}
 
           <p className="subtitle">
-            We validate business identity through 50 different layers of private credit and business data making sure you're doing business with the right people
+            We validate business identity through 50 different layers of<br/>
+            private credit and business data making sure you're doing<br/>
+            business with the right people
           </p>
           <div className="partners-section">
             <h2>Backed By Leading Institutions</h2>
@@ -276,12 +278,13 @@ const VerifyForm = ({ setReportData }) => {
       </div>
 
       {/* Footer */}
-      {/* Footer */}
       <div className="footer">
         <div className="footer-links">
           <div className="footer-column pann-column">
             <h3 className="pann-heading">Pann</h3>
-            <p>We validate business identity through 50 different layers of private credit and business data making sure you're doing business with the right people.</p>
+            <p>We validate business identity through 50 different layers<br/>
+               of private credit and business data making sure you're<br/>
+               doing business with the right people.</p>
           </div>
           <div className="footer-column aligned-column">
             <h3>About us</h3>
@@ -307,6 +310,7 @@ const VerifyForm = ({ setReportData }) => {
         </div>
         <p className="footer-copyright">© Pann Capital Platform, Corp. 2025. All Rights Reserved</p>
       </div>
+      
       {/* Modal for error message */}
       {error && (
         <div className="error-modal-overlay">

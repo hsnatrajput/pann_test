@@ -14,7 +14,7 @@
 body {
   margin: 0;
   font-family: 'Nunito Sans', sans-serif;
-  background-color: #f9f6f2;
+  background-color: #fff;
 }
 
 code {
@@ -66,6 +66,7 @@ code {
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
+  font-family: 'Nunito Sans';
 }
 
 .schedule-btn {
@@ -77,6 +78,7 @@ code {
 .pricing-btn,
 .login-btn {
   color: #333;
+  font-family: 'Nunito Sans';
 }
 
 .login-btn {
@@ -115,7 +117,7 @@ code {
   width: 700px;
   margin-left: auto;
   margin-right: auto;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Nunito Sans';
 }
 
 .hero-content span {
@@ -124,11 +126,11 @@ code {
   font-weight: bolder;
   margin-bottom: 20px;
   line-height: 1.2;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Nunito Sans';
 }
 
-.hero-content h1 br,
-.subtitle br {
+.hero-content h1 br
+ {
   display: none;
 }
 
@@ -141,6 +143,7 @@ code {
   width: 700px;
   margin-left: auto;
   margin-right: auto;
+  font-family: 'Nunito Sans';
 }
 
 .wide-heading-container {
@@ -156,6 +159,7 @@ code {
   margin-bottom: 20px;
   line-height: 1.2;
   width: 45rem;
+  font-family: 'Nunito Sans';
 }
 
 .wide-heading-container h1 span {
@@ -164,6 +168,7 @@ code {
   font-weight: 900;
   margin-bottom: 20px;
   line-height: 1.2;
+  font-family: 'Nunito Sans';
 }
 
 .verify-container {
@@ -190,7 +195,7 @@ code {
   color: #333;
   font-size: 16px;
   margin-left: 3.5rem;
-  font-family: 'Nunito Sans', sans-serif;;
+  font-family: 'Nunito Sans';
 }
 
 .form-item .input-group {
@@ -204,6 +209,7 @@ code {
   border-radius: 8px;
   border: 1px solid #ddd;
   flex-grow: 1;
+  font-family: 'Nunito Sans';
 }
 
 .input-icon {
@@ -219,6 +225,7 @@ code {
 .icon {
   color: white;
   font-size: 16px;
+  font-family: 'Nunito Sans';
 }
 .icon-image{
   color: white; /* For font icons */
@@ -235,10 +242,12 @@ input {
   width: 100%;
   font-size: 14px;
   height: 90%;
+  font-family: 'Nunito Sans';
 }
 
 input::placeholder {
   color: #999;
+  font-family: 'Nunito Sans';
 }
 
 .verify-btn {
@@ -252,6 +261,7 @@ input::placeholder {
   cursor: pointer;
   width: 50%;
   margin-top: 20px;
+  font-family: 'Nunito Sans';
 }
 
 .verify-btn:hover {
@@ -272,9 +282,9 @@ input::placeholder {
 
 .partners-section h2 {
   color: #000000;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-size: 38px;
+  font-weight: bold;
+  font-family: 'Nunito Sans';
 }
 
 .partner-logos {
@@ -282,6 +292,7 @@ input::placeholder {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+  margin-top: 30px;
 }
 
 .partner-logos img {
@@ -302,50 +313,66 @@ input::placeholder {
 .footer-links {
   display: flex;
   justify-content: center;
+  gap: 50px; /* Increased gap for more space between columns */
   margin-bottom: 20px;
 }
 
 .footer-column {
   text-align: left;
   min-width: 200px;
+  font-family: 'Nunito Sans';
 }
 
 .pann-column {
   display: flex;
   flex-direction: column;
+  font-family: 'Nunito Sans';
+  margin-left: -20px; /* Shift pann-column to the left */
+  margin-right: 30px; /* Add space to the right for separation */
+  /* background-color: #FEF8E0;  */
+  padding: 15px; /* Padding for visual distinction */
+  margin-top: -15px;
+
 }
 
 .pann-column h3 {
-  font-size: 30px;
+  font-size: 32px; /* Slightly larger for emphasis */
+  font-family: 'Nunito Sans';
+  color: #F15822; /* Use brand color for distinction */
 }
 
 .pann-heading {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #000000;
+  font-size: 26px; /* Increased size for prominence */
+  font-weight: 900; /* Bolder for emphasis */
+  margin-bottom: 12px;
+  color: #F15822; /* Brand color to stand out */
   margin-top: -10px;
+  font-family: 'Nunito Sans';
 }
 
 .footer-column p {
   font-size: 14px;
   color: #666;
   margin: 0 0 10px;
-  width: 65%;
+  width: 100%;
+  font-family: 'Nunito Sans';
 }
 
 .aligned-column {
   padding-top: 10px;
+  font-family: 'Nunito Sans';
 }
 
 .aligned-column h3 {
   font-size: 14px;
+  font-family: 'Nunito Sans';
 }
 
 .footer-column h3 {
   font-weight: bold;
   margin-bottom: 10px;
   color: #000000;
+  font-family: 'Nunito Sans';
 }
 
 .footer-column a {
@@ -354,6 +381,7 @@ input::placeholder {
   color: #000000;
   text-decoration: none;
   margin-bottom: 5px;
+  font-family: 'Nunito Sans';
 }
 
 .footer-column a:hover {
@@ -367,6 +395,92 @@ input::placeholder {
   font-weight: bold;
   border-top: 0.5px solid #CDCDCD;
   padding-top: 10px;
+  font-family: 'Nunito Sans';
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+  }
+
+  .pann-column {
+    margin-left: 0; /* Reset left shift for mobile */
+    margin-right: 0; /* Reset right margin for mobile */
+    padding: 10px; /* Reduced padding for mobile */
+    background-color: transparent; /* Remove background for mobile */
+    box-shadow: none; /* Remove shadow for mobile */
+    text-align: center; /* Center text for consistency */
+  }
+
+  .pann-column h3 {
+    font-size: 28px; /* Slightly smaller for mobile */
+    color: #000000; /* Reset to default color */
+  }
+
+  .pann-heading {
+    font-size: 22px; /* Adjust for mobile */
+    color: #000000; /* Reset to default color */
+  }
+
+  .footer-column {
+    text-align: center;
+    min-width: 100%;
+  }
+
+  .footer-column p {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pann-column h3 {
+    font-size: 26px;
+  }
+
+  .pann-heading {
+    font-size: 20px;
+  }
+
+  .footer-column p,
+  .footer-column a {
+    font-size: 12px;
+  }
+
+  .footer-column p {
+    width: 90%;
+  }
+
+  .footer-copyright {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pann-column h3 {
+    font-size: 24px;
+  }
+
+  .pann-heading {
+    font-size: 18px;
+  }
+
+  .footer-column p,
+  .footer-column a {
+    font-size: 11px;
+  }
+
+  .footer-column p {
+    width: 95%;
+  }
+
+  .footer-copyright {
+    font-size: 10px;
+  }
 }
 
 /* Modal styles for error message */
@@ -453,9 +567,10 @@ input::placeholder {
 }
 
 .loading-text {
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: bold;
   margin-top: 10px;
+  font-family: 'Nunito Sans';
 }
 
 .verified-container {
@@ -480,8 +595,10 @@ input::placeholder {
 }
 
 .verified-text {
-  font-size: 20px;
-  font-weight: 900;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Nunito Sans';
+  color: #000000;
 }
 
 /* Enhanced Media Queries for Responsiveness */
