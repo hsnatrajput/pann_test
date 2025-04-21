@@ -295,6 +295,7 @@ const VerifyForm = ({ setReportData }) => {
             <a href="#">Support Portal</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Cookie Policy</a>
+            <a href="#">FAQ's</a>
           </div>
           <div className="footer-column">
             <h3>SOCIAL</h3>
