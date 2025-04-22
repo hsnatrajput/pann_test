@@ -711,7 +711,8 @@ input::placeholder {
 
   .form-item label {
     font-size: 11px;
-    margin-left: 3rem;
+    margin-left: 3.3rem;
+    font-weight: bold;
   }
 
   .input-icon {
@@ -812,7 +813,7 @@ input::placeholder {
 
   .form-item label {
     font-size: 10px;
-    margin-left: 2.5rem;
+    margin-left: 3rem;
   }
 
   .input-group {
@@ -954,21 +955,28 @@ input::placeholder {
   }
 
   .subtitle {
-    font-size: 16px;
+    font-size: 11px;
     width: 98%;
     max-width: 400px;
     margin-top: 15px;
   }
 
   .wide-heading-container h1 {
-    font-size: 30px;
+    font-size: 20px;
     width: 98%;
     max-width: 400px;
+  }
+  .wide-heading-container h1 span{
+    font-size: 20px;
   }
 
   .verify-container {
     max-width: 98%;
     padding: 15px;
+  }
+  .input-box{
+    width: 20%;
+    height: 30px;
   }
 
   .form-item {
@@ -977,19 +985,23 @@ input::placeholder {
 
   .form-item label {
     font-size: 10px;
-    margin-left: 2.2rem;
+    margin-left: 2.5rem;
   }
 
   .input-icon {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     padding: 5px;
   }
 
   .icon {
     font-size: 13px;
   }
-
+  input::placeholder {
+    color: #999;
+    font-family: 'Nunito Sans';
+    font-size: 10px;
+  }
   .verify-btn {
     width: 80%;
     padding: 10px;
@@ -1106,21 +1118,30 @@ input::placeholder {
   }
 
   .subtitle {
-    font-size: 14px;
+    font-size: 9px;
     width: 100%;
     max-width: 300px;
     margin-top: 12px;
   }
 
   .wide-heading-container h1 {
-    font-size: 26px;
+    font-size: 18px;
     width: 100%;
     max-width: 300px;
+  }
+  .wide-heading-container h1 span{
+    font-size: 18px;
+    /* width: 100%;
+    max-width: 300px; */
   }
 
   .verify-container {
     max-width: 100%;
     padding: 12px;
+  }
+  .input-box{
+    width: 20%;
+    height: 25px;
   }
 
   .form-item {
@@ -1129,17 +1150,22 @@ input::placeholder {
 
   .form-item label {
     font-size: 9px;
-    margin-left: 2rem;
+    margin-left: 2.3rem;
   }
 
   .input-icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     padding: 4px;
   }
 
   .icon {
     font-size: 12px;
+  }
+  input::placeholder {
+    color: #999;
+    font-family: 'Nunito Sans';
+    font-size: 7px;
   }
 
   .verify-btn {
