@@ -1184,10 +1184,11 @@ input::placeholder {
   }
 
   .verify-btn {
-    width: 55%;
+    width: 60%;
     /* padding: 8px; */
     font-size: 9px;
     height: 28px;
+    padding-bottom: 20px;
   }
 
   .loading-container,
