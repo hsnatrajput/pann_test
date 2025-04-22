@@ -819,6 +819,14 @@ input::placeholder {
   .input-group {
     gap: 10px;
   }
+  input::placeholder {
+    color: #999;
+    font-family: 'Nunito Sans';
+    font-size: 10px;
+  }
+  /* input{
+    padding: 2px;
+  } */
 
   .input-icon {
     width: 35px;
@@ -1000,7 +1008,10 @@ input::placeholder {
   input::placeholder {
     color: #999;
     font-family: 'Nunito Sans';
-    font-size: 10px;
+    font-size: 5.5px;
+  }
+  input{
+    padding: 2px;
   }
   .verify-btn {
     width: 80%;
@@ -1165,7 +1176,10 @@ input::placeholder {
   input::placeholder {
     color: #999;
     font-family: 'Nunito Sans';
-    font-size: 7px;
+    font-size: 4px;
+  }
+  input{
+    padding: 2px;
   }
 
   .verify-btn {
@@ -1244,5 +1258,17 @@ input::placeholder {
     width: 18px;
     height: 18px;
     font-size: 12px;
+  }
+}
+
+@media (max-width: 375px) {
+
+  input::placeholder {
+    color: #999;
+    font-family: 'Nunito Sans';
+    font-size: 4px;
+  }
+  input{
+    padding: 2px;
   }
 }
