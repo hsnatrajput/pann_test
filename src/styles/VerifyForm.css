@@ -1014,9 +1014,10 @@ input::placeholder {
     padding: 2px;
   }
   .verify-btn {
-    width: 80%;
-    padding: 10px;
-    font-size: 12px;
+    width: 60%;
+    /* padding: 10px; */
+    font-size: 10px;
+    height: 30px;
   }
 
   .loading-container,
@@ -1183,9 +1184,10 @@ input::placeholder {
   }
 
   .verify-btn {
-    width: 85%;
-    padding: 8px;
-    font-size: 11px;
+    width: 55%;
+    /* padding: 8px; */
+    font-size: 9px;
+    height: 28px;
   }
 
   .loading-container,
