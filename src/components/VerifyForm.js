@@ -203,7 +203,7 @@ const VerifyForm = ({ setReportData }) => {
         <div className="hero-content">
           <div className="wide-heading-container">
             <h1>
-              <span>Validate</span> businesses in seconds <br /> & <span> Eliminate</span> Fraud
+              <span className="validate">Validate</span> businesses in seconds <br /> & <span> Eliminate</span> Fraud
             </h1>
           </div>
                   
@@ -280,7 +280,7 @@ const VerifyForm = ({ setReportData }) => {
 
       {/* Footer */}
       <div className="footer">
-        <div className="footer-links">
+        {/* <div className="footer-links">
           <div className="footer-column pann-column">
             <h3 className="pann-heading">Pann</h3>
             <p>We validate business identity through 50 different layers<br/>
@@ -308,7 +308,7 @@ const VerifyForm = ({ setReportData }) => {
               <img src="/images/linkedin.png" alt="LinkedIn" className="social-icon" />
             </a>
           </div>
-        </div>
+        </div> */}
         <p className="footer-copyright">© Pann Capital Platform, Corp. 2025. All Rights Reserved</p>
       </div>
       
