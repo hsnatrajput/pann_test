@@ -14,7 +14,7 @@ const VerifyForm = ({ setReportData }) => {
   const [error, setError] = useState(""); 
   const navigate = useNavigate();
   
-  const API_URL = process.env.REACT_APP_API_URL || "https://pann-app-base-edl9t.ondigitalocean.app";
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const replaceBaselayerWithPann = (value) => {
     if (typeof value === "string") {
