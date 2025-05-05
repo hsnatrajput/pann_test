@@ -131,7 +131,8 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
 
       // Save the PDF with optimized settings
       if (pdf) {
-        pdf.save("Business_Verification_Report.pdf");
+        const safeName = reportData.legalEntityName?.replace(/[^a-z0-9]/gi, '_') || "Business_Report";
+        pdf.save(`${safeName}_report.pdf`);
       }
     } catch (error) {
       console.error("Error generating PDF:", error);
