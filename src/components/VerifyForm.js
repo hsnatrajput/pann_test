@@ -192,9 +192,12 @@ const VerifyForm = ({ setReportData }) => {
           </a>
         </div>
         <div className="nav-buttons">
-          <button className="schedule-btn">Schedule a Meeting</button>
-          <span className="pricing-btn">Pricing</span>
-          <span className="login-btn">Sign in</span>
+          <button className="schedule-btn"
+           onClick={() => window.open("https://calendly.com/osama-pann/free-consultation", "_blank", "noopener,noreferrer")}
+          >Free Consultation
+          </button>
+          {/* <span className="pricing-btn">Pricing</span>
+          <span className="login-btn">Sign in</span> */}
         </div>
       </div>
 
