@@ -5,6 +5,8 @@ import { FaBriefcase } from "react-icons/fa";
 import { GoLocation } from "react-icons/go";
 import axios from "axios";
 import "../styles/VerifyForm.css";
+import { Helmet } from "react-helmet";
+
 
 const VerifyForm = ({ setReportData }) => {
   const [legalName, setLegalName] = useState("");
@@ -183,6 +185,15 @@ const VerifyForm = ({ setReportData }) => {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>Pann Capital Platform</title>
+      <meta
+        name="description"
+        content="Pann KYB - Validate your business partner in seconds. Fast and secure business verification platform to eliminate fraud."
+      />
+    </Helmet>
+
     <div className="page-container">
       {/* Navigation Menu */}
       <div className="nav-container">
@@ -327,6 +338,7 @@ const VerifyForm = ({ setReportData }) => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

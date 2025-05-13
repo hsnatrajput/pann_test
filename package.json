@@ -25,14 +25,20 @@
     "recharts": "^2.12.2",
     "web-vitals": "^3.5.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "node server.js",
-    "dev": "concurrently \"npm run server\" \"npm start\""
-  },
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "postbuild": "react-snap",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "server": "node server.js",
+  "dev": "concurrently \"npm run server\" \"npm start\""
+},
+"reactSnap": {
+  "inlineCss": true,
+  "puppeteerArgs": ["--no-sandbox"]
+},
+
   "eslintConfig": {
     "extends": [
       "react-app",
