@@ -63,150 +63,217 @@ h6 {
   border-radius: 12px;
 }
 
-.rating-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #fff8f0;
-  padding: 20px;
-  border-radius: 12px;
-  width: 80%;
-  margin: 0 auto;
-}
-
-.rating-text {
+.kyb-rating {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: flex-start;
+  background-color: #FFF8F0;
+  width: 100%;
+  height: 300px; /* Fixed height to match content */
+  padding: 20px;
 }
 
-.rating-section h6 {
-  font-weight: bold;
+
+
+.rating-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
 
 .rating-grade {
   font-size: 40px;
   font-weight: bold;
   color: #444;
-  margin: 0;
 }
 
-.rating-subtext {
-  color: gray;
-  margin-top: -10px;
-}
-
-.circular-chart-wrapper {
+.rating-box {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
-/* Responsive adjustments */
+.rating-value {
+  font-size: 40px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.rating-indicators {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.indicator-label {
+  font-size: 12px;
+  color: #868DA6;
+  text-transform: uppercase;
+  width: 200px;
+}
+
+.indicator-bar {
+  height: 8px;
+  width: 50px;
+  border-radius: 4px;
+}
+
+.existing-litigations {
+  background-color: #FF4A4A;
+}
+
+.lien-activity {
+  background-color: #FFBB33;
+}
+
+.statement-of-info-penalties {
+  background-color: #FFD700;
+}
+
+.business-snapshot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #FFF8F0;
+  width: 100%;
+  height: 300px; /* Fixed height to match KYB rating */
+  padding: 20px;
+}
+
+.snapshot-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.snapshot-table td {
+  padding: 8px;
+  color: #868DA6;
+}
+
+.snapshot-table tr:nth-child(even) {
+  background-color: #f8f9fc;
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+.status.active {
+  color: #11B669;
+  background-color: #11B66933;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered td {
+  border: 1px solid #dee2e6;
+  padding: 12px;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table td {
+  border: 1px solid #dee2e6;
+  padding: 12px;
+  color: #868DA6;
+}
+
+.table-header {
+  background-color: #E8ECEF;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
-  .pann-box {
-    width: 90%;
-    height: 140px;
+  h1 {
+    font-size: 24px;
+  }
+
+  .kyb-rating, .business-snapshot {
+    height: 250px; /* Adjusted height for smaller screens */
     padding: 15px;
   }
 
-  .pann-logo {
-    width: 100px;
+  .rating-value, .rating-grade {
+    font-size: 30px;
   }
 
-  .business-report {
-    font-size: 14px;
+  .indicator-label {
+    font-size: 10px;
+    width: 150px;
   }
 
-  .table td {
-    padding: 10px 12px;
+  .indicator-bar {
+    width: 40px;
+  }
+
+  .snapshot-table td {
+    padding: 6px;
     font-size: 12px;
   }
 
-  .text-muted {
-    font-size: 12px;
-  }
-
-  h6 {
-    font-size: 14px;
-  }
-
-  .badge {
+  .status {
     font-size: 10px;
     padding: 3px 6px;
   }
 
-  .rating-container {
-    width: 90%;
-    padding: 15px;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .rating-grade {
-    font-size: 30px;
-  }
-
-  .circular-chart-wrapper {
-    width: 180px;
-    height: 180px;
-  }
-
-  .circular-chart {
-    width: 180px !important;
-    height: 180px !important;
+  .table-bordered td {
+    padding: 10px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  .pann-box {
-    width: 95%;
-    height: 120px;
+  h1 {
+    font-size: 20px;
+  }
+
+  .rating-value, .rating-grade {
+    font-size: 20px;
+  }
+  
+  .kyb-rating, .business-snapshot {
+    height: 200px; /* Adjusted height for even smaller screens */
     padding: 10px;
   }
 
-  .pann-logo {
-    width: 80px;
+  .indicator-label {
+    font-size: 8px;
+    width: 120px;
   }
 
-  .business-report {
-    font-size: 12px;
+  .indicator-bar {
+    width: 30px;
   }
 
-  .table td {
-    padding: 8px 10px;
+  .snapshot-table td {
+    padding: 4px;
     font-size: 10px;
   }
 
-  .text-muted {
-    font-size: 10px;
-  }
-
-  h6 {
-    font-size: 12px;
-  }
-
-  .badge {
+  .status {
     font-size: 8px;
     padding: 2px 4px;
   }
 
-  .rating-container {
-    width: 95%;
-    padding: 10px;
-  }
-
-  .rating-grade {
-    font-size: 20px;
-  }
-
-  .circular-chart-wrapper {
-    width: 140px;
-    height: 140px;
-  }
-
-  .circular-chart {
-    width: 140px !important;
-    height: 140px !important;
+  .table-bordered td {
+    padding: 8px;
+    font-size: 10px;
   }
 }

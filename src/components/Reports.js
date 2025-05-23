@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Report1 from "./Report1";
 import Report2 from "./Report2";
 import Report3 from "./Report3";
@@ -9,12 +9,14 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import "../styles/Reports.css";
 
-const Reports = ({ reportData, hasPaid, setHasPaid }) => {
+const Reports = ({ reportData, hasPaid }) => {
   const [generating, setGenerating] = useState(false);
-  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Determine which report to show based on the route
+  const reportToShow = location.pathname.includes("report1") ? "report1" : "report1"; // Default to report1 for now
+  
   const reportRefs = {
     report1: useRef(null),
     report2: useRef(null),
@@ -22,7 +24,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     report4: useRef(null),
     report5: useRef(null)
   };
-  const reportContainerRef = useRef(null);
 
   useEffect(() => {
     if (!reportData) {
@@ -30,38 +31,15 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     }
   }, [reportData, navigate]);
 
-  const correctPassword = "pann00@@"; 
-
-  const handlePasswordSubmit = () => {
-    if (password === correctPassword) {
-      setHasPaid(true);
-      setIsPasswordModalOpen(false);
-      setErrorMessage("");
-    } else {
-      setErrorMessage("Incorrect password. Please try again.");
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handlePasswordSubmit();
-    }
-  };
-
   const compressCanvasImage = (canvas, quality = 0.9) => {
-    // Create a new canvas with slightly reduced dimensions
-    const scaleFactor = 0.85; // Only reduces dimensions by 15%
-    const newCanvas = document.createElement('canvas');
+    const scaleFactor = 0.85;
+    const newCanvas = document.createElement("canvas");
     newCanvas.width = canvas.width * scaleFactor;
     newCanvas.height = canvas.height * scaleFactor;
-    
-    // Draw original canvas content onto the new smaller canvas
-    const ctx = newCanvas.getContext('2d');
+    const ctx = newCanvas.getContext("2d");
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, newCanvas.width, newCanvas.height);
-    
-    // Return compressed JPEG image data with higher quality
-    return newCanvas.toDataURL('image/jpeg', quality);
+    return newCanvas.toDataURL("image/jpeg", quality);
   };
 
   const generatePDF = async () => {
@@ -76,64 +54,36 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
       if (downloadButton) downloadButton.style.display = "none";
       if (backButton) backButton.style.display = "none";
 
-      // Get report elements
-      const reportElements = [
-        reportRefs.report1.current,
-        reportRefs.report2.current,
-        reportRefs.report3.current,
-        reportRefs.report4.current,
-        reportRefs.report5.current
-      ];
+      // Only generate PDF for the selected report
+      const element = reportRefs[reportToShow].current;
+      if (!element) return;
 
-      let pdf = null;
-      
-      // Process each report element
-      for (let i = 0; i < reportElements.length; i++) {
-        const element = reportElements[i];
-        if (!element) continue;
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        scrollY: -window.scrollY,
+        windowWidth: document.documentElement.offsetWidth,
+        windowHeight: document.documentElement.offsetHeight,
+        imageTimeout: 0,
+        removeContainer: false
+      });
 
-        // Convert the report to canvas with higher scale for better quality
-        const canvas = await html2canvas(element, {
-          scale: 2, // Higher scale for better initial quality
-          useCORS: true,
-          logging: false,
-          scrollY: -window.scrollY,
-          windowWidth: document.documentElement.offsetWidth,
-          windowHeight: document.documentElement.offsetHeight,
-          imageTimeout: 0, // No timeout for images
-          removeContainer: false
-        });
+      const imgData = compressCanvasImage(canvas, 0.92);
+      const pdfWidth = (canvas.width / 96) * 25.4;
+      const pdfHeight = (canvas.height / 96) * 25.4;
 
-        // Compress the canvas image with higher quality
-        const imgData = compressCanvasImage(canvas, 0.92);
-        
-        // Calculate PDF dimensions based on original canvas size
-        // Convert from pixels to mm (assuming 96 DPI)
-        const pdfWidth = (canvas.width / 96) * 25.4;
-        const pdfHeight = (canvas.height / 96) * 25.4;
-        
-        // If first page, create PDF with dimensions of first report
-        if (i === 0) {
-          pdf = new jsPDF({
-            orientation: pdfWidth > pdfHeight ? "landscape" : "portrait",
-            unit: "mm",
-            format: [pdfWidth, pdfHeight],
-            compress: true,
-            putOnlyUsedFonts: true
-          });
-          pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, 'SLOW');
-        } else {
-          // For subsequent pages, add a new page with dimensions of current report
-          pdf.addPage([pdfWidth, pdfHeight], pdfWidth > pdfHeight ? "landscape" : "portrait");
-          pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, 'SLOW');
-        }
-      }
+      const pdf = new jsPDF({
+        orientation: pdfWidth > pdfHeight ? "landscape" : "portrait",
+        unit: "mm",
+        format: [pdfWidth, pdfHeight],
+        compress: true,
+        putOnlyUsedFonts: true
+      });
 
-      // Save the PDF with optimized settings
-      if (pdf) {
-        const safeName = reportData.legalEntityName?.replace(/[^a-z0-9]/gi, '_') || "Business_Report";
-        pdf.save(`${safeName}_report.pdf`);
-      }
+      pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, "SLOW");
+      const safeName = reportData.legalEntityName?.replace(/[^a-z0-9]/gi, "_") || "Business_Report";
+      pdf.save(`${safeName}_report.pdf`);
     } catch (error) {
       console.error("Error generating PDF:", error);
       alert("Error generating PDF. Please try again.");
@@ -142,7 +92,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         document.getElementById("download-pdf-btn").style.display = "block";
       if (document.getElementById("back-btn"))
         document.getElementById("back-btn").style.display = "block";
-
       setGenerating(false);
     }
   };
@@ -168,58 +117,34 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         </button>
       </div>
 
-      <div ref={reportContainerRef}>
-        <div className="report1-container" ref={reportRefs.report1}>
-          <Report1 reportData={reportData} />
-        </div>
-
-        <div
-          style={{
-            filter: hasPaid ? "none" : "blur(10px)",
-            pointerEvents: hasPaid ? "auto" : "none",
-            position: "relative",
-          }}
-        >
-          <div ref={reportRefs.report2}><Report2 reportData={reportData} /></div>
-          <div ref={reportRefs.report3}><Report3 reportData={reportData} /></div>
-          <div ref={reportRefs.report4}><Report4 reportData={reportData} /></div>
-          <div ref={reportRefs.report5}><Report5 reportData={reportData} /></div>
-        </div>
-
-        {!hasPaid && (
-          <div className="blur-overlay" onClick={() => setIsPasswordModalOpen(true)}>
-            <div className="upgrade-box">
-              <span className="upgrade-icon">🔒</span>
-              <p className="upgrade-text">Enter password to unlock full report</p>
-            </div>
+      <div>
+        {/* Conditionally render only the selected report */}
+        {reportToShow === "report1" && (
+          <div className="report1-container" ref={reportRefs.report1}>
+            <Report1 reportData={reportData} />
+          </div>
+        )}
+        {reportToShow === "report2" && (
+          <div ref={reportRefs.report2}>
+            <Report2 reportData={reportData} />
+          </div>
+        )}
+        {reportToShow === "report3" && (
+          <div ref={reportRefs.report3}>
+            <Report3 reportData={reportData} />
+          </div>
+        )}
+        {reportToShow === "report4" && (
+          <div ref={reportRefs.report4}>
+            <Report4 reportData={reportData} />
+          </div>
+        )}
+        {reportToShow === "report5" && (
+          <div ref={reportRefs.report5}>
+            <Report5 reportData={reportData} />
           </div>
         )}
       </div>
-
-      {isPasswordModalOpen && (
-        <div className="password-modal">
-          <div className="password-box">
-            <h4>Enter Password</h4>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="form-control mt-2"
-              placeholder="Enter password"
-            />
-            {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
-            <div className="mt-3">
-              <button className="btn btn-success" onClick={handlePasswordSubmit}>
-                Submit
-              </button>
-              <button className="btn btn-danger ms-2" onClick={() => setIsPasswordModalOpen(false)}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
