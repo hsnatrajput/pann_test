@@ -40,12 +40,26 @@ const Report1 = () => {
           <div className="business-snapshot p-3 rounded">
             <h6>BUSINESS SNAPSHOT</h6>
             <table className="snapshot-table">
-              <tr><td>Incorporation Date</td><td>July 11, 2018</td></tr>
-              <tr><td>SOS Entity Number</td><td>201810841036</td></tr>
-              <tr><td>Secretary of State</td><td><span className="status active">Active</span></td></tr>
-              <tr><td>Franchise Tax Board</td><td><span className="status active">Active</span></td></tr>
-              <tr><td>Victims of Corporate</td><td><span className="status active">Active</span></td></tr>
-              <tr><td>Fraud Compensation Fund</td><td></td></tr>
+              <tr>
+                <td>Incorporation Date</td>
+                <td>July 11, 2018</td>
+              </tr>
+              <tr>
+                <td>SOS Entity Number</td>
+                <td>201819410136</td>
+              </tr>
+              <tr>
+                <td>Secretary of State</td>
+                <td><span className="status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>Franchise Tax Board</td>
+                <td><span className="status active">Active</span></td>
+              </tr>
+              <tr>
+                <td>Victims of Corporate Fraud Compensation Fund</td>
+                <td><span className="status active">Active</span></td>
+              </tr>
             </table>
           </div>
         </div>
@@ -54,7 +68,7 @@ const Report1 = () => {
       <hr />
 
       <div className="mt-4">
-        <table className="table table-bordered custom-table">
+        <table className="table-bordered custom-table">
           <tbody>
             <tr className="table-header">
               <td>Company Name</td>

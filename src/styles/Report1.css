@@ -46,6 +46,8 @@
 h6 {
   font-size: 16px;
   color: #6c757d;
+  font-weight: 600;
+  margin-bottom: 15px; /* Space below the heading */
 }
 
 .custom-hr {
@@ -67,13 +69,12 @@ h6 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #FFF8F0;
+  background-color: #E8ECEF;
   width: 100%;
-  height: 300px; /* Fixed height to match content */
+  height: 300px; /* Standardized height */
   padding: 20px;
+  border-radius: 10px;
 }
-
-
 
 .rating-header {
   display: flex;
@@ -142,10 +143,11 @@ h6 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #FFF8F0;
+  background-color: #E8ECEF;
   width: 100%;
-  height: 300px; /* Fixed height to match KYB rating */
+  height: 300px; /* Standardized height to match kyb-rating */
   padding: 20px;
+  border-radius: 10px;
 }
 
 .snapshot-table {
@@ -154,12 +156,10 @@ h6 {
 }
 
 .snapshot-table td {
-  padding: 8px;
+  padding: 10px 15px;
   color: #868DA6;
-}
-
-.snapshot-table tr:nth-child(even) {
-  background-color: #f8f9fc;
+  font-size: 14px;
+  border: none;
 }
 
 .status {
@@ -186,18 +186,36 @@ h6 {
 
 .custom-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #dee2e6;
 }
 
 .custom-table td {
-  border: 1px solid #dee2e6;
+  border: 1px solid #dee2e6 !important;
   padding: 12px;
   color: #868DA6;
 }
 
-.table-header {
-  background-color: #E8ECEF;
+.custom-table td:first-child {
+  border-right: 2px solid #dee2e6 !important;
+}
+
+.custom-table td:last-child {
+  border-left: 1px solid #dee2e6 !important;
+}
+
+.custom-table .table-header {
+  background-color: #E8ECEF !important;
   font-weight: bold;
+}
+
+.custom-table .table-header td {
+  background-color: #E8ECEF !important;
+}
+
+.table-bordered td {
+  border: 1px solid #dee2e6 !important;
 }
 
 @media (max-width: 768px) {
@@ -247,7 +265,7 @@ h6 {
   .rating-value, .rating-grade {
     font-size: 20px;
   }
-  
+
   .kyb-rating, .business-snapshot {
     height: 200px; /* Adjusted height for even smaller screens */
     padding: 10px;
