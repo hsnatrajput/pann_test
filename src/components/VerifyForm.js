@@ -162,7 +162,7 @@ const VerifyForm = ({ setReportData }) => {
       setTimeout(() => {
         setIsVerified(false);
         navigate("/report1");
-      }, 2000);
+      }, 4000);
     } catch (error) {
       console.error("Detailed Error:", error);
       console.log("Error Code:", error.code);
