@@ -1,51 +1,65 @@
 import React from 'react';
 import '../styles/Report2.css';
-import Footer
- from './Footer';
-const Report2 = () => {
+import Footer from './Footer';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
+
+const Report2 = ({ reportData }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!reportData) {
+      navigate("/");
+    }
+  }, [reportData, navigate]);
+
+  if (!reportData) {
+    return <h2 className="text-center mt-5">Loading Report...</h2>;
+  }
+
+  const addresses = reportData.addresses || [];
+  const agentAddress = reportData.registeredAgentAddress || "N/A";
+  const agentPhone = reportData.phoneNumber || "N/A";
+
   return (
     <div className="report-container">
       <div className="header">
-        <h2>OAKLAND PRO SOCCER LLC</h2>
+        <h2>{reportData.legalEntityName || "N/A"}</h2>
         <h1>ADDRESS & AGENT HISTORY</h1>
       </div>
 
       <div className="section">
         <h3>COMMERCIAL ADDRESS</h3>
-        <div className="highlight-box">
+        <div className="highlight-box" style={{ color: '#000', fontSize: '14px', padding: '5px' }}>
           <p>DELIVERABLE</p>
         </div>
-        <p>2744 E 11TH STREET, UNIT K01</p>
-        <p>OAKLAND, CA 94601</p>
+        <p>{addresses[0] || "N/A"}</p>
       </div>
 
       <div className="section">
         <h3>RESIDENTIAL ADDRESS</h3>
-        <div className="highlight-box">
+        <div className="highlight-box" style={{ color: '#000', fontSize: '14px', padding: '5px' }}>
           <p>DELIVERABLE</p>
         </div>
-        <p>2930 TAHOE PL SAN RAMON</p>
-        <p>OAKLAND, CA 94601</p>
+        <p>{addresses[1] || "N/A"}</p>
       </div>
 
       <div className="section">
         <h3>RESIDENTIAL ADDRESS</h3>
-        <div className="highlight-box">
+        <div className="highlight-box" style={{ color: '#000', fontSize: '14px', padding: '5px' }}>
           <p>DELIVERABLE</p>
         </div>
-        <p>1234 NAKAMA BLVD APT 3</p>
-        <p>OAKLAND, CA 94601</p>
+        <p>{addresses[2] || "N/A"}</p>
       </div>
 
       <div className="section">
         <h2>AGENT ADDRESS</h2>
         <div className='agent-address-section'>
-        <h3>PERSONAL ADDRESS</h3>
-        <p style={{marginTop:'0' , marginBottom:'0'}}>96 N SPRINGER RD</p>
-        <p style={{marginTop:'0' , marginBottom:'0'}}>LOS ALTOS, CA 94024-3421</p>
-        <h3 style={{marginTop:'1rem' , marginBottom:'0'}}>PHONE NUMBER</h3>
-        <p style={{marginTop:'0' , marginBottom:'0'}}>(630) 210-0007</p>
-        <p style={{marginTop:'0' , marginBottom:'0'}}>LANDLINE-PACIFIC BELL TELEPHONE COMPANY</p>
+          <h3>PERSONAL ADDRESS</h3>
+          <p style={{ marginTop: '0', marginBottom: '0' }}>{agentAddress}</p>
+          <h3 style={{ marginTop: '1rem', marginBottom: '0' }}>PHONE NUMBER</h3>
+          <p style={{ marginTop: '0', marginBottom: '0' }}>{agentPhone}</p>
+          <p style={{ marginTop: '0', marginBottom: '0' }}>LANDLINE-PACIFIC BELL TELEPHONE COMPANY</p>
         </div>
       </div>
 
@@ -55,7 +69,6 @@ const Report2 = () => {
 };
 
 export default Report2;
-
 
 
 

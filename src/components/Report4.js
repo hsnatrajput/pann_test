@@ -1,18 +1,35 @@
 import React from 'react';
 import '../styles/Report4.css';
 import Footer from './Footer';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
-const Report4 = () => {
+const Report4 = ({ reportData }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!reportData) {
+      navigate("/");
+    }
+  }, [reportData, navigate]);
+
+  if (!reportData) {
+    return <h2 className="text-center mt-5">Loading Report...</h2>;
+  }
+
+  const litigations = reportData.business?.litigations || [];
+  const bankruptcyCount = reportData.business?.bankruptcies?.length || 0;
+
   return (
     <div className="report-container">
       <div className="header">
-        <h2 style={{marginBottom:'1rem'}}>OAKLAND PRO SOCCER LLC</h2>
+        <h2 style={{ marginBottom: '1rem' }}>{reportData.legalEntityName || "N/A"}</h2>
         <h1>LITIGATION & BANKRUPTCIES</h1>
       </div>
 
-      <div className="section" style={{borderRadius:'1.5rem'}}>
-        <h3 className="note">17 HITS* ON RECORD</h3>
-        <p className="note">Out of 17 hits 12 were recognized as trademarks*</p>
+      <div className="section" style={{ borderRadius: '1.5rem' }}>
+        <h3 className="note">{litigations.length} HITS* ON RECORD</h3>
+        <p className="note">Out of {litigations.length} hits {litigations.filter(l => l.type === "trademark").length} were recognized as trademarks*</p>
         <table className="litigation-table">
           <thead>
             <tr>
@@ -23,35 +40,19 @@ const Report4 = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>07/01/2024</td>
-              <td>OAKLAND PRO SOCCER LLC VS GEF LOGISTICS INC</td>
-              <td>Washington State Pierce County Superior Court</td>
-              <td>General Recovery</td>
-            </tr>
-            <tr>
-              <td>01/02/2024</td>
-              <td>v. Oakland Pro Soccer</td>
-              <td>California Northern District Court</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>01/02/2024</td>
-              <td>OAKLAND PRO SOCCER LLC VS GEF LOGISTICS INC</td>
-              <td>Washington State Pierce County Superior Court</td>
-              <td>Tort - Other</td>
-            </tr>
-            <tr>
-              <td>03/17/2023</td>
-              <td>Oakland Pro Soccer LLC v. GEF Logistics Inc</td>
-              <td>Washington Western District Court</td>
-              <td>-</td>
-            </tr>
+            {litigations.map((litigation, index) => (
+              <tr key={index}>
+                <td>{litigation.filing_date || "N/A"}</td>
+                <td>{litigation.case_name || "N/A"}</td>
+                <td>{litigation.court || "N/A"}</td>
+                <td>{litigation.type || "N/A"}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
       <h1>BANKRUPTCIES</h1>
-      <p>NO BANKRUPTCIES FOUND</p>
+      <p>{bankruptcyCount > 0 ? `${bankruptcyCount} Bankruptcy${bankruptcyCount > 1 ? 'ies' : ''} Found` : "NO BANKRUPTCIES FOUND"}</p>
 
       <Footer pageNumber={4} />
     </div>

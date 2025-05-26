@@ -78,7 +78,7 @@ const VerifyForm = ({ setReportData }) => {
         tin: replaceBaselayerWithPann(response.data.tin || "N/A"),
         officers: replaceBaselayerWithPann(officerNames),
         phoneNumber: replaceBaselayerWithPann(response.data.phone_number || "N/A"),
-        website: replaceBaselayerWithPann(response.data.website || "N/A"),
+        // website: replaceBaselayerWithPann(response.data.website || "N/A"),
         riskRating: replaceBaselayerWithPann(riskScore.rating || "N/A"),
         riskLevel: replaceBaselayerWithPann(
           riskScore.rating === "A" ? "Low Risk" : 
@@ -86,6 +86,7 @@ const VerifyForm = ({ setReportData }) => {
           riskScore.rating === "C" ? "High Risk" : "N/A"
         ),
         kybRating: replaceBaselayerWithPann(kybScore.rating || "N/A"),
+        kybScore: kybScore.score || 0,
         kybLevel: replaceBaselayerWithPann(
           kybScore.rating === "A" ? "Fully Verified" : 
           kybScore.rating === "B" ? "Partially Verified" : 
@@ -109,6 +110,7 @@ const VerifyForm = ({ setReportData }) => {
         ),
         structure: replaceBaselayerWithPann(response.data.business?.structure || "N/A"),
         entityType: replaceBaselayerWithPann(response.data.business?.structure || "N/A"),
+        website: response.business?.website || "N/A",
         naicsCode: replaceBaselayerWithPann(
           response.data.business?.predicted_naics?.length > 0 
             ? response.data.business.predicted_naics[0] 

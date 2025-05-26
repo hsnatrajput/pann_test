@@ -1,64 +1,69 @@
 import React from 'react';
 import '../styles/Report3.css';
 import Footer from './Footer';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
-const Report3 = () => {
+const Report3 = ({ reportData }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!reportData) {
+      navigate("/");
+    }
+  }, [reportData, navigate]);
+
+  if (!reportData) {
+    return <h2 className="text-center mt-5">Loading Report...</h2>;
+  }
+
+  const liens = reportData.business?.liens || [];
+
   return (
     <div className="report-container">
       <div className="header">
-        <h2>OAKLAND PRO SOCCER LLC</h2>
+        <h2>{reportData.legalEntityName || "N/A"}</h2>
         <h1>WATCHLISTS</h1>
         <h3>DEPARTMENT OF TREASURY, OFFICE OF FOREIGN ASSETS CONTROL</h3>
         <div className="status-box">
           <span>OFAC: </span>
-          <span className="status-green" style={{backgroundColor:'#9ACD32' , padding:'0.3rem' , borderRadius:'0.5rem'}}>No Hits</span>
+          <span className="status-green" style={{ backgroundColor: '#9ACD32', padding: '0.3rem', borderRadius: '0.5rem' }}>
+            {reportData.watchlistHits.some(hit => hit.count > 0) ? "Hits Found" : "No Hits"}
+          </span>
         </div>
       </div>
       <h3>LIENS</h3>
       <div className="section">
         <div className="details-box">
-          <div className="details-row">
-            <span className="label">Status</span>
-            <span className="value status-green">Active</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Lien</span>
-            <span className="value">UCC</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Filed Date</span>
-            <span className="value">12/30/2022</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Lapse Date</span>
-            <span className="value">12/30/2027</span>
-          </div>
-          <div className="details-row">
-            <span className="label">State</span>
-            <span className="value">California</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Debtors</span>
-            <div className="value-list">
-              <span>OAKLAND PRO SOCCER LLC</span>
-              <span>123 E 11TH ST, OAKLAND, CA 94601</span>
+          {liens.length > 0 && liens.map((lien, index) => (
+            <div key={index} className="details-row">
+              <span className="label">Status</span>
+              <span className="value status-green">{lien.status || "N/A"}</span>
+              <span className="label">Lien</span>
+              <span className="value">{lien.type || "N/A"}</span>
+              <span className="label">Filed Date</span>
+              <span className="value">{lien.filed_date || "N/A"}</span>
+              <span className="label">Lapse Date</span>
+              <span className="value">{lien.lapse_date || "N/A"}</span>
+              <span className="label">State</span>
+              <span className="value">{lien.state || "N/A"}</span>
+              <span className="label">Debtors</span>
+              <div className="value-list">
+                <span>{reportData.legalEntityName || "N/A"}</span>
+                <span>{reportData.legalEntityAddress || "N/A"}</span>
+              </div>
+              <span className="label">Secured Party</span>
+              <div className="value-list">
+                <span>{lien.secured_party_name || "N/A"}</span>
+                <span>{lien.secured_party_address || "N/A"}</span>
+              </div>
+              <span className="label">Amendments</span>
+              <span className="value">{lien.amendments || "N/A"}</span>
+              <span className="label">Filing Date</span>
+              <span className="value">{lien.filing_date || "N/A"}</span>
             </div>
-          </div>
-          <div className="details-row">
-            <span className="label">Secured Party</span>
-            <div className="value-list">
-              <span>LCA BANK CORPORATION</span>
-              <span>123 MAIN ST, LOS ANGELES, CA 90001</span>
-            </div>
-          </div>
-          <div className="details-row">
-            <span className="label">Amendments</span>
-            <span className="value">U230002446929</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Filing Date</span>
-            <span className="value">01/01/2023</span>
-          </div>
+          ))}
+          {liens.length === 0 && <p>No liens found</p>}
         </div>
       </div>
 

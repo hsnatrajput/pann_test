@@ -1,16 +1,32 @@
 import React from 'react';
 import '../styles/Report4.css';
 import Footer from './Footer';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
-const Report5 = () => {
+const Report5 = ({ reportData }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!reportData) {
+      navigate("/");
+    }
+  }, [reportData, navigate]);
+
+  if (!reportData) {
+    return <h2 className="text-center mt-5">Loading Report...</h2>;
+  }
+
+  const penalties = reportData.business?.penalties || [];
+
   return (
     <div className="report-container">
       <div className="header">
-        <h2>OAKLAND PRO SOCCER LLC</h2>
-        <h1>SOS PANELTIES</h1>
+        <h2>{reportData.legalEntityName || "N/A"}</h2>
+        <h1>SOS PENALTIES</h1>
       </div>
 
-      <div className="section" style={{borderRadius:'1.5rem'}}>
+      <div className="section" style={{ borderRadius: '1.5rem' }}>
         <table className="litigation-table">
           <thead>
             <tr>
@@ -21,30 +37,19 @@ const Report5 = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td> OAKLAND PRO SOCCER LLC</td>
-              <td>07/01/2024</td>
-              <td></td>
-              <td>General Recovery</td>
-            </tr>
-            <tr>
-              <td>v. Oakland Pro Soccer</td>
-              <td>01/02/2024</td>
-              <td></td>
-              <td>General Recovery</td>
-            </tr>
-            <tr>
-              <td>OAKLAND PRO SOCCER LLC</td>
-              <td>01/02/2024</td>
-              <td></td>
-              <td>Tort - Other</td>
-            </tr>
-            <tr>
-              <td>GEF Logistics Inc</td>
-              <td>03/17/2023</td>
-              <td></td>
-              <td>Washington Western District Court</td>
-            </tr>
+            {penalties.map((penalty, index) => (
+              <tr key={index}>
+                <td>{penalty.event_type || "N/A"}</td>
+                <td>{penalty.filed_date || "N/A"}</td>
+                <td>{penalty.effective_date || "N/A"}</td>
+                <td>{penalty.description || "N/A"}</td>
+              </tr>
+            ))}
+            {penalties.length === 0 && (
+              <tr>
+                <td colSpan="4">No penalties found</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

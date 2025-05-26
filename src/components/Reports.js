@@ -1,29 +1,30 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Report1 from "./Report1";
 import Report2 from "./Report2";
 import Report3 from "./Report3";
 import Report4 from "./Report4";
 import Report5 from "./Report5";
+import Report6 from "./Report6";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import "../styles/Reports.css";
 
-const Reports = ({ reportData, hasPaid }) => {
+const Reports = ({ reportData, hasPaid, setHasPaid }) => {
   const [generating, setGenerating] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
-  
-  // Determine which report to show based on the route
-  const reportToShow = location.pathname.includes("report1") ? "report1" : "report1"; // Default to report1 for now
-  
   const reportRefs = {
     report1: useRef(null),
     report2: useRef(null),
     report3: useRef(null),
     report4: useRef(null),
-    report5: useRef(null)
+    report5: useRef(null),
+    report6: useRef(null)
   };
+  const reportContainerRef = useRef(null);
 
   useEffect(() => {
     if (!reportData) {
@@ -31,15 +32,35 @@ const Reports = ({ reportData, hasPaid }) => {
     }
   }, [reportData, navigate]);
 
+  const correctPassword = "pann00@@"; 
+
+  const handlePasswordSubmit = () => {
+    if (password === correctPassword) {
+      setHasPaid(true);
+      setIsPasswordModalOpen(false);
+      setErrorMessage("");
+    } else {
+      setErrorMessage("Incorrect password. Please try again.");
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handlePasswordSubmit();
+    }
+  };
+
   const compressCanvasImage = (canvas, quality = 0.9) => {
     const scaleFactor = 0.85;
-    const newCanvas = document.createElement("canvas");
+    const newCanvas = document.createElement('canvas');
     newCanvas.width = canvas.width * scaleFactor;
     newCanvas.height = canvas.height * scaleFactor;
-    const ctx = newCanvas.getContext("2d");
+    
+    const ctx = newCanvas.getContext('2d');
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, newCanvas.width, newCanvas.height);
-    return newCanvas.toDataURL("image/jpeg", quality);
+    
+    return newCanvas.toDataURL('image/jpeg', quality);
   };
 
   const generatePDF = async () => {
@@ -54,36 +75,56 @@ const Reports = ({ reportData, hasPaid }) => {
       if (downloadButton) downloadButton.style.display = "none";
       if (backButton) backButton.style.display = "none";
 
-      // Only generate PDF for the selected report
-      const element = reportRefs[reportToShow].current;
-      if (!element) return;
+      const reportElements = [
+        reportRefs.report1.current,
+        reportRefs.report2.current,
+        reportRefs.report3.current,
+        reportRefs.report4.current,
+        reportRefs.report5.current,
+        reportRefs.report6.current
+      ];
 
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        scrollY: -window.scrollY,
-        windowWidth: document.documentElement.offsetWidth,
-        windowHeight: document.documentElement.offsetHeight,
-        imageTimeout: 0,
-        removeContainer: false
-      });
+      let pdf = null;
+      
+      for (let i = 0; i < reportElements.length; i++) {
+        const element = reportElements[i];
+        if (!element) continue;
 
-      const imgData = compressCanvasImage(canvas, 0.92);
-      const pdfWidth = (canvas.width / 96) * 25.4;
-      const pdfHeight = (canvas.height / 96) * 25.4;
+        const canvas = await html2canvas(element, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          scrollY: -window.scrollY,
+          windowWidth: document.documentElement.offsetWidth,
+          windowHeight: document.documentElement.offsetHeight,
+          imageTimeout: 0,
+          removeContainer: false
+        });
 
-      const pdf = new jsPDF({
-        orientation: pdfWidth > pdfHeight ? "landscape" : "portrait",
-        unit: "mm",
-        format: [pdfWidth, pdfHeight],
-        compress: true,
-        putOnlyUsedFonts: true
-      });
+        const imgData = compressCanvasImage(canvas, 0.92);
+        
+        const pdfWidth = (canvas.width / 96) * 25.4;
+        const pdfHeight = (canvas.height / 96) * 25.4;
+        
+        if (i === 0) {
+          pdf = new jsPDF({
+            orientation: pdfWidth > pdfHeight ? "landscape" : "portrait",
+            unit: "mm",
+            format: [pdfWidth, pdfHeight],
+            compress: true,
+            putOnlyUsedFonts: true
+          });
+          pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, 'SLOW');
+        } else {
+          pdf.addPage([pdfWidth, pdfHeight], pdfWidth > pdfHeight ? "landscape" : "portrait");
+          pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, 'SLOW');
+        }
+      }
 
-      pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, "SLOW");
-      const safeName = reportData.legalEntityName?.replace(/[^a-z0-9]/gi, "_") || "Business_Report";
-      pdf.save(`${safeName}_report.pdf`);
+      if (pdf) {
+        const safeName = reportData.legalEntityName?.replace(/[^a-z0-9]/gi, '_') || "Business_Report";
+        pdf.save(`${safeName}_report.pdf`);
+      }
     } catch (error) {
       console.error("Error generating PDF:", error);
       alert("Error generating PDF. Please try again.");
@@ -92,6 +133,7 @@ const Reports = ({ reportData, hasPaid }) => {
         document.getElementById("download-pdf-btn").style.display = "block";
       if (document.getElementById("back-btn"))
         document.getElementById("back-btn").style.display = "block";
+
       setGenerating(false);
     }
   };
@@ -117,34 +159,59 @@ const Reports = ({ reportData, hasPaid }) => {
         </button>
       </div>
 
-      <div>
-        {/* Conditionally render only the selected report */}
-        {reportToShow === "report1" && (
-          <div className="report1-container" ref={reportRefs.report1}>
-            <Report1 reportData={reportData} />
-          </div>
-        )}
-        {reportToShow === "report2" && (
-          <div ref={reportRefs.report2}>
-            <Report2 reportData={reportData} />
-          </div>
-        )}
-        {reportToShow === "report3" && (
-          <div ref={reportRefs.report3}>
-            <Report3 reportData={reportData} />
-          </div>
-        )}
-        {reportToShow === "report4" && (
-          <div ref={reportRefs.report4}>
-            <Report4 reportData={reportData} />
-          </div>
-        )}
-        {reportToShow === "report5" && (
-          <div ref={reportRefs.report5}>
-            <Report5 reportData={reportData} />
+      <div ref={reportContainerRef}>
+        <div className="report1-container" ref={reportRefs.report1}>
+          <Report1 reportData={reportData} />
+        </div>
+
+        <div
+          style={{
+            filter: hasPaid ? "none" : "blur(10px)",
+            pointerEvents: hasPaid ? "auto" : "none",
+            position: "relative",
+          }}
+        >
+          <div ref={reportRefs.report2}><Report2 reportData={reportData} /></div>
+          <div ref={reportRefs.report3}><Report3 reportData={reportData} /></div>
+          <div ref={reportRefs.report4}><Report4 reportData={reportData} /></div>
+          <div ref={reportRefs.report5}><Report5 reportData={reportData} /></div>
+          <div ref={reportRefs.report6}><Report6 reportData={reportData} /></div>
+        </div>
+
+        {!hasPaid && (
+          <div className="blur-overlay" onClick={() => setIsPasswordModalOpen(true)}>
+            <div className="upgrade-box">
+              <span className="upgrade-icon">🔒</span>
+              <p className="upgrade-text">Enter password to unlock full report</p>
+            </div>
           </div>
         )}
       </div>
+
+      {isPasswordModalOpen && (
+        <div className="password-modal">
+          <div className="password-box">
+            <h4>Enter Password</h4>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="form-control mt-2"
+              placeholder="Enter password"
+            />
+            {errorMessage && <p className="text-danger mt-2">{errorMessage}</p>}
+            <div className="mt-3">
+              <button className="btn btn-success" onClick={handlePasswordSubmit}>
+                Submit
+              </button>
+              <button className="btn btn-danger ms-2" onClick={() => setIsPasswordModalOpen(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

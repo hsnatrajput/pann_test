@@ -1,30 +1,67 @@
 import React from 'react';
 import '../styles/Report1.css';
 import Footer from './Footer';
-import '../styles/Footer.css'
+import '../styles/Footer.css';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
-const Report1 = () => {
+const Report1 = ({ reportData }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!reportData) {
+      navigate("/");
+    }
+  }, [reportData, navigate]);
+
+  if (!reportData) {
+    return <h2 className="text-center mt-5">Loading Report...</h2>;
+  }
+
+  const calculateCompanyAge = (incorporationDate) => {
+    if (!incorporationDate || incorporationDate === "N/A") return "N/A";
+    const date = new Date(incorporationDate);
+    const today = new Date();
+    let years = today.getFullYear() - date.getFullYear();
+    let months = today.getMonth() - date.getMonth();
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+    return `${years} Years ${months} Months`;
+  };
+
+  const currentDate = new Date().toLocaleString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "Asia/Karachi"
+  }).replace("PM", "PM PKT").replace("AM", "AM PKT");
+
   return (
     <div className="report-container">
       <div className="footer-container mb-5">
-      <div className="footer-left">
-        <img src="/images/Pann_logo.png" alt="Pann Logo" className="footer-logo" />
+        <div className="footer-left">
+          <img src="/images/Pann_logo.png" alt="Pann Logo" className="footer-logo" />
+        </div>
+        <div className="footer-right">
+          <p className="report-date">Report generated on {currentDate}</p>
+        </div>
       </div>
-      <div className="footer-right">
-        <p className="report-date">Report generated on May 23, 2025 04:44 PM PKT</p>
-      </div>
-    </div>
       <div className="header">
-        <h1>OAKLAND PRO SOCCER LLC</h1>
+        <h1>{reportData.legalEntityName || "N/A"}</h1>
         <div className="rating-section">
           <div className="rating-left">
-            <h3 style={{fontWeight:'bold'}}>KYB RATING</h3>
+            <h3 style={{ fontWeight: 'bold' }}>KYB RATING</h3>
             <div className="rating-row">
-              <div className="rating-circle">
-                <span>84%</span>
-              </div>
+            <div className="rating-circle">
+              <span>{reportData.kybScore ? `${reportData.kybScore}%` : "N/A"}</span>
+            </div>
               <div className="rating-letter-box">
-                <p className="rating-letter">B</p>
+                <p className="rating-letter">{reportData.kybRating || "N/A"}</p>
                 <p className="rating-label">Rating</p>
               </div>
             </div>
@@ -33,6 +70,7 @@ const Report1 = () => {
               <span>EXISTING LITIGATIONS</span>
             </div>
             <div className="status-bar">
+
               <div className="bar red"></div>
               <span>LIEN ACTIVITY</span>
             </div>
@@ -42,37 +80,37 @@ const Report1 = () => {
             </div>
           </div>
           <div className="rating-right">
-            <h3 style={{ fontWeight: 'bold' , marginBottom:'1rem' }}>BUSINESS SNAPSHOT</h3>
+            <h3 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>BUSINESS SNAPSHOT</h3>
             <div className="snapshot-row">
               <span className="snapshot-label">Incorporation Date</span>
-              <span className="snapshot-value">July 11</span>
+              <span className="snapshot-value">{reportData.incorporationDate || "N/A"}</span>
             </div>
             <div className="snapshot-row">
               <span className="snapshot-label">SOS Entity Number</span>
-              <span className="snapshot-value">201819410136</span>
+              <span className="snapshot-value">{reportData.filingID || "N/A"}</span>
             </div>
             <div className="snapshot-row">
               <span className="snapshot-label">Secretary of State</span>
               <span className="snapshot-value">
-                <span className="active-badge">Active</span>
+                {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
               </span>
             </div>
             <div className="snapshot-row">
               <span className="snapshot-label">Franchise Tax Board</span>
               <span className="snapshot-value">
-                <span className="active-badge">Active</span>
+                {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
               </span>
             </div>
             <div className="snapshot-row">
               <span className="snapshot-label">Agent</span>
               <span className="snapshot-value">
-                <span className="active-badge">Active</span>
+                {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
               </span>
             </div>
             <div className="snapshot-row">
               <span className="snapshot-label">Victims of Corporate Fraud Compensation Fund</span>
               <span className="snapshot-value">
-                <span className="active-badge">Active</span>
+                {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
               </span>
             </div>
           </div>
@@ -81,53 +119,53 @@ const Report1 = () => {
 
       <div className="details-section">
         <div className="details-table">
-          <div className="details-row" style={{backgroundColor:'#F0F8FF'}}>
+          <div className="details-row" style={{ backgroundColor: '#F0F8FF' }}>
             <span className="label">Company Name</span>
-            <span className="value">Oakland Pro Soccer LLC</span>
+            <span className="value">{reportData.legalEntityName || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">Entity Type</span>
-            <span className="value">Limited Liability Company</span>
+            <span className="value">{reportData.entityType || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">Legal Entity Address</span>
-            <span className="value">2744 E 11th St Unit K01, Oakland, CA 94601</span>
+            <span className="value">{reportData.legalEntityAddress || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">Website</span>
-            <span className="value">https://www.oaklandrootssc.com/</span>
+            <span className="value">{reportData.website || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">Incorporation Date</span>
-            <span className="value">July 11, 2018</span>
+            <span className="value">{reportData.incorporationDate || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">Company Age</span>
-            <span className="value">6 Years 10 Months</span>
+            <span className="value">{calculateCompanyAge(reportData.incorporationDate)}</span>
           </div>
           <div className="details-row">
             <span className="label">Agent</span>
-            <span className="value">Steven Aldrich</span>
+            <span className="value">{reportData.registeredAgent || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">Status</span>
-            <span className="value">Active</span>
+            <span className="value">{reportData.status || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">State</span>
-            <span className="value">CA</span>
+            <span className="value">{reportData.incorporationState || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">Formed In</span>
-            <span className="value">California</span>
+            <span className="value">{reportData.incorporationState || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">Statement of Info Due Date</span>
-            <span className="value">07/31/2026</span>
+            <span className="value">{reportData.business?.registrations?.[0]?.next_due_date || "N/A"}</span>
           </div>
           <div className="details-row">
             <span className="label">B Corporation</span>
-            <span className="value">No</span>
+            <span className="value">{reportData.business?.b_corp ? "Yes" : "No"}</span>
           </div>
         </div>
       </div>
