@@ -1,118 +1,185 @@
-import React from "react";
-import Loan from "./LoanComponent/Loan";
-import Header from "./Header";
-import Footer from "./Footer";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/Report1.css";
+import React from 'react';
+import '../styles/Report4.css';
+import Footer from './Footer';
 
-function Report4({ reportData }) {
-  if (!reportData) return <p>Loading...</p>;
-
-  const businessOfficers = reportData.businessOfficers || [];
-  const watchlistHits = reportData.watchlistHits || [];
-  const watchlistNames = watchlistHits.map(hit => hit.name || hit.code).filter(Boolean);
-
+const Report4 = () => {
   return (
-    <div className="container p-3 p-md-4 border shadow-sm bg-white">
-      <Header />
-
-      <div className="mt-3 mt-md-4">
-        <table className="table table-responsive">
-          <tbody>
-            <tr>
-              <td>Business Officer</td>
-              <td>This summary presents all associated Business Officers gathered by Pann for the identified business.</td>
-            </tr>
-            <tr className="bg-light">
-              <td>Address</td>
-              <td>Role(s)</td>
-              <td>SoS Filings</td>
-            </tr>
-            {businessOfficers.map((officer, index) => (
-              <tr key={index}>
-                <td className="fw-bold text-muted">{officer.name}</td>
-                <td>{officer.roles}</td>
-                <td><span className="badge badge-green">{officer.sos_filings}</span></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="report-container">
+      <div className="header">
+        <h2 style={{marginBottom:'1rem'}}>OAKLAND PRO SOCCER LLC</h2>
+        <h1>LITIGATION & BANKRUPTCIES</h1>
       </div>
 
-      <hr />
-
-      <div className="mt-3 mt-md-4">
-        <table className="table table-responsive">
+      <div className="section" style={{borderRadius:'1.5rem'}}>
+        <h3 className="note">17 HITS* ON RECORD</h3>
+        <p className="note">Out of 17 hits 12 were recognized as trademarks*</p>
+        <table className="litigation-table">
+          <thead>
+            <tr>
+              <th>Filing Date</th>
+              <th>Litigation</th>
+              <th>Court</th>
+              <th>Case Type</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td>WATCHLISTS</td>
-              <td>This summary presents Watchlist hits gathered by Pann on the identified business or its officers.</td>
+              <td>07/01/2024</td>
+              <td>OAKLAND PRO SOCCER LLC VS GEF LOGISTICS INC</td>
+              <td>Washington State Pierce County Superior Court</td>
+              <td>General Recovery</td>
             </tr>
             <tr>
-              <td className="fw-bold text-muted">{watchlistNames.length > 0 ? watchlistNames.join(', ') : 'No Watchlist Hits'}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <hr />
-
-      <div className="mt-3 mt-md-4">
-        <table className="table table-responsive">
-          <tbody>
-            <tr>
-              <td>WEBSITE ANALYSIS</td>
-              <td>This summary presents all associated Business Officers gathered by Pann for the identified business.</td>
+              <td>01/02/2024</td>
+              <td>v. Oakland Pro Soccer</td>
+              <td>California Northern District Court</td>
+              <td>-</td>
             </tr>
             <tr>
-              <td className="fw-bold text-muted">Business Age</td>
-              <td>{reportData.businessAge || "14 years"} <p>Incorporated {reportData.incorporationDate || "2010-08-27"}</p></td>
+              <td>01/02/2024</td>
+              <td>OAKLAND PRO SOCCER LLC VS GEF LOGISTICS INC</td>
+              <td>Washington State Pierce County Superior Court</td>
+              <td>Tort - Other</td>
             </tr>
-            <tr className="bg-light">
-              <td className="fw-bold text-muted">Officers</td>
-              <td>{reportData.legalEntityAddress || "8201 Corporate Dr Ste 635, Landover, MD 20785"}</td>
+            <tr>
+              <td>03/17/2023</td>
+              <td>Oakland Pro Soccer LLC v. GEF Logistics Inc</td>
+              <td>Washington Western District Court</td>
+              <td>-</td>
             </tr>
           </tbody>
         </table>
       </div>
-
-      <hr />
-
-      <div className="mt-3 mt-md-4">
-        <table className="table table-responsive">
-          <tbody>
-            <tr>
-              <td>WEBSITE ANALYSIS</td>
-              <td>This summary presents website data for the identified business.</td>
-            </tr>
-            <tr>
-              <td className="fw-bold text-muted">Business Website</td>
-              <td>
-                {reportData.website || "www.captivasolutions.com"}
-                {["Active", "Secure"].map((status, index) => (
-                  <span key={index} className="badge badge-green mx-1">{status}</span>
-                ))}
-              </td>
-            </tr>
-            <tr className="bg-light">
-              <td className="fw-bold text-muted">Business Age</td>
-              <td>{reportData.businessAge || "14 years"} <p>Incorporated {reportData.incorporationDate || "2010-08-27"}</p></td>
-            </tr>
-            <tr>
-              <td className="fw-bold text-muted">Domain Age</td>
-              <td>10 years <p>Created 2015-03-15</p></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div className="mt-3 mt-md-4">
-        <Loan />
-      </div>
+      <h1>BANKRUPTCIES</h1>
+      <p>NO BANKRUPTCIES FOUND</p>
 
       <Footer pageNumber={4} />
     </div>
   );
-}
+};
 
 export default Report4;
+
+
+
+
+
+
+// import React from "react";
+// import Loan from "./LoanComponent/Loan";
+// import Header from "./Header";
+// import Footer from "./Footer";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "../styles/Report1.css";
+
+// function Report4({ reportData }) {
+//   if (!reportData) return <p>Loading...</p>;
+
+//   const businessOfficers = reportData.businessOfficers || [];
+//   const watchlistHits = reportData.watchlistHits || [];
+//   const watchlistNames = watchlistHits.map(hit => hit.name || hit.code).filter(Boolean);
+
+//   return (
+//     <div className="container p-3 p-md-4 border shadow-sm bg-white">
+//       <Header />
+
+//       <div className="mt-3 mt-md-4">
+//         <table className="table table-responsive">
+//           <tbody>
+//             <tr>
+//               <td>Business Officer</td>
+//               <td>This summary presents all associated Business Officers gathered by Pann for the identified business.</td>
+//             </tr>
+//             <tr className="bg-light">
+//               <td>Address</td>
+//               <td>Role(s)</td>
+//               <td>SoS Filings</td>
+//             </tr>
+//             {businessOfficers.map((officer, index) => (
+//               <tr key={index}>
+//                 <td className="fw-bold text-muted">{officer.name}</td>
+//                 <td>{officer.roles}</td>
+//                 <td><span className="badge badge-green">{officer.sos_filings}</span></td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
+
+//       <hr />
+
+//       <div className="mt-3 mt-md-4">
+//         <table className="table table-responsive">
+//           <tbody>
+//             <tr>
+//               <td>WATCHLISTS</td>
+//               <td>This summary presents Watchlist hits gathered by Pann on the identified business or its officers.</td>
+//             </tr>
+//             <tr>
+//               <td className="fw-bold text-muted">{watchlistNames.length > 0 ? watchlistNames.join(', ') : 'No Watchlist Hits'}</td>
+//             </tr>
+//           </tbody>
+//         </table>
+//       </div>
+
+//       <hr />
+
+//       <div className="mt-3 mt-md-4">
+//         <table className="table table-responsive">
+//           <tbody>
+//             <tr>
+//               <td>WEBSITE ANALYSIS</td>
+//               <td>This summary presents all associated Business Officers gathered by Pann for the identified business.</td>
+//             </tr>
+//             <tr>
+//               <td className="fw-bold text-muted">Business Age</td>
+//               <td>{reportData.businessAge || "14 years"} <p>Incorporated {reportData.incorporationDate || "2010-08-27"}</p></td>
+//             </tr>
+//             <tr className="bg-light">
+//               <td className="fw-bold text-muted">Officers</td>
+//               <td>{reportData.legalEntityAddress || "8201 Corporate Dr Ste 635, Landover, MD 20785"}</td>
+//             </tr>
+//           </tbody>
+//         </table>
+//       </div>
+
+//       <hr />
+
+//       <div className="mt-3 mt-md-4">
+//         <table className="table table-responsive">
+//           <tbody>
+//             <tr>
+//               <td>WEBSITE ANALYSIS</td>
+//               <td>This summary presents website data for the identified business.</td>
+//             </tr>
+//             <tr>
+//               <td className="fw-bold text-muted">Business Website</td>
+//               <td>
+//                 {reportData.website || "www.captivasolutions.com"}
+//                 {["Active", "Secure"].map((status, index) => (
+//                   <span key={index} className="badge badge-green mx-1">{status}</span>
+//                 ))}
+//               </td>
+//             </tr>
+//             <tr className="bg-light">
+//               <td className="fw-bold text-muted">Business Age</td>
+//               <td>{reportData.businessAge || "14 years"} <p>Incorporated {reportData.incorporationDate || "2010-08-27"}</p></td>
+//             </tr>
+//             <tr>
+//               <td className="fw-bold text-muted">Domain Age</td>
+//               <td>10 years <p>Created 2015-03-15</p></td>
+//             </tr>
+//           </tbody>
+//         </table>
+//       </div>
+
+//       <div className="mt-3 mt-md-4">
+//         <Loan />
+//       </div>
+
+//       <Footer pageNumber={4} />
+//     </div>
+//   );
+// }
+
+// export default Report4;
