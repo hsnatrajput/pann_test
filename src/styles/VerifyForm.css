@@ -417,7 +417,7 @@ input::placeholder {
   color: #353434;
   font-size: 12px;
   font-weight: bold;
-  border-top: 0.5px solid #CDCDCD;
+  /* border-top: 0.5px solid #CDCDCD; */
   padding-top: 10px;
   font-family: 'Nunito Sans';
 }

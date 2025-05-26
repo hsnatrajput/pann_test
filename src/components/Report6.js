@@ -48,20 +48,22 @@ const Report6 = ({ reportData }) => {
         <p style={{ marginBottom: '0', marginTop: '0' }}><strong>Age:</strong> {calculateDomainAge(domainCreated)}</p>
       </div>
 
-      <div className="section">
-        <h2>SOCIALS</h2>
-        <div className="social-grid">
+      {socialMedia && socialMedia.length > 0 && (
+        <div className="section">
+            <h2>SOCIALS</h2>
+            <div className="social-grid">
             {socialMedia.map((social, index) => {
                 const [platform, url] = social.split(": ");
                 return (
-                    <div key={index} className="social-box">
+                <div key={index} className="social-box">
                     <h4>{platform || "Unknown"}</h4>
                     <p>{url || "N/A"}</p>
-                    </div>
+                </div>
                 );
             })}
+            </div>
         </div>
-      </div>
+      )}
 
       <Footer pageNumber={6} />
     </div>

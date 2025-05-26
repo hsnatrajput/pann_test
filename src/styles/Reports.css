@@ -92,3 +92,10 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   }
   
+  .report-heading {
+    margin-top: 10mm; /* Default margin for headings */
+  }
+  
+  .new-page-heading {
+    margin-top: 20mm !important; /* Extra margin for headings on new pages */
+  }
