@@ -5,7 +5,7 @@ import '../styles/Footer.css';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 
-const Report1 = ({ reportData }) => {
+const Report1 = ({ reportData, hasPaid }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,133 +43,138 @@ const Report1 = ({ reportData }) => {
 
   return (
     <div className="report-container">
-      <div className="footer-container mb-5">
-        <div className="footer-left">
-          <img src="/images/Pann_logo.png" alt="Pann Logo" className="footer-logo" />
+      {/* Unblurred Section: Header and Rating Section */}
+      <div className="unblurred-content">
+        <div className="footer-container mb-5">
+          <div className="footer-left">
+            <img src="/images/Pann_logo.png" alt="Pann Logo" className="footer-logo" />
+          </div>
+          <div className="footer-right">
+            <p className="report-date">Report generated on {currentDate}</p>
+          </div>
         </div>
-        <div className="footer-right">
-          <p className="report-date">Report generated on {currentDate}</p>
-        </div>
-      </div>
-      <div className="header">
-        <h1>{reportData.legalEntityName || "N/A"}</h1>
-        <div className="rating-section">
-          <div className="rating-left">
-            <h3 style={{ fontWeight: 'bold' }}>KYB RATING</h3>
-            <div className="rating-row">
-            <div className="rating-circle">
-              <span>{reportData.kybScore ? `${reportData.kybScore}%` : "N/A"}</span>
-            </div>
-              <div className="rating-letter-box">
-                <p className="rating-letter">{reportData.kybRating || "N/A"}</p>
-                <p className="rating-label">Rating</p>
+        <div className="header">
+          <h1>{reportData.legalEntityName || "N/A"}</h1>
+          <div className="rating-section">
+            <div className="rating-left">
+              <h3 style={{ fontWeight: 'bold' }}>KYB RATING</h3>
+              <div className="rating-row">
+                <div className="rating-circle">
+                  <span>{reportData.kybScore ? `${reportData.kybScore}%` : "N/A"}</span>
+                </div>
+                <div className="rating-letter-box">
+                  <p className="rating-letter">{reportData.kybRating || "N/A"}</p>
+                  <p className="rating-label">Rating</p>
+                </div>
+              </div>
+              <div className="status-bar">
+                <div className="bar red"></div>
+                <span>EXISTING LITIGATIONS</span>
+              </div>
+              <div className="status-bar">
+                <div className="bar red"></div>
+                <span>LIEN ACTIVITY</span>
+              </div>
+              <div className="status-bar">
+                <div className="bar yellow"></div>
+                <span>STATEMENT OF INFORMATION PENALTIES</span>
               </div>
             </div>
-            <div className="status-bar">
-              <div className="bar red"></div>
-              <span>EXISTING LITIGATIONS</span>
-            </div>
-            <div className="status-bar">
-
-              <div className="bar red"></div>
-              <span>LIEN ACTIVITY</span>
-            </div>
-            <div className="status-bar">
-              <div className="bar yellow"></div>
-              <span>STATEMENT OF INFORMATION PENALTIES</span>
-            </div>
-          </div>
-          <div className="rating-right">
-            <h3 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>BUSINESS SNAPSHOT</h3>
-            <div className="snapshot-row">
-              <span className="snapshot-label">Incorporation Date</span>
-              <span className="snapshot-value">{reportData.incorporationDate || "N/A"}</span>
-            </div>
-            <div className="snapshot-row">
-              <span className="snapshot-label">SOS Entity Number</span>
-              <span className="snapshot-value">{reportData.filingID || "N/A"}</span>
-            </div>
-            <div className="snapshot-row">
-              <span className="snapshot-label">Secretary of State</span>
-              <span className="snapshot-value">
-                {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
-              </span>
-            </div>
-            <div className="snapshot-row">
-              <span className="snapshot-label">Franchise Tax Board</span>
-              <span className="snapshot-value">
-                {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
-              </span>
-            </div>
-            <div className="snapshot-row">
-              <span className="snapshot-label">Agent</span>
-              <span className="snapshot-value">
-                {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
-              </span>
-            </div>
-            <div className="snapshot-row">
-              <span className="snapshot-label">Victims of Corporate Fraud Compensation Fund</span>
-              <span className="snapshot-value">
-                {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
-              </span>
+            <div className="rating-right">
+              <h3 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>BUSINESS SNAPSHOT</h3>
+              <div className="snapshot-row">
+                <span className="snapshot-label">Incorporation Date</span>
+                <span className="snapshot-value">{reportData.incorporationDate || "N/A"}</span>
+              </div>
+              <div className="snapshot-row">
+                <span className="snapshot-label">SOS Entity Number</span>
+                <span className="snapshot-value">{reportData.filingID || "N/A"}</span>
+              </div>
+              <div className="snapshot-row">
+                <span className="snapshot-label">Secretary of State</span>
+                <span className="snapshot-value">
+                  {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
+                </span>
+              </div>
+              <div className="snapshot-row">
+                <span className="snapshot-label">Franchise Tax Board</span>
+                <span className="snapshot-value">
+                  {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
+                </span>
+              </div>
+              <div className="snapshot-row">
+                <span className="snapshot-label">Agent</span>
+                <span className="snapshot-value">
+                  {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
+                </span>
+              </div>
+              <div className="snapshot-row">
+                <span className="snapshot-label">Victims of Corporate Fraud Compensation Fund</span>
+                <span className="snapshot-value">
+                  {reportData.status === "active" ? <span className="active-badge">Active</span> : reportData.status || "N/A"}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="details-section">
-        <div className="details-table">
-          <div className="details-row" style={{ backgroundColor: '#F0F8FF' }}>
-            <span className="label">Company Name</span>
-            <span className="value">{reportData.legalEntityName || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Entity Type</span>
-            <span className="value">{reportData.entityType || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Legal Entity Address</span>
-            <span className="value">{reportData.legalEntityAddress || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Website</span>
-            <span className="value">{reportData.website || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Incorporation Date</span>
-            <span className="value">{reportData.incorporationDate || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Company Age</span>
-            <span className="value">{calculateCompanyAge(reportData.incorporationDate)}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Agent</span>
-            <span className="value">{reportData.registeredAgent || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Status</span>
-            <span className="value">{reportData.status || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">State</span>
-            <span className="value">{reportData.incorporationState || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Formed In</span>
-            <span className="value">{reportData.incorporationState || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">Statement of Info Due Date</span>
-            <span className="value">{reportData.business?.registrations?.[0]?.next_due_date || "N/A"}</span>
-          </div>
-          <div className="details-row">
-            <span className="label">B Corporation</span>
-            <span className="value">{reportData.business?.b_corp ? "Yes" : "No"}</span>
+      {/* Blurred Section: Details Section and Footer */}
+      <div className={`blurred-content ${!hasPaid ? 'blurred' : ''}`}>
+        <div className="details-section">
+          <div className="details-table">
+            <div className="details-row" style={{ backgroundColor: '#F0F8FF' }}>
+              <span className="label">Company Name</span>
+              <span className="value">{reportData.legalEntityName || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Entity Type</span>
+              <span className="value">{reportData.entityType || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Legal Entity Address</span>
+              <span className="value">{reportData.legalEntityAddress || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Website</span>
+              <span className="value">{reportData.website || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Incorporation Date</span>
+              <span className="value">{reportData.incorporationDate || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Company Age</span>
+              <span className="value">{calculateCompanyAge(reportData.incorporationDate)}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Agent</span>
+              <span className="value">{reportData.registeredAgent || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Status</span>
+              <span className="value">{reportData.status || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">State</span>
+              <span className="value">{reportData.incorporationState || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Formed In</span>
+              <span className="value">{reportData.incorporationState || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">Statement of Info Due Date</span>
+              <span className="value">{reportData.business?.registrations?.[0]?.next_due_date || "N/A"}</span>
+            </div>
+            <div className="details-row">
+              <span className="label">B Corporation</span>
+              <span className="value">{reportData.business?.b_corp ? "Yes" : "No"}</span>
+            </div>
           </div>
         </div>
+        <Footer pageNumber={1} />
       </div>
-      <Footer pageNumber={1} />
     </div>
   );
 };

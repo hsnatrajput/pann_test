@@ -44,7 +44,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     }
   };
 
-  // Create paginated content with dynamic page breaks
   const createPaginatedContent = () => {
     const reports = [
       { component: Report1, data: reportData },
@@ -54,18 +53,22 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
       { component: Report5, data: reportData },
       { component: Report6, data: reportData }
     ];
-
+  
     return reports.map((report, index) => {
       const ReportComponent = report.component;
       return (
-        <div key={index} className="report-section">
-          <ReportComponent reportData={report.data} />
+        <div key={index} className={`report-section ${index !== 0 && !hasPaid ? 'blurred' : ''}`}>
+          <ReportComponent reportData={report.data} hasPaid={hasPaid} />
         </div>
       );
     });
   };
 
   const generatePDF = async () => {
+    if (!reportData || !hasPaid) {
+      setIsPasswordModalOpen(true);
+      return;
+    }
 
     const preloadImage = (src) => {
       return new Promise((resolve, reject) => {
@@ -77,35 +80,30 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
       });
     };
 
-    if (!reportData || !hasPaid) return;
-
     setGenerating(true);
 
     try {
-      // Hide buttons during PDF generation
       const downloadButton = document.getElementById("download-pdf-btn");
       const backButton = document.getElementById("back-btn");
       if (downloadButton) downloadButton.style.display = "none";
       if (backButton) backButton.style.display = "none";
       await preloadImage('/images/Pann_logo.png');
-      // Create a temporary container for PDF generation
+
       const tempContainer = document.createElement('div');
       tempContainer.style.position = 'absolute';
       tempContainer.style.left = '-9999px';
       tempContainer.style.top = '0';
-      tempContainer.style.width = '210mm'; // A4 width
+      tempContainer.style.width = '210mm';
       tempContainer.style.fontFamily = 'Arial, sans-serif';
       document.body.appendChild(tempContainer);
 
-      // Define constants
       const A4_WIDTH_MM = 210;
       const A4_HEIGHT_MM = 297;
       const MARGIN_MM = 20;
       const FOOTER_HEIGHT_MM = 15;
       const CONTENT_HEIGHT_MM = A4_HEIGHT_MM - (2 * MARGIN_MM) - FOOTER_HEIGHT_MM;
-      const PX_PER_MM = 3.78; // 96 DPI
+      const PX_PER_MM = 3.78;
 
-      // Initialize PDF
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
@@ -113,7 +111,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         compress: true
       });
 
-      // Get all report content
       const reports = [
         { component: Report1, data: reportData },
         { component: Report2, data: reportData },
@@ -123,7 +120,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         { component: Report6, data: reportData }
       ];
 
-      // Create pages with dynamic content flow
       let currentPageContent = '';
       let currentHeightPx = 0;
       let pageNumber = 1;
@@ -131,10 +127,8 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
       const pages = [];
 
       for (const report of reports) {
-        // Render report to HTML
         const reportHTML = await renderReportToHTML(report.component, report.data);
 
-        // Create temporary div to measure height
         const measureDiv = document.createElement('div');
         measureDiv.style.width = `${A4_WIDTH_MM - 2 * MARGIN_MM}mm`;
         measureDiv.style.padding = '0';
@@ -145,49 +139,48 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         measureDiv.innerHTML = reportHTML;
         tempContainer.appendChild(measureDiv);
 
-        // Measure height
         const heightPx = measureDiv.offsetHeight;
         const heightMm = heightPx / PX_PER_MM;
         let modifiedReportHTML = reportHTML;
 
-        // Check if content fits on current page
         if (currentHeightPx + heightPx > CONTENT_HEIGHT_MM * PX_PER_MM) {
-          // Create a new page with current content
           const pageDiv = document.createElement('div');
           pageDiv.className = 'pdf-page';
+          const headerHTML = !isFirstPage ? `<h2 style="font-size: 1.5rem; color: #666; margin: 0;">${reportData.legalEntityName || "N/A"}</h2><div style="margin-bottom: 20px;"></div>` : '';
           pageDiv.innerHTML = `
-          <style>
-            .pdf-page {
-              width: 210mm;
-              min-height: 297mm;
-              padding: 20mm;
-              box-sizing: border-box;
-              position: relative;
-              background: white;
-              font-family: Arial, Helvetica, sans-serif;
-            }
-            .content-area {
-              min-height: ${CONTENT_HEIGHT_MM}mm;
-              overflow: hidden;
-            }
-            .page-footer {
-              position: absolute;
-              bottom: 10mm;
-              left: 20mm;
-              right: 20mm;
-              height: 15mm;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              border-top: 1px solid #d3d3d3;
-              padding-top: 5mm;
-              font-size: 10px;
-              color: #666;
-              font-family: Arial, Helvetica, sans-serif;
-            }
-            .new-page-heading { margin-top: 20mm; }
-          </style>
+            <style>
+              .pdf-page {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 20mm;
+                box-sizing: border-box;
+                position: relative;
+                background: white;
+                font-family: Arial, Helvetica, sans-serif;
+              }
+              .content-area {
+                min-height: ${CONTENT_HEIGHT_MM}mm;
+                overflow: hidden;
+              }
+              .page-footer {
+                position: absolute;
+                bottom: 10mm;
+                left: 20mm;
+                right: 20mm;
+                height: 15mm;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top: 1px solid #d3d3d3;
+                padding-top: 5mm;
+                font-size: 10px;
+                color: #666;
+                font-family: Arial, Helvetica, sans-serif;
+              }
+              .new-page-heading { margin-top: 20mm; }
+            </style>
             <div class="content-area">
+              ${headerHTML}
               ${currentPageContent}
             </div>
             <div class="page-footer">
@@ -212,7 +205,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
 
           tempContainer.appendChild(pageDiv);
 
-          // Convert to canvas
           const canvas = await html2canvas(pageDiv, {
             scale: 2,
             useCORS: true,
@@ -222,7 +214,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
             backgroundColor: '#ffffff'
           });
 
-          // Add to PDF
           if (!isFirstPage) {
             pdf.addPage();
           }
@@ -234,15 +225,13 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
             'class="report-heading new-page-heading"'
           );
 
-          // Reset for new page
-          currentPageContent = reportHTML;
-          currentHeightPx = heightPx;
+          currentPageContent = modifiedReportHTML;
+          currentHeightPx = measureDiv.offsetHeight + (headerHTML ? 20 * PX_PER_MM : 0); // Adjust for header height
           pageNumber++;
           isFirstPage = false;
 
           tempContainer.removeChild(pageDiv);
         } else {
-          // Append to current page
           currentPageContent += reportHTML;
           currentHeightPx += heightPx;
         }
@@ -250,10 +239,10 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         tempContainer.removeChild(measureDiv);
       }
 
-      // Add final page if there's remaining content
       if (currentPageContent) {
         const pageDiv = document.createElement('div');
         pageDiv.className = 'pdf-page';
+        const headerHTML = !isFirstPage ? `<h2 style="font-size: 1.5rem; color: #666; margin: 0;">${reportData.legalEntityName || "N/A"}</h2><div style="margin-bottom: 20px;"></div>` : '';
         pageDiv.innerHTML = `
           <style>
             .pdf-page {
@@ -284,6 +273,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
             }
           </style>
           <div class="content-area">
+            ${headerHTML}
             ${currentPageContent}
           </div>
           <div class="page-footer">
@@ -308,7 +298,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
 
         tempContainer.appendChild(pageDiv);
 
-        // Convert to canvas
         const canvas = await html2canvas(pageDiv, {
           scale: 2,
           useCORS: true,
@@ -318,7 +307,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
           backgroundColor: '#ffffff'
         });
 
-        // Add to PDF
         if (!isFirstPage) {
           pdf.addPage();
         }
@@ -328,10 +316,8 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         tempContainer.removeChild(pageDiv);
       }
 
-      // Clean up
       document.body.removeChild(tempContainer);
 
-      // Save PDF
       const safeName = reportData.legalEntityName?.replace(/[^a-z0-9]/gi, '_') || "Business_Report";
       pdf.save(`${safeName}_report.pdf`);
 
@@ -339,17 +325,14 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
       console.error("Error generating PDF:", error);
       alert("Error generating PDF. Please try again.");
     } finally {
-      // Show buttons again
       if (document.getElementById("download-pdf-btn"))
         document.getElementById("download-pdf-btn").style.display = "block";
       if (document.getElementById("back-btn"))
         document.getElementById("back-btn").style.display = "block";
-
       setGenerating(false);
     }
   };
 
-  // Helper function to render React component to HTML
   const renderReportToHTML = async (ReportComponent, data) => {
     if (ReportComponent === Report1) {
       return createReport1HTML(data);
@@ -367,8 +350,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     return '';
   };
 
-  // HTML generation functions for each report
- // Replace createReport1HTML in Reports.js
   const createReport1HTML = (data) => {
     const calculateCompanyAge = (incorporationDate) => {
       if (!incorporationDate || incorporationDate === "N/A") return "N/A";
@@ -483,7 +464,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     return `
       <div style="max-width: 100%; font-family: Arial, sans-serif; padding: 0;">
         <div class="report-heading" style="text-align: left; margin-bottom: 20px;">
-          <h2 style="font-size: 1.5rem; color: #666; margin: 0;">${data.legalEntityName || "N/A"}</h2>
           <h1 style="color: #333; margin: 5px 0 0 0;">ADDRESS & AGENT HISTORY</h1>
         </div>
 
@@ -495,7 +475,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
           <p style="margin: 5px 0; font-size: 0.9rem; color: #333;">${addresses[0] || "N/A"}</p>
         </div>
 
-        
         <div style="margin-bottom: 1.5rem; padding: 1.5rem; background-color: #f5f5f5; border-radius: 2rem;">
           <h3 style="font-size: 1rem; color: #333; margin: 0 0 10px 0; font-weight: bold;">COMMERCIAL ADDRESS</h3>
           <div style="display: inline-block; background-color: #9ACD32; padding: 0.3rem; border-radius: 0.5rem; color: #000000; font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
@@ -504,7 +483,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
           <p style="margin: 5px 0; font-size: 0.9rem; color: #333;">${addresses[0] || "N/A"}</p>
         </div>
 
-        
         <div style="margin-bottom: 1.5rem; padding: 1.5rem; background-color: #f5f5f5; border-radius: 2rem;">
           <h3 style="font-size: 1rem; color: #333; margin: 0 0 10px 0; font-weight: bold;">COMMERCIAL ADDRESS</h3>
           <div style="display: inline-block; background-color: #9ACD32; padding: 0.3rem; border-radius: 0.5rem; color: #000000; font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
@@ -533,7 +511,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     return `
       <div style="max-width: 100%; font-family: Arial, sans-serif; padding: 0;">
         <div class="report-heading" style="text-align: left; margin-bottom: 20px;">
-          <h2 style="font-size: 1.5rem; color: #666; margin: 0;">${data.legalEntityName || "N/A"}</h2>
           <h1 style="font-size: 1.5rem; color: #333; margin: 0;">WATCHLISTS</h1>
           <h3 style="font-size: 1rem; color: #333; margin: 5px 0 0 0;">DEPARTMENT OF TREASURY, OFFICE OF FOREIGN ASSETS CONTROL</h3>
           <div style="margin-top: 1.5rem;">
@@ -605,7 +582,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     return `
       <div style="max-width: 100%; font-family: Arial, sans-serif; padding: 0;">
         <div class="report-heading" style="text-align: left; margin-bottom: 20px;">
-          <h2 style="font-size: 1.5rem; color: #666; margin: 0;">${data.legalEntityName || "N/A"}</h2>
           <h1 style="font-size: 1.5rem; color: #333; margin: 0;">LITIGATION & BANKRUPTCIES</h1>
         </div>
 
@@ -647,7 +623,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     return `
       <div style="max-width: 100%; font-family: Arial, sans-serif; padding: 0;">
         <div class="report-heading" style="text-align: left; margin-bottom: 20px;">
-          <h2 style="font-size: 1.5rem; color: #666; margin: 0;">${data.legalEntityName || "N/A"}</h2>
           <h1 style="font-size: 1.5rem; color: #333; margin: 0;">SOS PENALTIES</h1>
         </div>
 
@@ -704,7 +679,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
     return `
       <div style="max-width: 100%; font-family: Arial, sans-serif; padding: 0;">
         <div class="report-heading" style="text-align: left; margin-bottom: 20px;">
-          <h2 style="font-size: 1.5rem; color: #666; margin: 0;">${data.legalEntityName || "N/A"}</h2>
           <h1 style="font-size: 2.5rem; color: #333; margin: 5px 0 3rem 0;">WEBSITE & SOCIAL</h1>
         </div>
 
@@ -759,19 +733,18 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
       </div>
 
       <div ref={reportContainerRef} className="report-wrapper">
-        <div ref={paginatedContentRef} className="report-content">
+        <div className="report-content" ref={paginatedContentRef}>
           {createPaginatedContent()}
         </div>
-      </div>
-
-      {!hasPaid && (
-        <div className="blur-overlay" onClick={() => setIsPasswordModalOpen(true)}>
-          <div className="upgrade-box">
-            <span className="upgrade-icon">🔒</span>
-            <p className="upgrade-text">Enter password to unlock full report</p>
+        {!hasPaid && (
+          <div className="blur-overlay" onClick={() => setIsPasswordModalOpen(true)}>
+            <div className="upgrade-box">
+              <span className="upgrade-icon">🔒</span>
+              <p className="upgrade-text">Enter password to unlock full report</p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {isPasswordModalOpen && (
         <div className="password-modal">

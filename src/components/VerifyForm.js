@@ -159,10 +159,11 @@ const VerifyForm = ({ setReportData }) => {
       // Show "Verified!" message for 2 seconds before navigating
       setLoading(false);
       setIsVerified(true);
-      setTimeout(() => {
-        setIsVerified(false);
-        navigate("/report1");
-      }, 4000);
+      navigate("/report1");
+      // setTimeout(() => {
+      //   setIsVerified(false);
+      //   navigate("/report1");
+      // }, 4000);
     } catch (error) {
       console.error("Detailed Error:", error);
       console.log("Error Code:", error.code);

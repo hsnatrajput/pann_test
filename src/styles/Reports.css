@@ -1,101 +1,117 @@
 .report1-container {
-    position: relative;
-  }
-  .password-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .password-box {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .blur-overlay-report1 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50%; 
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-  }
-  .upgrade-text{
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  .upgrade-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background:#FEF7EF ; 
-    color: #FA822C; 
-    padding: 12px 20px;
-    border: 1px solid #FEF7EF;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-    max-width: 400px;
-    margin: 10px auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .upgrade-box:hover {
-    background: #FEF7EF;
-  }
-  
-  .upgrade-icon {
-    font-size: 18px;
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    width: 50%;
-    height: 65%;
-    background: #f9f6f2;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .report-heading {
-    margin-top: 10mm; /* Default margin for headings */
-  }
-  
-  .new-page-heading {
-    margin-top: 20mm !important; /* Extra margin for headings on new pages */
-  }
+  position: relative;
+}
+
+.password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.password-box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.report-content {
+  transition: filter 0.3s ease;
+}
+
+/* .report-content.blurred {
+  filter: blur(8px);
+} */
+
+.report-section.blurred {
+  filter: blur(8px);
+}
+
+.blurred-content.blurred {
+  filter: blur(8px);
+}
+
+.blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.upgrade-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #FEF7EF;
+  color: #FA822C;
+  padding: 12px 20px;
+  border: 1px solid #FEF7EF;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 55%; /* Slightly below the clear section */
+  transform: translateY(-50%);
+}
+
+.upgrade-box:hover {
+  background: #FEE8D6;
+}
+
+.upgrade-icon {
+  font-size: 18px;
+}
+
+.upgrade-text {
+  margin: 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 50%;
+  height: 65%;
+  background: #f9f6f2;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.report-heading {
+  margin-top: 10mm; /* Default margin for headings */
+}
+
+.new-page-heading {
+  margin-top: 20mm !important; /* Extra margin for headings on new pages */
+}
