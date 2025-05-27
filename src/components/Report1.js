@@ -56,30 +56,42 @@ const Report1 = ({ reportData, hasPaid }) => {
         <div className="header">
           <h1>{reportData.legalEntityName || "N/A"}</h1>
           <div className="rating-section">
-            <div className="rating-left">
-              <h3 style={{ fontWeight: 'bold' }}>KYB RATING</h3>
-              <div className="rating-row">
-                <div className="rating-circle">
-                  <span>{reportData.kybScore ? `${reportData.kybScore}%` : "N/A"}</span>
+          <div className="rating-left">
+            <h3 style={{ fontWeight: 'bold' }}>KYB RATING</h3>
+            <div className="rating-row">
+              <div className="rating-circle">
+                <span>{reportData.kybScore ? `${reportData.kybScore}%` : "N/A"}</span>
+                <div className="rating-dashes">
+                  <div className="dash" style={{ backgroundColor: reportData.kybScore >= 25 ? '#ff0000' : '#e0e0e0' }}></div>
+                  <div className="dash" style={{ backgroundColor: reportData.kybScore >= 50 ? '#ff6600' : '#e0e0e0' }}></div>
+                  <div className="dash" style={{ backgroundColor: reportData.kybScore >= 75 ? '#ffcc00' : '#e0e0e0' }}></div>
+                  <div className="dash" style={{ backgroundColor: reportData.kybScore >= 100 ? '#d3d3d3' : '#e0e0e0' }}></div>
                 </div>
-                <div className="rating-letter-box">
-                  <p className="rating-letter">{reportData.kybRating || "N/A"}</p>
-                  <p className="rating-label">Rating</p>
-                </div>
               </div>
-              <div className="status-bar">
-                <div className="bar red"></div>
-                <span>EXISTING LITIGATIONS</span>
-              </div>
-              <div className="status-bar">
-                <div className="bar red"></div>
-                <span>LIEN ACTIVITY</span>
-              </div>
-              <div className="status-bar">
-                <div className="bar yellow"></div>
-                <span>STATEMENT OF INFORMATION PENALTIES</span>
+              <div className="rating-letter-box">
+                <p className="rating-letter">{reportData.kybRating || "N/A"}</p>
+                <p className="rating-label">Rating</p>
               </div>
             </div>
+            <div className="status-bar">
+              <span>EXISTING LITIGATIONS</span>
+              <div className="status-dashes">
+                <div className="status-dash red"></div>
+              </div>
+            </div>
+            <div className="status-bar">
+              <span>LIEN ACTIVITY</span>
+              <div className="status-dashes">
+                <div className="status-dash red"></div>
+              </div>
+            </div>
+            <div className="status-bar">
+              <span>STATEMENT OF INFORMATION PENALTIES</span>
+              <div className="status-dashes">
+                <div className="status-dash yellow"></div>
+              </div>
+            </div>
+          </div>
             <div className="rating-right">
               <h3 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>BUSINESS SNAPSHOT</h3>
               <div className="snapshot-row">

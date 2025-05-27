@@ -387,27 +387,35 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         <div class="report-heading" style="text-align: left; margin-bottom: 20px;">
           <h1 style="font-size: 1.5rem; color: #333; margin: 0;">${data.legalEntityName || "N/A"}</h1>
           <div style="display: flex; gap: 2rem; margin-top: 20px;">
-            <div style="flex: 1; background-color: #f5f5f5; border-radius: 1rem; padding: 1.5rem;">
+            <div style="flex: 0 0 40%; background-color: #f5f5f5; border-radius: 1rem; padding: 1.5rem;">
               <h3 style="font-size: 1.2rem; color: #333; margin: 0 0 15px 0; font-weight: bold;">KYB RATING</h3>
-              <div style="display: flex; gap: 2rem; align-items: center;">
-                <span style="font-size: 2rem; font-weight: bold; color: #333;">${data.kybScore ? `${data.kybScore}%` : "N/A"}</span>
-                <div>
+              <div style="display: flex; gap: 7rem;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                  <span style="font-size: 2rem; font-weight: bold; color: #333;">${data.kybScore ? `${data.kybScore}%` : "N/A"}</span>
+                  <div style="display: flex; gap: 5px; margin-top: 10px;">
+                    <div style="width: 20px; height: 5px; border-radius: 2px; background-color: ${data.kybScore >= 25 ? '#ff0000' : '#e0e0e0'};"></div>
+                    <div style="width: 20px; height: 5px; border-radius: 2px; background-color: ${data.kybScore >= 50 ? '#ff6600' : '#e0e0e0'};"></div>
+                    <div style="width: 20px; height: 5px; border-radius: 2px; background-color: ${data.kybScore >= 75 ? '#ffcc00' : '#e0e0e0'};"></div>
+                    <div style="width: 20px; height: 5px; border-radius: 2px; background-color: ${data.kybScore >= 100 ? '#d3d3d3' : '#e0e0e0'};"></div>
+                  </div>
+                </div>
+                <div style="display: flex; flex-direction: column; margin-top: -0.8rem;">
                   <p style="font-size: 2rem; font-weight: bold; color: #333; margin: 0;">${data.kybRating || "N/A"}</p>
                   <p style="font-size: 0.9rem; color: #666; margin: 0;">Rating</p>
                 </div>
               </div>
               <div style="margin-top: 15px;">
                 <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                  <div style="width: 10px; height: 10px; background-color: #ff0000; margin-right: 5px;"></div>
-                  <span style="font-size: 0.9rem; color: #333;">EXISTING LITIGATIONS</span>
+                  <span style="font-size: 0.9rem; color: #333; margin-left: 10px;">EXISTING LITIGATIONS</span>
+                  <div style="width: 20px; height: 5px; border-radius: 2px; background-color: #ff0000;"></div>
                 </div>
                 <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                  <div style="width: 10px; height: 10px; background-color: #ff0000; margin-right: 5px;"></div>
-                  <span style="font-size: 0.9rem; color: #333;">LIEN ACTIVITY</span>
+                  <span style="font-size: 0.9rem; color: #333; margin-left: 10px;">LIEN ACTIVITY</span>
+                  <div style="width: 20px; height: 5px; border-radius: 2px; background-color: #ff0000;"></div>
                 </div>
                 <div style="display: flex; align-items: center;">
-                  <div style="width: 10px; height: 10px; background-color: #ffcc00; margin-right: 5px;"></div>
-                  <span style="font-size: 0.9rem; color: #333;">STATEMENT OF INFORMATION PENALTIES</span>
+                  <span style="font-size: 0.9rem; color: #333; margin-left: 10px;">STATEMENT OF INFORMATION PENALTIES</span>
+                  <div style="width: 20px; height: 5px; border-radius: 2px; background-color: #ffcc00;"></div>
                 </div>
               </div>
             </div>

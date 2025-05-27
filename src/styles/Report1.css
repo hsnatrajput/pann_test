@@ -48,13 +48,28 @@
 }
 
 .rating-circle {
-  /* Adjusted for better alignment */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .rating-circle span {
   font-size: 2rem;
   font-weight: bold;
   color: #333;
+}
+
+.rating-dashes {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.dash {
+  width: 20px;
+  height: 5px;
+  border-radius: 2px;
+  background-color: #e0e0e0; /* Default color for unfilled dashes */
 }
 
 .rating-letter-box {
@@ -78,25 +93,32 @@
 .status-bar {
   display: flex;
   align-items: center;
-}
-
-.status-bar .bar {
-  width: 10px;
-  height: 10px;
-  margin-right: 5px;
-}
-
-.status-bar .red {
-  background-color: #ff0000;
-}
-
-.status-bar .yellow {
-  background-color: #ffcc00;
+  margin-top: 10px;
 }
 
 .status-bar span {
   font-size: 0.9rem;
   color: #333;
+  margin-right: 10px;
+}
+
+.status-dashes {
+  display: flex;
+  gap: 5px;
+}
+
+.status-dash {
+  width: 20px;
+  height: 5px;
+  border-radius: 2px;
+}
+
+.status-dash.red {
+  background-color: #ff0000;
+}
+
+.status-dash.yellow {
+  background-color: #ffcc00;
 }
 
 .rating-right {
