@@ -266,7 +266,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
               display: flex;
               justify-content: space-between;
               align-items: center;
-              border-top: 1px solid #d3d3d3;
               padding-top: 5mm;
               font-size: 10px;
               color: #666;
@@ -277,7 +276,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
             ${currentPageContent}
           </div>
           <div class="page-footer">
-            <div style="display: flex; align-items: center;">
+            <div style="display: flex; flex-direction: column; align-items: left;">
               <img src="/images/Pann_logo.png" alt="Pann Logo" style="width: 20mm; height: auto; margin-right: 5mm;" />
               <span style="color: #868DA6; font-size: 8px;">AI Powered Business Verification & Instant Identity Monitoring</span>
             </div>
@@ -291,7 +290,6 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
                 hour12: true,
                 timeZone: "Asia/Karachi"
               }).replace("PM", "PM PKT").replace("AM", "AM PKT")}</p>
-              <p style="font-size: 8px; margin: 0;">Page ${pageNumber}</p>
             </div>
           </div>
         `;
