@@ -171,7 +171,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                border-top: 1px solid #d3d3d3;
+                // border-top: 1px solid #d3d3d3;
                 padding-top: 5mm;
                 font-size: 10px;
                 color: #666;
@@ -184,7 +184,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
               ${currentPageContent}
             </div>
             <div class="page-footer">
-              <div style="display: flex; align-items: center;">
+              <div style="display: flex; flex-direction: column; align-items: left;">
                 <img src="/images/Pann_logo.png" alt="Pann Logo" style="width: 20mm; height: auto; margin-right: 5mm;" />
                 <span style="color: #868DA6; font-size: 8px;">AI Powered Business Verification & Instant Identity Monitoring</span>
               </div>
@@ -198,7 +198,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
                   hour12: true,
                   timeZone: "Asia/Karachi"
                 }).replace("PM", "PM PKT").replace("AM", "AM PKT")}</p>
-                <p style="font-size: 8px; margin: 0;">Page ${pageNumber}</p>
+                <p style="font-size: 12px; margin: 0;">pann.ai</p>
               </div>
             </div>
           `;
@@ -388,7 +388,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
           <h1 style="font-size: 1.5rem; color: #333; margin: 0;">${data.legalEntityName || "N/A"}</h1>
           <div style="display: flex; gap: 2rem; margin-top: 20px;">
             <div style="flex: 1; background-color: #f5f5f5; border-radius: 1rem; padding: 1.5rem;">
-              <h3 style="font-size: 1.2rem; color: #666; margin: 0 0 15px 0; font-weight: bold;">KYB RATING</h3>
+              <h3 style="font-size: 1.2rem; color: #333; margin: 0 0 15px 0; font-weight: bold;">KYB RATING</h3>
               <div style="display: flex; gap: 2rem; align-items: center;">
                 <span style="font-size: 2rem; font-weight: bold; color: #333;">${data.kybScore ? `${data.kybScore}%` : "N/A"}</span>
                 <div>
@@ -412,7 +412,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
               </div>
             </div>
             <div style="flex: 1; background-color: #f5f5f5; border-radius: 1rem; padding: 1.5rem;">
-              <h3 style="font-size: 1.2rem; color: #666; margin: 0 0 15px 0; font-weight: bold;">BUSINESS SNAPSHOT</h3>
+              <h3 style="font-size: 1.2rem; color: #333; margin: 0 0 15px 0; font-weight: bold;">BUSINESS SNAPSHOT</h3>
               ${[
                 ['Incorporation Date', data.incorporationDate || "N/A"],
                 ['SOS Entity Number', data.filingID || "N/A"],
@@ -469,24 +469,24 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
 
         <div style="margin-bottom: 1.5rem; padding: 1.5rem; background-color: #f5f5f5; border-radius: 2rem;">
           <h3 style="font-size: 1rem; color: #333; margin: 0 0 10px 0; font-weight: bold;">COMMERCIAL ADDRESS</h3>
-          <div style="display: inline-block; background-color: #9ACD32; padding: 0.3rem; border-radius: 0.5rem; color: #000000; font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
-            <p style="margin: 0;">DELIVERABLE</p>
+          <div style="display: inline-block; background-color:	#9ACD32; padding: 0.3rem; border-radius: 0.5rem; color: #000; font-size: 14px; font-family: Arial, sans-serif;">
+            <span>DELIVERABLE<span>
           </div>
           <p style="margin: 5px 0; font-size: 0.9rem; color: #333;">${addresses[0] || "N/A"}</p>
         </div>
 
         <div style="margin-bottom: 1.5rem; padding: 1.5rem; background-color: #f5f5f5; border-radius: 2rem;">
           <h3 style="font-size: 1rem; color: #333; margin: 0 0 10px 0; font-weight: bold;">COMMERCIAL ADDRESS</h3>
-          <div style="display: inline-block; background-color: #9ACD32; padding: 0.3rem; border-radius: 0.5rem; color: #000000; font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
-            <p style="margin: 0;">DELIVERABLE</p>
+          <div style="display: inline-block; background-color:	#9ACD32; padding: 0.3rem; border-radius: 0.5rem; color: #000; font-size: 14px; font-family: Arial, sans-serif;">
+            <span>DELIVERABLE</span>
           </div>
           <p style="margin: 5px 0; font-size: 0.9rem; color: #333;">${addresses[0] || "N/A"}</p>
         </div>
 
         <div style="margin-bottom: 1.5rem; padding: 1.5rem; background-color: #f5f5f5; border-radius: 2rem;">
           <h3 style="font-size: 1rem; color: #333; margin: 0 0 10px 0; font-weight: bold;">COMMERCIAL ADDRESS</h3>
-          <div style="display: inline-block; background-color: #9ACD32; padding: 0.3rem; border-radius: 0.5rem; color: #000000; font-size: 14px; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">
-            <p style="margin: 0;">DELIVERABLE</p>
+          <div style="display: inline-block; background-color:	#9ACD32; padding: 0.3rem; border-radius: 0.5rem; color: #000; font-size: 14px; font-family: Arial, sans-serif;">
+            <span>DELIVERABLE</span>
           </div>
           <p style="margin: 5px 0; font-size: 0.9rem; color: #333;">${addresses[0] || "N/A"}</p>
         </div>
@@ -692,7 +692,7 @@ const Reports = ({ reportData, hasPaid, setHasPaid }) => {
         </div>
 
         ${socialMedia && socialMedia.length > 0 ? `
-          <div style="margin-bottom: 20px;">
+          <div style="margin-bottom: 20px; background-color: #f5f5f5; border-radius: 2rem; padding: 1.5rem;">
             <h2 style="font-size: 1.5rem; color: #333; margin: 0 0 10px 0;">SOCIALS</h2>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
               ${socialMedia.map((social, index) => {

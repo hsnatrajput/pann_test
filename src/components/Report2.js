@@ -30,7 +30,7 @@ const Report2 = ({ reportData }) => {
 
       <div className="section">
         <h3>COMMERCIAL ADDRESS</h3>
-        <div className="highlight-box" style={{ color: '#000', fontSize: '14px', padding: '5px' }}>
+        <div className="highlight-box">
           <p>DELIVERABLE</p>
         </div>
         <p>{addresses[0] || "N/A"}</p>
@@ -38,7 +38,7 @@ const Report2 = ({ reportData }) => {
 
       <div className="section">
         <h3>RESIDENTIAL ADDRESS</h3>
-        <div className="highlight-box" style={{ color: '#000', fontSize: '14px', padding: '5px' }}>
+        <div className="highlight-box">
           <p>DELIVERABLE</p>
         </div>
         <p>{addresses[1] || "N/A"}</p>
@@ -46,7 +46,7 @@ const Report2 = ({ reportData }) => {
 
       <div className="section">
         <h3>RESIDENTIAL ADDRESS</h3>
-        <div className="highlight-box" style={{ color: '#000', fontSize: '14px', padding: '5px' }}>
+        <div className="highlight-box">
           <p>DELIVERABLE</p>
         </div>
         <p>{addresses[2] || "N/A"}</p>
